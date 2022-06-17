@@ -25,33 +25,6 @@ Route::prefix('/')->group(function() {
 Route::get('/login/{social}','Auth\LoginController@redirectToProvider')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
 Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallback')->where('social','twitter|facebook|linkedin|google|github|bitbucket');
 
-Route::prefix('admin')->group(function() {
-	Route::get('/', 'Admin\HomeController@index')->name('admin.dashboard');
-	Route::get('/home', 'Admin\HomeController@index')->name('admin.home');
-
-	Route::get('/profile', 'Admin\ProfileController@index')->middleware('auth:admin')->name('admin.profile');
-	Route::put('/profile/update/{id}', 'Admin\ProfileController@update')->middleware('auth:admin')->name('admin.profile.update');
-	Route::get('/profile/password', 'Admin\ProfileController@password')->middleware('auth:admin')->name('admin.profile.password');
-	Route::put('/profile/password', 'Admin\ProfileController@updatePassword')->middleware('auth:admin')->name('admin.profile.password.update');
-
-	// AdminsController
-	Route::resource('admins', 'Admin\AdminsController')->middleware('auth:admin', 'SuperAdmin');
-
-	// Login Logout Routes
-	Route::get('/login', 'Auth\Admin\LoginController@showLoginForm')->name('admin.login');
-	Route::post('/login', 'Auth\Admin\LoginController@login')->name('admin.login.submit');
-	Route::post('/logout', 'Auth\Admin\LoginController@logout')->name('admin.logout');
-
-	// Password Resets Routes
-	Route::post('password/email', 'Auth\Admin\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
-	Route::get('password/reset', 'Auth\Admin\ForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
-	Route::post('password/reset', 'Auth\Admin\ResetPasswordController@reset')->name('admin.password.update');
-	Route::get('/password/reset/{token}', 'Auth\Admin\ResetPasswordController@showResetForm')->name('admin.password.reset');
-
-	// Email Verification
-	Route::get('email/verify/{id}/{hash}', 'Auth\Admin\VerificationController@verify')->name('admin.verification.verify');
-});
-
 // Special Routes
 Route::prefix('special')->group(function() {
 	Route::get('/back/{name}', 'ReturnRedirectController@back')->name('go.back');
@@ -68,4 +41,46 @@ Route::prefix('seller')->middleware('auth')->group(function() {
 
 	// leads
 	Route::get('leads/{id}', 'LeadsController@viewLeads');
+});
+
+Route::prefix('admin')->group(function() {
+
+	Route::get('/', 'Admin\HomeController@index')->name('admin.dashboard');
+	Route::get('/home', 'Admin\HomeController@index')->name('admin.home');
+
+	Route::get('/profile', 'Admin\ProfileController@index')->middleware('auth:admin')->name('admin.profile');
+	Route::put('/profile/update/{id}', 'Admin\ProfileController@update')->middleware('auth:admin')->name('admin.profile.update');
+	Route::get('/profile/password', 'Admin\ProfileController@password')->middleware('auth:admin')->name('admin.profile.password');
+	Route::put('/profile/password', 'Admin\ProfileController@updatePassword')->middleware('auth:admin')->name('admin.profile.password.update');
+
+	// AdminsController
+	Route::resource('admins', 'Admin\AdminsController')->middleware('auth:admin', 'SuperAdmin');
+
+	// sellers list
+	Route::get('/sellers/all', 'Admin\SellerController@index')->middleware('auth:admin')->name('admin.sellers.all');
+	Route::get('/sellers/add', 'Admin\SellerController@addSeller')->middleware('auth:admin')->name('admin.sellers.add');
+
+	// Leads
+	Route::get('/sellers/leads/all', 'Admin\LeadsController@allLeads')->middleware('auth:admin')->name('admin.leads.all');
+	Route::get('/sellers/leads/ajax/change-status/{id}/{status}', 'Admin\LeadsController@changeLeadStatus')->middleware('auth:admin');
+	Route::get('/sellers/leads/import', 'Admin\LeadsController@importLeads')->middleware('auth:admin')->name('admin.leads.import');
+	Route::get('/sellers/leads/orders/{leadid}', 'Admin\LeadsController@ordersOfLead')->middleware('auth:admin');
+	// Orders
+	Route::get('/sellers/orders/all', 'Admin\LeadsController@allOrders')->middleware('auth:admin')->name('admin.orders.all');
+	Route::get('/sellers/orders/ajax/change-status/{id}/{status}', 'Admin\LeadsController@changeOrderStatus')->middleware('auth:admin');
+
+	// Login Logout Routes
+	Route::get('/login', 'Auth\Admin\LoginController@showLoginForm')->name('admin.login');
+	Route::post('/login', 'Auth\Admin\LoginController@login')->name('admin.login.submit');
+	Route::get('/logout', 'Auth\Admin\LoginController@logout')->name('admin.logout');
+
+	// Password Resets Routes
+	Route::post('password/email', 'Auth\Admin\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
+	Route::get('password/reset', 'Auth\Admin\ForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
+	Route::post('password/reset', 'Auth\Admin\ResetPasswordController@reset')->name('admin.password.update');
+	Route::get('/password/reset/{token}', 'Auth\Admin\ResetPasswordController@showResetForm')->name('admin.password.reset');
+
+	// Email Verification
+	Route::get('email/verify/{id}/{hash}', 'Auth\Admin\VerificationController@verify')->name('admin.verification.verify');
+
 });

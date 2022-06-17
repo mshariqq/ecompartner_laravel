@@ -7,10 +7,13 @@
 @section('content')
 
 <div class="page-header">
-    <h2>Dashboard</h2>
+    <h2>Add New Seller</h2>
 </div>
 
+
+
 @endsection
+
 @section('custom-scripts')
-<script src="{{ asset('js/admin/admins-delete.js') }}" defer></script>
+{{-- <script src="{{ asset('js/admin/admins-delete.js') }}" defer></script> --}}
 @endsection
