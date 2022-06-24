@@ -34,17 +34,27 @@
                             </td>
                            <td>{{$item->name}}</td>
                             <td>{{$item->created_at->diffForHumans()}}</td>
-                           <td id="tdStatus{{$item->id}}">{{$item->status}}</td>
+                           <td id="tdStatus{{$item->id}}">
+                                @if ($item->status == 'processing')
+                                    <span class="tag bg-success text-white p-1 text-capitalize">{{$item->status}}</span>
+                                @elseif($item->status == 'pending')
+                                    <span class="text-dark tag bg-orange text-capitalize">{{$item->status}}</span>
+                                
+                                @else
+                                    <span class="text-primary text-capitalize">{{$item->status}}</span>
+
+                                @endif
+                                    {{-- {{$item->status}} --}}
+                        </td>
                            <td>
-                            <a href="{{url('admin/sellers/leads/orders')}}/{{$item->id}}" class="btn btn-primary"> <i class="fa fa-eye" aria-hidden="true"></i> View</a>
+                            <a href="{{url('admin/sellers/leads/lead')}}/{{$item->id}}" class="btn btn-primary"> <i class="fa fa-eye" aria-hidden="true"></i> View</a>
                            </td>
                            <td>
                             <div class="form-group">
                               <select onchange="changeStatus(this, '{{$item->id}}')" class="form-control" name="status" id="">
                                 <option value="null">Change Status</option>
-                                <option value="confirmed">Confirmed</option>
-                                <option value="no-response">No Response</option>
-                                <option value="cancelled">Cancelled</option>
+                                <option value="processing">Processing</option>
+                                <option value="pending">Pending</option>
                               </select>
                             </div>
                            </td>

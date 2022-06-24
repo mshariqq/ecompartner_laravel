@@ -2,7 +2,7 @@
 @section('content')
 
 <div class="page-header bg-white p-3 shadow">
-    <h4 class="mb-0 float-left"> <a href="{{route('leads.leads-list.index')}}"><i class="fa fa-arrow-left" aria-hidden="true"></i> </a> Showing Leads for the List  <span class="text-primary"> {{$leads_list->name}}</span> </h4>
+    <h4 class="mb-0 float-left"> <a href="{{route('leads.leads-list.index')}}"><i class="fa fa-arrow-left" aria-hidden="true"></i> </a> Showing Orders from your Leads  </h4>
     <p class="mb-0 float-right"><a href="#" class="btn btn-sm btn-primary"> <i class="fa fa-download" aria-hidden="true"></i> Export</a></p>
 </div>
 
@@ -24,19 +24,19 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($leads as $item)
+                @foreach ($orders as $item)
                     <tr>
                         <td>
                             @if ($item->status == 'confirmed')
-                            <span class="text-dark tag bg-success p-1 text-capitalize">{{$item->status}}</span>
-                            @elseif($item->status == 'no response')
-                                <span class="text-dark tag bg-orange text- text-capitalize">{{$item->status}}</span>
-                            @elseif($item->status == 'cancelled')
-                                <span class="text-white tag bg-danger text-capitalize">{{$item->status}}</span>
-                            @else
-                                <span class="bg-warning text-dark tag text-capitalize">{{$item->status}}</span>
+                            <span class="tag bg-indigo text-white p-1 text-capitalize">{{$item->status}}</span>
+                        @elseif($item->status == 'delivered')
+                            <span class="tag bg-success text-dark text-capitalize">{{$item->status}}</span>
+                        @elseif($item->status == 'cancelled')
+                            <span class="tag bg-danger text-white text-capitalize">{{$item->status}}</span>
+                        @else
+                            <span class="tag bg-dark text-orange text-capitalize">{{$item->status}}</span>
 
-                            @endif
+                        @endif
                         </td>
                         <td>{{$item->name}}</td>
                         <td>{{$item->delivery_address}}</td>
@@ -51,7 +51,7 @@
                 @endforeach
             </tbody>
             <tfoot>
-                {{$leads->links()}}
+                {{$orders->links()}}
             </tfoot>
         </table>
     </div>

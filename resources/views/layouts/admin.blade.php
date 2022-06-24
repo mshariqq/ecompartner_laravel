@@ -279,7 +279,8 @@
 								</li>
 								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="typcn typcn-briefcase"></i> Warehouse </a>
 									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="modal.html">Products</a></li>
+										<li aria-haspopup="true"><a href="{{route('admin.warehouse.all')}}">Warehouses</a></li>
+										<li aria-haspopup="true"><a href="{{route('admin.warehouse.products.all')}}">Products</a></li>
 										<li aria-haspopup="true"><a href="tooltipandpopover.html">Stocks</a></li>
 										
 									</ul>

@@ -7,7 +7,7 @@
 @section('content')
 
 <div class="page-header">
-    <h2>Showing All Orders imported by their respective Sellers</h2>
+    <h2>Showing All Leads imported by their respective Sellers</h2>
 </div>
 
 <div class="row">
@@ -42,10 +42,9 @@
 
                                 <div class="form-group">
                                   <select onchange="changeStatus(this, '{{$item->id}}')" class="form-control" name="status" id="">
-                                    <option value="null">Change Status</option>
-                                    <option value="pending">Pending</option>
+                                    <option value="draft">Change Status</option>
                                     <option value="packing">Packing</option>
-                                    <option value="out-for-deivery">Out for Delivery</option>
+                                    <option value="out for delivery">Out for Delivery</option>
                                     <option value="delivered">Delivered</option>
                                     <option value="reschedule">Reschedule</option>
                                     <option value="cancelled">Cancelled</option>
@@ -53,14 +52,14 @@
                                 </div>
                                </td>
                             <td id="tdStatus{{$item->id}}">
-                                    @if ($item->status == 'pending' || $item->status == 'Uploaded'|| $item->status == 'Pending')
-                                        <span class="text-orange p-1 text-uppercase">{{$item->status}}</span>
+                                    @if ($item->status == 'packing')
+                                        <span class="text-white tag bg-primary p-1 text-capitalize">{{$item->status}}</span>
                                     @elseif($item->status == 'delivered')
-                                        <span class="text-success text-uppercase">{{$item->status}}</span>
+                                        <span class="text-dark tag bg-success text-capitalize">{{$item->status}}</span>
                                     @elseif($item->status == 'cancelled')
-                                        <span class="text-danger text-uppercase">{{$item->status}}</span>
+                                        <span class="text-white bg-danger tag text-capitalize">{{$item->status}}</span>
                                     @else
-                                        <span class="text-primary text-uppercase">{{$item->status}}</span>
+                                        <span class="text-primary text-capitalize">{{$item->status}}</span>
  
                                     @endif
                             </td>

@@ -41,6 +41,19 @@ Route::prefix('seller')->middleware('auth')->group(function() {
 
 	// leads
 	Route::get('leads/{id}', 'LeadsController@viewLeads');
+
+	// orders
+	Route::get('orders/all', 'OrdersController@viewAll')->name('orders.all');
+
+	// warehouses
+	Route::get('warehouses/all', 'WarehouseController@all')->name('warehouses.all');
+	Route::get('warehouses/new', 'WarehouseController@new')->name('warehouses.new');	
+	Route::post('warehouses/insert', 'WarehouseController@insert')->name('warehouses.insert');
+	Route::get('warehouses/products/all', 'WarehouseController@myProducts')->name('warehouses.products');
+	Route::get('warehouses/products/{id}', 'WarehouseController@wareouseProducts');	
+	Route::get('warehouses/products/new/{id}', 'WarehouseController@newWareouseProduct');	
+	Route::post('warehouses/products/insert', 'WarehouseController@insertWareouseProduct')->name('warehouses.product.insert');
+	
 });
 
 Route::prefix('admin')->group(function() {
@@ -64,10 +77,17 @@ Route::prefix('admin')->group(function() {
 	Route::get('/sellers/leads/all', 'Admin\LeadsController@allLeads')->middleware('auth:admin')->name('admin.leads.all');
 	Route::get('/sellers/leads/ajax/change-status/{id}/{status}', 'Admin\LeadsController@changeLeadStatus')->middleware('auth:admin');
 	Route::get('/sellers/leads/import', 'Admin\LeadsController@importLeads')->middleware('auth:admin')->name('admin.leads.import');
-	Route::get('/sellers/leads/orders/{leadid}', 'Admin\LeadsController@ordersOfLead')->middleware('auth:admin');
+	Route::get('/sellers/leads/lead/{leadid}', 'Admin\LeadsController@ordersOfLead')->middleware('auth:admin');
+	Route::get('/sellers/lead/ajax/change-status/{id}/{status}', 'Admin\LeadsController@changeOrderStatus')->middleware('auth:admin');
+
 	// Orders
-	Route::get('/sellers/orders/all', 'Admin\LeadsController@allOrders')->middleware('auth:admin')->name('admin.orders.all');
-	Route::get('/sellers/orders/ajax/change-status/{id}/{status}', 'Admin\LeadsController@changeOrderStatus')->middleware('auth:admin');
+	Route::get('/sellers/orders/all', 'Admin\OrdersController@allOrders')->middleware('auth:admin')->name('admin.orders.all');
+	Route::get('/sellers/orders/ajax/change-status/{id}/{status}', 'Admin\OrdersController@changeOrderStatus')->middleware('auth:admin');
+
+	// Warehouses
+	Route::get('/warehouse/all', 'Admin\WarehouseController@all')->middleware('auth:admin')->name('admin.warehouse.all');
+	Route::get('/warehouse/products/all', 'Admin\WarehouseController@allProducts')->middleware('auth:admin')->name('admin.warehouse.products.all');
+
 
 	// Login Logout Routes
 	Route::get('/login', 'Auth\Admin\LoginController@showLoginForm')->name('admin.login');

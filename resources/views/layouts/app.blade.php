@@ -264,15 +264,15 @@
 								</li>
 								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="typcn typcn-chart-pie-outline"></i> Orders <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="chart-chartist.html">Browse Orders</a></li>
+										<li aria-haspopup="true"><a href="{{route("orders.all")}}">Browse Orders</a></li>
 										{{-- <li aria-haspopup="true"><a href="chart-morris.html">Reports</a></li> --}}
 										
 									</ul>
 								</li>
 								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="typcn typcn-briefcase"></i> Warehouse </a>
 									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="modal.html">Products</a></li>
-										<li aria-haspopup="true"><a href="tooltipandpopover.html">Stocks</a></li>
+										<li aria-haspopup="true"><a href="{{route('warehouses.all')}}">My Warehouses</a></li>
+										<li aria-haspopup="true"><a href="{{route('warehouses.products')}}">My Products</a></li>
 										
 									</ul>
 								</li>

@@ -7,7 +7,7 @@
 @section('content')
 
 <div class="page-header">
-    <h4> <a href="{{route('admin.leads.all')}}"><i class="fa fa-arrow-left" aria-hidden="true"></i></a> Showing Leads of <span class="text-primary">{{$lead->name}} Lead</span> uploaded by <span class="text-primary">{{$lead->user->name}}</span> on <span class="text-orange">{{$lead->created_at->diffForHumans()}}</span></h4>
+    <h2>Showing All Orders imported by their respective Sellers</h2>
 </div>
 
 <div class="row">
@@ -38,27 +38,31 @@
                                 <a href="http://" class="btn btn-primary"> <i class="fa fa-eye" aria-hidden="true"></i> View</a>
                                </td> --}}
                                <td>
-                                <p class="">Imported : <b>{{$item->created_at->diffForHumans()}}</b></p>
+                                <p class="">Converted : <b>{{$item->created_at->diffForHumans()}}</b></p>
 
                                 <div class="form-group">
                                   <select onchange="changeStatus(this, '{{$item->id}}')" class="form-control" name="status" id="">
-                                    <option value="draft">Change Status</option>
-                                    <option value="confirmed">Confirmed</option>
-                                    <option value="no response">No Response</option>
+                                    <option value="null">Change Status</option>
+                                    {{-- <option value="pending">Pending</option> --}}
+                                    <option value="packing">Packing</option>
+                                    <option value="out for deivery">Out for Delivery</option>
+                                    <option value="delivered">Delivered</option>
+                                    {{-- <option value="reschedule">Reschedule</option> --}}
                                     <option value="cancelled">Cancelled</option>
-                                   
                                   </select>
                                 </div>
+                                
+                                <a href="#" class="btn btn-sm btn-primary"> <i class="fa fa-user-circle-o" aria-hidden="true"></i> View Seller <i class="fa fa-arrow-right" aria-hidden="true"></i> </a>
                                </td>
                             <td id="tdStatus{{$item->id}}">
                                     @if ($item->status == 'confirmed')
-                                        <span class="text-dark tag bg-success p-1 text-capitalize">{{$item->status}}</span>
-                                    @elseif($item->status == 'no response')
-                                        <span class="text-dark tag bg-orange text- text-capitalize">{{$item->status}}</span>
+                                        <span class="tag bg-indigo text-white p-1 text-capitalize">{{$item->status}}</span>
+                                    @elseif($item->status == 'delivered')
+                                        <span class="tag bg-success text-dark text-capitalize">{{$item->status}}</span>
                                     @elseif($item->status == 'cancelled')
-                                        <span class="text-white tag bg-danger text-capitalize">{{$item->status}}</span>
+                                        <span class="tag bg-danger text-white text-capitalize">{{$item->status}}</span>
                                     @else
-                                        <span class="bg-orange text-dark tag text-capitalize">{{$item->status}}</span>
+                                        <span class="tag bg-dark text-orange text-capitalize">{{$item->status}}</span>
  
                                     @endif
                             </td>
@@ -97,7 +101,7 @@
         var status = $(select).val();
 
         $.ajax({
-            url: '{{url("admin/sellers/lead/ajax/change-status")}}' + "/" + id + "/" + status,
+            url: '{{url("admin/sellers/orders/ajax/change-status")}}' + "/" + id + "/" + status,
             method: 'get',
             success: function(res){
                 // var rp = JSON.parse(res);

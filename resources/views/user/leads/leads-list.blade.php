@@ -28,7 +28,18 @@
                             <a href="http://" class="btn btn-danger btn-sm mr-md-2"><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
                         <td>{{ $ll_leads[$item->id] }} <span class="text-muted">Leads</span></td>
-                        <td><span class="bg-dark p-2 round rounded">{{$item->status}}</span></td>
+                        <td>
+                                @if ($item->status == 'processing')
+                                <span class="tag bg-success text-white p-1 text-capitalize">{{$item->status}}</span>
+                            @elseif($item->status == 'pending')
+                                <span class="text-dark tag bg-orange text-capitalize">{{$item->status}}</span>
+                            
+                            @else
+                                <span class="text-dark tag bg-orange text-capitalize">{{$item->status}}</span>
+
+                            @endif
+                            
+                        </td>
                         <td>
                             <i class="fa fa-history" aria-hidden="true"></i> Imported {{$item->created_at->diffForHumans()}} 
                             <br> Last Update {{$item->updated_at->diffForHumans()}} </td>

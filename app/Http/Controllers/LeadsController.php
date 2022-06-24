@@ -32,7 +32,7 @@ class LeadsController extends BaseController
                 $Lead_List = new LeadsList();
                 $Lead_List->name = $request->name;
                 $Lead_List->user_id = auth()->user()->id;
-                $Lead_List->status = 'Pending';
+                $Lead_List->status = 'pending';
 
                 $saveLeadList = $Lead_List->save();
                 if($saveLeadList){
@@ -69,7 +69,7 @@ class LeadsController extends BaseController
                                 $Leads->pieces = $getData[7];
                                 $Leads->shipment_description = $getData[8];
                                 $Leads->leads_list_id = $LLid;
-                                $Leads->status = 'Pending';
+                                $Leads->status = 'Draft';
 
                                 // insert the current row
                                 $save_lead = $Leads->save();
