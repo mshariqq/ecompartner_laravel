@@ -50,6 +50,16 @@
 		<!-- Jquery js-->
 		<script src="{{ asset('assets/js/vendors/jquery-3.2.1.min.js')}}"></script>
 
+				<!-- Charts js-->
+				<script src="{{ asset('assets/plugins/chart/chart.bundle.js')}}"></script>
+				<script src="{{ asset('assets/plugins/chart/utils.js')}}"></script>
+		
+				<!-- Charts js-->
+				<script src="{{asset('assets/plugins/chart/chart.bundle.js')}}"></script>
+				<script src="{{asset('assets/plugins/chart/chart.extension.js')}}"></script>
+				
+				<script src="{{ asset('assets/js/chartjs.js')}}"></script>
+
 	</head>
 	<body class="app sidebar-mini rtl">
 
@@ -796,20 +806,9 @@
 		<!-- Rightsidebar js -->
 		<script src="{{ asset('assets/plugins/sidebar/sidebar.js')}}"></script>
 
-		<!-- Charts js-->
-		<script src="{{ asset('assets/plugins/chart/chart.bundle.js')}}"></script>
-		<script src="{{ asset('assets/plugins/chart/utils.js')}}"></script>
-
 		<!--Time Counter js-->
 		<script src="{{ asset('assets/plugins/counters/jquery.missofis-countdown.js')}}"></script>
 		<script src="{{ asset('assets/plugins/counters/counter.js')}}"></script>
-
-		<!--Morris  Charts js-->
-		<script src="{{ asset('assets/plugins/morris/raphael-min.js')}}"></script>
-		<script src="{{ asset('assets/plugins/morris/morris.js')}}"></script>
-
-		<!-- Custom-charts js-->
-		<script src="{{ asset('assets/js/index1.js')}}"></script>
 
 		<!-- Custom js-->
 		<script src="{{ asset('assets/js/custom.js')}}"></script>
