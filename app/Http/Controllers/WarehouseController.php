@@ -37,6 +37,7 @@ class WarehouseController extends Controller
 
         $wr->name = $request->name;
         $wr->status = $request->status;
+        $wr->location = $request->location;
         $wr->seller_id = auth()->user()->id;
 
         $save = $wr->save();

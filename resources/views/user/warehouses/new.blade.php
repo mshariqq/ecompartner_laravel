@@ -17,6 +17,10 @@
                 <input type="text" name="name" id="" class="form-control" placeholder="Enter a name for your new warehouse">
               </div>
               <div class="form-group">
+                <label for="">Warehouse Country</label>
+                <input type="text" name="location" id="" class="form-control" placeholder="Ex: Dubai, Abu Dhabi">
+              </div>
+              <div class="form-group">
                 <label>Status</label>
                 <select class="form-control" name="status">
                   <option value="active">Active</option>

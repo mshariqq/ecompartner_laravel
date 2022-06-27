@@ -87,7 +87,10 @@ Route::prefix('admin')->group(function() {
 	// Warehouses
 	Route::get('/warehouse/all', 'Admin\WarehouseController@all')->middleware('auth:admin')->name('admin.warehouse.all');
 	Route::get('/warehouse/products/all', 'Admin\WarehouseController@allProducts')->middleware('auth:admin')->name('admin.warehouse.products.all');
+	Route::get('/warehouse/purchases/all', 'Admin\WarehouseController@productPurchases')->middleware('auth:admin')->name('admin.warehouse.product-purchases');
 
+	Route::get('/warehouse/buy-stock/product/{id}', 'Admin\WarehouseController@buyStock')->middleware('auth:admin');
+	Route::post('/warehouse/buy-stock/product/store', 'Admin\WarehouseController@buyStockStore')->middleware('auth:admin');
 
 	// Login Logout Routes
 	Route::get('/login', 'Auth\Admin\LoginController@showLoginForm')->name('admin.login');

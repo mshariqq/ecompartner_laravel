@@ -7,10 +7,10 @@
 @section('content')
 
 <div class="page-header">
-    <h2>Showing your Products of Warehouse <b class="text-blue">{{$warehouse->name}}</b></h2>
+    <h4>Product from <b class="text-indigo">{{$warehouse->name}} <span class="tag bg-primary">{{$warehouse->location}}</span></b></h4>
     <p class="float-right text-end text-right">
         <a href="{{url('seller/warehouses/products/new')}}/{{$warehouse->id}}" class="btn btn-primary">Add New Product <i class="fa fa-plus" aria-hidden="true"></i> </a>
-    </p>products
+    </p>
 </div>
 
 <div class="row">

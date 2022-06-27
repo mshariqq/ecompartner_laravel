@@ -39,7 +39,7 @@
         
     </div>
 
-@endforeach
+    @endforeach
 </div>
 
 @endsection
