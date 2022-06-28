@@ -38,8 +38,7 @@
                         <td>{{$item->created_at->diffForHumans()}}</td>
                         <td>{{$item->country}}</td>
                         <td>
-                            <a href="http://" class="btn btn-sm btn-primary"> <i class="fa fa-eye" aria-hidden="true"></i> View</a>
-
+                            <a href="{{route('admin.sellers.profile', $item->id)}}" class="btn btn-sm btn-primary"> <i class="fa fa-eye" aria-hidden="true"></i> View</a>
                         </td>
                     </tr>
                 @endforeach

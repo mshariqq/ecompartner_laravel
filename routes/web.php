@@ -72,6 +72,8 @@ Route::prefix('admin')->group(function() {
 	// sellers list
 	Route::get('/sellers/all', 'Admin\SellerController@index')->middleware('auth:admin')->name('admin.sellers.all');
 	Route::get('/sellers/add', 'Admin\SellerController@addSeller')->middleware('auth:admin')->name('admin.sellers.add');
+	Route::get('/sellers/profile/{id}', 'Admin\SellerController@profile')->middleware('auth:admin')->name('admin.sellers.profile');
+
 
 	// Leads
 	Route::get('/sellers/leads/all', 'Admin\LeadsController@allLeads')->middleware('auth:admin')->name('admin.leads.all');

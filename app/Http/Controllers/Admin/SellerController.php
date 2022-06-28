@@ -17,4 +17,13 @@ class SellerController extends Controller
         return view('admin.sellers.add');
 
     }
+
+    public function profile($id){
+        $seller = User::find($id);
+        if($seller){
+            return view('admin.sellers.profile', compact('seller'));
+        }else{
+            return redirect()->back()->with('error', "Seller not found");
+        }
+    }
 }

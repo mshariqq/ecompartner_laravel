@@ -334,6 +334,15 @@
                 <!-- app-content-->
 				<div class="container content-area">
 					<div class="side-app">
+						@if (\Session::has('success'))
+							<div class="alert alert-success">
+								<p>{!! \Session::get('success') !!}</p>
+							</div>
+						@elseif (\Session::has('error'))
+							<div class="alert alert-danger">
+								<p>{!! \Session::get('error') !!}</p>
+							</div>
+						@endif
                         @yield('content')
 					</div><!--End side app-->
 
