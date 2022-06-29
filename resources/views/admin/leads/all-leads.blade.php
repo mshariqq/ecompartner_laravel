@@ -1,9 +1,5 @@
 @extends('layouts.admin')
 
-{{-- @section('CustomStyles')
-<link rel="stylesheet" type="text/css" href="{{ asset('css/cutsom-normal.css') }}"/>>
-@endsection --}}
-
 @section('content')
 
 <div class="page-header">

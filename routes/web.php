@@ -50,10 +50,12 @@ Route::prefix('seller')->middleware('auth')->group(function() {
 	Route::get('warehouses/new', 'WarehouseController@new')->name('warehouses.new');	
 	Route::post('warehouses/insert', 'WarehouseController@insert')->name('warehouses.insert');
 	Route::get('warehouses/products/all', 'WarehouseController@myProducts')->name('warehouses.products');
-	Route::get('warehouses/products/{id}', 'WarehouseController@wareouseProducts');	
+	Route::get('warehouses/products/{id}', 'WarehouseController@wareouseProducts')->name('warehouses.products.inside');	
 	Route::get('warehouses/products/new/{id}', 'WarehouseController@newWareouseProduct');	
 	Route::post('warehouses/products/insert', 'WarehouseController@insertWareouseProduct')->name('warehouses.product.insert');
-	
+	Route::get('warehouses/request-stock/{product_id}', 'WarehouseController@requestStock')->name('warehouses.product.request-stock');
+	Route::post('warehouses/request-stock/insert', 'WarehouseController@requestStockInsert')->name('warehouses.product.request-stock.insert');
+	Route::get('warehouses/requests/my-all', 'WarehouseController@myRequests')->name('warehouses.product.request.all');
 });
 
 Route::prefix('admin')->group(function() {
@@ -94,6 +96,11 @@ Route::prefix('admin')->group(function() {
 	Route::get('/warehouse/buy-stock/product/{id}', 'Admin\WarehouseController@buyStock')->middleware('auth:admin');
 	Route::post('/warehouse/buy-stock/product/store', 'Admin\WarehouseController@buyStockStore')->middleware('auth:admin');
 
+	
+
+	// Reports
+	Route::get('/reports/orders', 'Admin\ReportsController@orders')->middleware('auth:admin')->name('admin.reports.orders');
+
 	// Login Logout Routes
 	Route::get('/login', 'Auth\Admin\LoginController@showLoginForm')->name('admin.login');
 	Route::post('/login', 'Auth\Admin\LoginController@login')->name('admin.login.submit');
@@ -107,5 +114,6 @@ Route::prefix('admin')->group(function() {
 
 	// Email Verification
 	Route::get('email/verify/{id}/{hash}', 'Auth\Admin\VerificationController@verify')->name('admin.verification.verify');
+
 
 });

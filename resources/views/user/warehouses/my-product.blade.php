@@ -12,14 +12,7 @@
 </div>
 
 <div class="row">
-    <div class="col-12">
-        @if (\Session::has('success'))
-            <h4 class="text-success">{!! \Session::get('success') !!}</h4>
-        @endif
-        @if(\Session::has('errors'))
-        <h4 class="text-danger"> <i class="fa fa-times-circle" aria-hidden="true"></i> {!! \Session::get('errors') !!}</h4>
-        @endif
-    </div>
+
     <div class="col-12">
         <div class="table-responsive">
         @if (count($warehouse) < 1)
@@ -67,7 +60,10 @@
                             </td>
                             <td>
                                 {{$item->created_at->diffForHumans()}}
-                                <br>                                <a class="btn btn-primary btn-sm" href="{{url('seller/warehouses/products')}}/{{$item1->id}}">view warehouse <i class="fa fa-arrow-right" aria-hidden="true"></i> </a>                            </td>
+                                <br>                                <a class="btn btn-primary btn-sm" href="{{url('seller/warehouses/products')}}/{{$item1->id}}">view warehouse <i class="fa fa-arrow-right" aria-hidden="true"></i> </a>    
+                                <br>
+                                <a href="{{route('warehouses.product.request-stock', $item->id)}}" class="btn btn-orange mt-1">Request Stock <i class="fa fa-question" aria-hidden="true"></i> </a>                        
+                            </td>
 
                             </td>
                         

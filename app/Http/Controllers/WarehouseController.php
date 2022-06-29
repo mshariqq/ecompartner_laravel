@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 
 use App\Product;
+use App\PurchaseRequest;
 use App\Warehouse;
 use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
@@ -105,6 +106,33 @@ class WarehouseController extends Controller
     public function myProducts(){
         $warehouse = Warehouse::where('seller_id', auth()->user()->id)->paginate(10);
         return view('user.warehouses.my-product', compact('warehouse'));
+    }
+
+    public function requestStock($product_id){
+        $product = Product::find($product_id);
+        return view('user.warehouses.request-stock', compact('product'));
+    }
+
+    public function requestStockInsert(Request $request){
+        $pr = new PurchaseRequest();
+
+        $pr->seller_id = auth()->user()->id;
+        $pr->product_id = $request->product_id;
+        $pr->qty = $request->qty;
+        $pr->status = 'pending';
+        $save = $pr->save();
+
+        if($save){
+            return redirect()->route('warehouses.product.request.all')->with('success', 'Reuest Submitted!');
+        }else{
+            return Redirect::back()->with('errors', 'Error while inserting data');
+
+        }
+    }
+
+    public function myRequests(){
+        $reqs = PurchaseRequest::paginate(50);
+        return view('user.warehouses.all-requests', compact('reqs'));
     }
 
 }

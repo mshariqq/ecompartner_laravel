@@ -299,10 +299,8 @@
 
 								<li aria-haspopup="true"><a href="#" class="sub-icon "><i class="typcn typcn-cog-outline"></i> Reports <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="profile.html">Orders</a></li>
-										<li aria-haspopup="true"><a href="editprofile.html">Leads</a></li>
-
-										<li aria-haspopup="true" ><a href="construction.html">Warehouse</a></li>
+										<li aria-haspopup="true"><a href="{{route('admin.reports.orders')}}">Orders</a></li>
+										
 									</ul>
 								</li>
 								

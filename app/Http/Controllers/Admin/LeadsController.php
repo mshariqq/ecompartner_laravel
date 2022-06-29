@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Lead;
 use App\LeadsList;
 use App\Order;
+use App\Product;
 
 class LeadsController extends Controller
 {
@@ -53,22 +54,23 @@ class LeadsController extends Controller
             $lead = Lead::find($id);
             if($lead){
                 $lead->status = $status;
-                $update = $lead->save();
                 
-                if($update){
                     if($status == "confirmed"){
                         // convert to order
                          // If lead new status is match for order, then copy this record to orders table
                         $co = $this->createNewOrder($id, $status);
-                        if($co){
+                        if($co['0']){
+                            $lead->save();
+
                             return array(
                                 'code' => 200,
                                 'msg' => 'success'
                             );
+
                         }else{
                             return array(
                                 'code' => 500,
-                                'msg' => 'error occured while ctreating order'
+                                'msg' => $co['1']
                             );
                         }
                     }
@@ -78,13 +80,6 @@ class LeadsController extends Controller
                         'msg' => 'success'
                     );
                    
-                   
-                }else{
-                    return array(
-                        'code' => 500,
-                        'msg' => 'error occured while updating the record'
-                    );
-                }
     
             }else{
                 return array(
@@ -97,26 +92,51 @@ class LeadsController extends Controller
     public function createNewOrder($id, $status){
         $lead = Lead::find($id);
 
-        $order = new Order();
-        $order->lead_id = $lead->id;
-        $order->seller_id = $lead->list->user->id;
-        $order->name = $lead->name;
-        $order->delivery_address = $lead->delivery_address;
-        $order->city = $lead->city;
-        $order->phone_number = $lead->phone_number;
-        $order->country = $lead->country;
-        $order->cod_currency = $lead->cod_currency;
-        $order->cod_amount = $lead->cod_amount;
-        $order->pieces = $lead->pieces;
-        $order->shipment_description = $lead->shipment_description;
-        $order->status = $status;
+        # decrease the quantity
+        $product = Product::find($lead->product_id);
+        # check if we have that product
+        if($product){
 
-        $save = $order->save();
-        if($save){
-            // if order saved
-            return true;
+            # decrease the product
+            if($product->stock < $lead->pieces){
+                return array(false, 'Product Stock is Empty');
+            }
+            $product->stock = $product->stock - $lead->pieces;
+            $updateProduct = $product->save();
+            if($updateProduct){
+
+                $order = new Order();
+                $order->lead_id = $lead->id;
+                $order->seller_id = $lead->list->user->id;
+                $order->name = $lead->name;
+                $order->delivery_address = $lead->delivery_address;
+                $order->city = $lead->city;
+                $order->phone_number = $lead->phone_number;
+                $order->country = $lead->country;
+                $order->cod_currency = $lead->cod_currency;
+                $order->cod_amount = $lead->cod_amount;
+                $order->pieces = $lead->pieces;
+                $order->shipment_description = $lead->shipment_description;
+                $order->status = $status;
+        
+                $save = $order->save();
+                if($save){
+                    // if order saved
+                    return array(true, 'success');
+                }else{
+                    // if order error then revert the deacrese 
+                    $product = Product::find($lead->product_id);
+                    $product->stock += $lead->pieces;
+                    $product->save(); 
+                    
+                    return array(false, 'Error while saving order data');
+                }
+            }else{
+                return array(false, 'Error while decreasing product stock');
+            }
+
         }else{
-            return false;
+            return array(false, 'Product Not Found');
         }
     }
 

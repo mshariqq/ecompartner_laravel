@@ -15,6 +15,7 @@
                     <th>Name</th>
                     <th>Delivery Address</th>
                     <th>City</th>
+                    <th>Product ID</th>
                     <th>Phone</th>
                     <th>Country</th>
                     <th>COD Currency</th>
@@ -41,6 +42,19 @@
                         <td>{{$item->name}}</td>
                         <td>{{$item->delivery_address}}</td>
                         <td>{{$item->city}}</td>
+                        <td>
+                            {{$item->product_id}}
+                            <br>
+                            @php
+                               $product = \App\Product::find($item->product_id);
+                               if($product){
+                                echo "<span class='text-indigo'>".$product->name."</span>";
+                               }else {
+                                // if no product
+                                echo "<span class='text-danger'>No Product Found</span>";
+                               }
+                            @endphp
+                       </td>
                         <td>{{$item->phone_number}}</td>
                         <td>{{$item->country}}</td>
                         <td>{{$item->cod_currency}}</td>

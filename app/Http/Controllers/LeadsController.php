@@ -69,6 +69,7 @@ class LeadsController extends BaseController
                                 $Leads->pieces = $getData[7];
                                 $Leads->shipment_description = $getData[8];
                                 $Leads->leads_list_id = $LLid;
+                                $Leads->product_id = $getData[9];
                                 $Leads->status = 'Draft';
 
                                 // insert the current row
