@@ -292,7 +292,7 @@
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="{{route('admin.warehouse.all')}}">Warehouses</a></li>
 										<li aria-haspopup="true"><a href="{{route('admin.warehouse.products.all')}}">Products</a></li>
-										<li aria-haspopup="true"><a href="tooltipandpopover.html">Stocks</a></li>
+										<li aria-haspopup="true"><a href="{{route('admins.purchase.requests')}}">Purchase Requests</a></li>
 										
 									</ul>
 								</li>
@@ -341,6 +341,24 @@
 								<p>{!! \Session::get('error') !!}</p>
 							</div>
 						@endif
+						@php
+							$purchaseReqs = \App\PurchaseRequest::where('status', 'pending')->count();
+						@endphp
+						@if ($purchaseReqs > 0)
+						<div class="row">
+							<div class="col-12 pt-2">
+								<div class="alert alert-warning alert-dismissible fade show" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+										<span class="sr-only">Close</span>
+									</button>
+									<strong> <i class="fa fa-bell-o" aria-hidden="true"></i> Hey, New Stock Requests from Sellers!</strong> 
+									<a href="{{route('admins.purchase.requests')}}" class="btn btn-primary">Open <i class="fa fa-eye" aria-hidden="true"></i> </a>
+								</div>
+							</div>
+						</div>
+						@endif
+						
                         @yield('content')
 					</div><!--End side app-->
 

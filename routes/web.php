@@ -76,6 +76,8 @@ Route::prefix('admin')->group(function() {
 	Route::get('/sellers/add', 'Admin\SellerController@addSeller')->middleware('auth:admin')->name('admin.sellers.add');
 	Route::get('/sellers/profile/{id}', 'Admin\SellerController@profile')->middleware('auth:admin')->name('admin.sellers.profile');
 
+	// Purchse Requests
+	Route::get('/purchase-requests/all', 'Admin\PurchaseRequests@all')->middleware('auth:admin')->name('admins.purchase.requests');
 
 	// Leads
 	Route::get('/sellers/leads/all', 'Admin\LeadsController@allLeads')->middleware('auth:admin')->name('admin.leads.all');
@@ -95,7 +97,6 @@ Route::prefix('admin')->group(function() {
 
 	Route::get('/warehouse/buy-stock/product/{id}', 'Admin\WarehouseController@buyStock')->middleware('auth:admin');
 	Route::post('/warehouse/buy-stock/product/store', 'Admin\WarehouseController@buyStockStore')->middleware('auth:admin');
-
 	
 
 	// Reports
