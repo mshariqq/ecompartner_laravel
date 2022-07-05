@@ -18,14 +18,26 @@
                             <h5 class="time-title p-0 font-weight-semibold leading-normal mb-0"><a href="{{route('admin.sellers.profile', $item->seller->id)}}">{{$item->seller->name}}</a></h5>
                             {{$item->seller->country}}
                         </div>
-                        <a href="" class="btn btn-success d-none d-sm-block mr-2"><i class="fa fa-check"></i> </a>
+                        @if ($item->status == 'pending' || $item->status == 'rejected' )
+                        <a href="{{route('admins.purchase.requests.confirm', $item->id)}}" class="btn btn-success d-none d-sm-block mr-2"><i class="fa fa-check"></i> </a>
                         
-                        <button class="btn btn-danger d-none d-sm-block"><i class="fa fa-times"></i> </button>
+                        <a href="{{route('admins.purchase.requests.reject', $item->id)}}" class="btn btn-danger d-none d-sm-block"><i class="fa fa-times"></i> </a>
+                        @endif
+
                     </div>
+                    <br>
+                    @if ($item->status == 'pending')
+                        <span class="tag bg-warning">Pending</span>
+                    @elseif($item->status == 'rejected')
+                        <span class="tag bg-danger">Rejected</span>
+                    @else  
+                        <span class="tag bg-success">Confirmed</span>
+                    @endif
                     <br>
                     New Stock Request: <b><span class="text-primary"> {{$item->qty}} </span></b>
                     <br>
                     Request Date : <b>{{$item->created_at->diffForHumans()}}</b>
+                    
 
                 </div>
                 <div class="card-footer border-top">
@@ -39,13 +51,15 @@
                             <br>
                             Current Stock : <b>{{$item->product->stock}}</b>
                         </div>
-                    </div>
-                    
+                    </div>                    
                 </div>
             </div>
         </div>
 
     @endforeach
+    <div class="col-12">
+        {!! $reqs->links() !!}
+    </div>
 </div>
 
 @endsection

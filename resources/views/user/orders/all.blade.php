@@ -2,16 +2,23 @@
 @section('content')
 
 <div class="page-header bg-white p-3 shadow">
-    <h4 class="mb-0 float-left"> <a href="{{route('leads.leads-list.index')}}"><i class="fa fa-arrow-left" aria-hidden="true"></i> </a> Showing Orders from your Leads  </h4>
+    <h4 class="mb-0 float-left"> <a href="{{route('leads.leads-list.index')}}"><i class="fa fa-arrow-left" aria-hidden="true"></i> </a> Showing Orders from your Leads   </h4>
     <p class="mb-0 float-right"><a href="#" class="btn btn-sm btn-primary"> <i class="fa fa-download" aria-hidden="true"></i> Export</a></p>
 </div>
 
 <div class="row">
     <div class="col-12">
-        <table id="example" class="table table-striped bg-white table-bordered shadow">
+        
+        <p style="font-size: 16px" class="text-orange">Note : Scroll the table horizontally for more columns <i class="fa fa-align-right" aria-hidden="true"></i> </p>
+
+    </div>
+    <div class="col-12">
+       <div class="table-responsive">
+        <table id="example" class="table table-striped bg-white table-bordered shadow text-nowrap">
             <thead class="bg-dark">
                 <tr>
                     <th>Status</th>
+                    <th>Tracking ID</th>
                     <th>Name</th>
                     <th>Delivery Address</th>
                     <th>City</th>
@@ -38,6 +45,7 @@
 
                         @endif
                         </td>
+                        <td>{{$item->tracking_id}}</td>
                         <td>{{$item->name}}</td>
                         <td>{{$item->delivery_address}}</td>
                         <td>{{$item->city}}</td>
@@ -54,6 +62,7 @@
                 {{$orders->links()}}
             </tfoot>
         </table>
+       </div>
     </div>
 </div>
 

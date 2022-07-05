@@ -37,6 +37,7 @@
           <input name="id" type="hidden" value="{{$product->id}}">
           <input required type="number" name="qty" id="" min="0" max="{{$product->stock}}" class="bg-white form-control" placeholder="0" aria-describedby="helpId">
         </div>
+       
         <div class="form-group text-right">
             <p class="text-right"><button class="btn btn-primary" type="submit">Purchase Now <i class="fa fa-arrow-right" aria-hidden="true"></i> </button></p>
         </div>

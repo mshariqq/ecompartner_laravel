@@ -44,6 +44,8 @@ Route::prefix('seller')->middleware('auth')->group(function() {
 
 	// orders
 	Route::get('orders/all', 'OrdersController@viewAll')->name('orders.all');
+	Route::get('orders/track', 'OrdersController@track')->name('orders.track');
+	Route::post('orders/track/data', 'OrdersController@trackOrder')->name('orders.track.data');
 
 	// warehouses
 	Route::get('warehouses/all', 'WarehouseController@all')->name('warehouses.all');
@@ -78,6 +80,8 @@ Route::prefix('admin')->group(function() {
 
 	// Purchse Requests
 	Route::get('/purchase-requests/all', 'Admin\PurchaseRequests@all')->middleware('auth:admin')->name('admins.purchase.requests');
+	Route::get('/purchase-requests/confirm/{id}', 'Admin\PurchaseRequests@confirm')->middleware('auth:admin')->name('admins.purchase.requests.confirm');
+	Route::get('/purchase-requests/reject/{id}', 'Admin\PurchaseRequests@reject')->middleware('auth:admin')->name('admins.purchase.requests.reject');
 
 	// Leads
 	Route::get('/sellers/leads/all', 'Admin\LeadsController@allLeads')->middleware('auth:admin')->name('admin.leads.all');

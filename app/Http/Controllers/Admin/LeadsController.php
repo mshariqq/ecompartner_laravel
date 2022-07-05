@@ -122,7 +122,21 @@ class LeadsController extends Controller
                 $save = $order->save();
                 if($save){
                     // if order saved
-                    return array(true, 'success');
+                    // create new TRK id and update the order
+                    $nOrder = Order::find($order->id);
+                    $TRK = array();
+                    $TRK['str1'] = rand(0,10);
+                    $TRK['str2'] = rand(0,12);
+                    $TRK['id'] = $order->id;
+                    $nOrder->tracking_id = "AWB" . $TRK['str1'] . $TRK['str2'] . $this->getOrderAlpha($TRK['str1']) . $this->getOrderAlpha($TRK['str2']) . $TRK['id'];
+                    $update = $nOrder->save();
+                    if($update){
+                        return array(true, 'success');
+
+                    }else{
+                        return array(false, 'Error while generating tracking ID');
+
+                    }
                 }else{
                     // if order error then revert the deacrese 
                     $product = Product::find($lead->product_id);
@@ -138,6 +152,24 @@ class LeadsController extends Controller
         }else{
             return array(false, 'Product Not Found');
         }
+    }
+
+    private function getOrderAlpha($int){
+        $alpha = array(
+            0 => 'A',
+            1 => 'B',
+            2 => 'C',
+            3 => 'D',
+            4 => 'E',
+            5 => 'F',
+            6 => 'G',
+            7 => 'H',
+            8 => 'I',
+            9 => 'J',
+            10 => 'K',
+            11 => 'L'
+        );
+        return $alpha[$int];
     }
 
     public function ordersOfLead($leadid){

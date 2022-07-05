@@ -288,11 +288,12 @@
 										
 									</ul>
 								</li>
-								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="typcn typcn-briefcase"></i> Warehouse </a>
+								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="typcn typcn-briefcase"></i> Warehouse & Purchases </a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="{{route('admin.warehouse.all')}}">Warehouses</a></li>
 										<li aria-haspopup="true"><a href="{{route('admin.warehouse.products.all')}}">Products</a></li>
-										<li aria-haspopup="true"><a href="{{route('admins.purchase.requests')}}">Purchase Requests</a></li>
+										<li aria-haspopup="true"><a href="{{route('admins.purchase.requests')}}">Purchase Requests by Sellers</a></li>
+										<li aria-haspopup="true"><a href="{{route('admin.warehouse.product-purchases')}}">Purchase History</a></li>
 										
 									</ul>
 								</li>
@@ -333,13 +334,22 @@
 				<div class="container content-area">
 					<div class="side-app">
 						@if (\Session::has('success'))
-							<div class="alert alert-success">
-								<p>{!! \Session::get('success') !!}</p>
-							</div>
+						<div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+								<span class="sr-only">Close</span>
+							</button>
+							<p>{!! \Session::get('success') !!}</p>						
+						</div>
+							
 						@elseif (\Session::has('error'))
-							<div class="alert alert-danger">
-								<p>{!! \Session::get('error') !!}</p>
-							</div>
+						<div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+								<span class="sr-only">Close</span>
+							</button>
+							<p>{!! \Session::get('error') !!}</p>						
+						</div>
 						@endif
 						@php
 							$purchaseReqs = \App\PurchaseRequest::where('status', 'pending')->count();

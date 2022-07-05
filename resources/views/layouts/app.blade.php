@@ -275,6 +275,7 @@
 								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="typcn typcn-chart-pie-outline"></i> Orders <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="{{route("orders.all")}}">Browse Orders</a></li>
+										<li aria-haspopup="true"><a href="{{route("orders.track")}}">Track Order</a></li>
 										{{-- <li aria-haspopup="true"><a href="chart-morris.html">Reports</a></li> --}}
 										
 									</ul>

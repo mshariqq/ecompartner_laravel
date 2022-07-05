@@ -7,17 +7,25 @@
 @section('content')
 
 <div class="page-header">
-    <h2>Showing All Orders imported by their respective Sellers</h2>
+    <h2>Showing All Orders imported by their respective Sellers
+        <br>
+        <small style="font-size: 16px" class="text-orange">Note : Scroll the table horizontally for more columns <i class="fa fa-align-right" aria-hidden="true"></i> </small>
+
+
+    </h2>
+    
 </div>
 
 <div class="row">
     <div class="col-12">
         <div class="table-responsive">
-            <table class="bg-white shadow table table-striped table-bordered">
+            <table class="bg-white shadow table table-striped table-bordered  text-nowrap">
                 <thead class="bg-dark">
                     <tr>
                         {{-- <th>View</th> --}}
-                        <th width="17%">Change Status</th>
+                        <th>Change Status</th>
+                        <th>Seller</th>
+                        <th>Tracking ID</th>
                         <th>Status</th>
                         <th>Name</th>
                         <th>Delivery Address</th>
@@ -52,8 +60,19 @@
                                   </select>
                                 </div>
                                 
-                                <a href="#" class="btn btn-sm btn-primary"> <i class="fa fa-user-circle-o" aria-hidden="true"></i> View Seller <i class="fa fa-arrow-right" aria-hidden="true"></i> </a>
+                               
                                </td>
+                               <td>
+                                <a href="{{route('admin.sellers.profile', $item->seller->id)}}"> <i class="fa fa-user" aria-hidden="true"></i> {{$item->seller->name}}</a>
+                                
+
+                               </td>
+                               <td>
+                                {{
+                                    $item->tracking_id
+                                }}
+                               </td>
+                              
                             <td id="tdStatus{{$item->id}}">
                                     @if ($item->status == 'confirmed')
                                         <span class="tag bg-indigo text-white p-1 text-capitalize">{{$item->status}}</span>
@@ -65,6 +84,8 @@
                                         <span class="tag bg-dark text-orange text-capitalize">{{$item->status}}</span>
  
                                     @endif
+                                    <br>
+
                             </td>
 
                             <td>

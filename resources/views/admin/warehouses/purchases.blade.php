@@ -7,7 +7,7 @@
 @section('content')
 
 <div class="page-header">
-    <h2>Product Purchases</h2>
+    <h2> <i class="fa fa-history" aria-hidden="true"></i> Product Purchases History</h2>
 </div>
 
 <div class="row">
@@ -20,13 +20,12 @@
                 <thead class="bg-dark">
                     <tr>
                         {{-- <th>View</th> --}}
-                        <th>Seller</th>
-                        <th>Warehouse</th>
-                        <th>Name</th>
-                        <th>Details</th>
-                        <th>Price</th>
-                        <th>Stock</th>
-                        <th>Purchased</th>
+                        <th>Seller Info</th>
+                        <th>Product</th>
+                        <th>Stock before</th>
+                        <th>Stock purchase</th>
+                        <th>Stock after</th>
+                        <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,39 +34,50 @@
                             {{-- <td>
                                 <a href="http://" class="btn btn-primary"> <i class="fa fa-eye" aria-hidden="true"></i> View</a>
                             </td> --}}
-                            {{-- <td>                                
-                                <a href="#" class="btn btn-sm btn-dark mb-2"> View Warehouse <i class="fa fa-eye" aria-hidden="true"></i> </a>
-                                
-                                <a href="{{url('admin/warehouse/buy-stock/product/'.$item->id)}}" target="_blank" class="btn btn-sm btn-indigo mb-2">Buy Stocks <i class="fa fa-plus-circle" aria-hidden="true"></i> </a>
-                                <img width="auto" height="100px" src="{{url($item->photo)}}" alt="">
+                            <td>                                
+                                <a href="#" class="btn btn-sm btn-indigo mb-2"> {{$item->product->warehouse->name}} <i class="fa fa-eye" aria-hidden="true"></i> </a>
+                                <br>
+                                <a class="btn btn-danger btn-sm" href="{{route('admin.sellers.profile', $item->seller->id)}}">{{$item->seller->name}} <i class="fa fa-user" aria-hidden="true"></i></a>
 
-                            </td> --}}
-                            <td>
-                                {{$item->seller->name}}
-                            </td>
-                            <td>
-                                {{$item->product->warehouse->name}}
                             </td>
 
                             <td>
-                            
-                                <span class="text-primary"> {{ $item->product->name }} </span>
                                 <img width="auto" height="100px" src="{{url($item->product->photo)}}" alt="">
-
-                            </td>
-                            <td>
-                                {!! $item->product->description !!}
+                                <br>
+                                Name : <span class="text-primary"> {{ $item->product->name }} </span>
+                                <br>
+                                Price : <span class="text-indigo">{{$item->product->price}}</span>
                                 
                             </td>
                             <td>
-                                {{$item->product->price}}
+                                <span class="tag bg-danger">
+                                    @php
+                                    echo $item->product->stock - $item->qty;
+                                 @endphp
+                                </span>
+                            
+                            </td>
+                            <td>
+                                <span class="tag bg-primary">
+                                    @php
+                                    echo $item->qty;
+                                 @endphp
+                                </span>
                                 
                             </td>
                             <td>
-                                {{$item->qty}}
-                                
+                                <span class="tag bg-success">
+                                    @php
+                                    echo $item->product->stock;
+                                 @endphp
+                                </span>
                             </td>
-                            <td>{{$item->created_at->diffForHumans()}}</td>
+                            
+                            <td>
+                                {{$item->created_at->diffForHumans()}}
+                                <br>
+                                <span class="text-muted">{{$item->created_at}}</span>
+                            </td>
                         
                         </tr>
                     @endforeach

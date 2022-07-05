@@ -13,7 +13,7 @@
 <div class="row">
     <div class="col-12">
         <div class="table-responsive">
-            <table class="bg-white shadow table table-striped table-bordered">
+            <table class="bg-white shadow table table-striped table-bordered table-nowrap text-nowrap">
                 <thead class="bg-dark">
                     <tr>
                         {{-- <th>View</th> --}}
