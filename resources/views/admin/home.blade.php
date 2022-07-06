@@ -27,7 +27,7 @@
                         <div class="col-8">
                             <div class="card-body p-3  d-flex">
                                 <div>
-                                    <p class="text-muted mb-1">Total Income</p>
+                                    <p class="text-muted mb-1">Total COD</p>
                                     <h2 class="mb-0 text-dark">{{$data['total_income']}}</h2>
                                 </div>
                             </div>
@@ -48,8 +48,8 @@
                         <div class="col-8">
                             <div class="card-body p-3  d-flex">
                                 <div>
-                                    <p class="text-muted mb-1">Total Cancelled</p>
-                                    <h2 class="mb-0 text-dark">{{$data['total_cancelled']}}</h2>
+                                    <p class="text-muted mb-1">Total Confirmed</p>
+                                    <h2 class="mb-0 text-dark">{{$data['total_confirmed']}}</h2>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                         <div class="col-8">
                             <div class="card-body p-3  d-flex">
                                 <div>
-                                    <p class="text-muted mb-1">Total Revenue</p>
+                                    <p class="text-muted mb-1">Total Delivered</p>
                                     <h2 class="mb-0 text-dark">{{$data['total_revenue']}}</h2>
                                 </div>
                             </div>
@@ -90,8 +90,8 @@
                         <div class="col-8">
                             <div class="card-body p-3  d-flex">
                                 <div>
-                                    <p class="text-muted mb-1">Total Orders</p>
-                                    <h2 class="mb-0 text-dark">{{$data['total_orders']}}</h2>
+                                    <p class="text-muted mb-1">Total Pending</p>
+                                    <h2 class="mb-0 text-dark">{{$data['total_pending_cod']}}</h2>
                                 </div>
                             </div>
                         </div>
@@ -109,44 +109,39 @@
             <div class="row">
                 <div class="col-xl-2 col-lg-6 col-sm-6 pr-0 pl-0">
                     <div class="card-body text-center">
-                        <h5 class="text-white">Today</h5>
-                        <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{$data['today_orders']}}</h2>
-                         <div><i class="si si-graph mr-1 text-danger"></i><span class="text-white">Orders</span></div>
+                        <h5 class="text-white">Total Leads</h5>
+                        <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{$data['total_leads']}}</h2>
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-6 col-sm-6 pr-0 pl-0">
                     <div class="card-body text-center">
-                        <h5 class="text-white">Yesterday</h5>
-                        <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{$data['yesterday_orders']}}</h2>
-                         <div><i class="si si-graph mr-1 text-danger"></i><span class="text-white">Orders</span></div>
+                        <h5 class="text-white">Total Orders</h5>
+                        <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{$data['total_orders']}}</h2>
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-6 col-sm-6 pr-0 pl-0">
                     <div class="card-body text-center">
-                        <h5 class="text-white">Last 7 Days</h5>
-                        <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{$data['last_week_orders']}}</h2>
-                         <div><i class="si si-graph mr-1 text-danger"></i><span class="text-white">Orders</span></div>
+                        <h5 class="text-white">Total Delivered</h5>
+                        <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{$data['total_delivered_orders']}}</h2>
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-6 col-sm-6 pr-0 pl-0">
                     <div class="card-body text-center">
-                        <h5 class="text-white">Last 30 Days</h5>
-                        <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{$data['last_month_orders']}}</h2>
-                         <div><i class="si si-graph mr-1 text-danger"></i><span class="text-white">Orders</span></div>
+                        <h5 class="text-white">Total</h5>
+                        <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{$data['total_outfordeivery_orders']}}</h2>
+                        <span class="text-white">Out for Delivery</span>
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-6 col-sm-6 pr-0 pl-0">
                     <div class="card-body text-center">
-                        <h5 class="text-white">Last 6 Months</h5>
-                        <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{$data['last_sixmonths_orders']}}</h2>
-                         <div><i class="si si-graph mr-1 text-danger"></i><span class="text-white">Orders</span></div>
+                        <h5 class="text-white">Total Pending</h5>
+                        <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{$data['total_pending_orders']}}</h2>
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-6 col-sm-6 pr-0 pl-0">
                     <div class="card-body text-center">
-                        <h5 class="text-white">Last 12 Months</h5>
-                        <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{ $data['last_year_orders'] }}</h2>
-                         <div><i class="si si-graph mr-1 text-danger"></i><span class="text-white">Orders</span></div>
+                        <h5 class="text-white">Total Cancelled</h5>
+                        <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{ $data['total_cancelled_orders'] }}</h2>
                     </div>
                 </div>
             </div>
@@ -161,8 +156,8 @@
             <div class="card-body">
                 <div class="d-flex clearfix">
                     <div class="text-left mt-3">
-                        <p class="card-text text-muted mb-1">Total Orders</p>
-                        <h2 class="mb-0 text-dark mainvalue">{{$data['total_orders']}}</h2>
+                        <p class="card-text text-muted mb-1">Total Leads</p>
+                        <h2 class="mb-0 text-dark mainvalue">{{$data['total_leads_count']}}</h2>
                     </div>
                     <div class="ml-auto">
                         <span class="bg-primary-transparent icon-service text-primary ">
@@ -212,12 +207,12 @@
             <div class="card-body">
                 <div class="d-flex clearfix">
                     <div class="text-left mt-3">
-                        <p class="card-text text-muted mb-1">Total Cancelled</p>
-                        <h2 class="mb-0 text-dark mainvalue">{{$data['total_cancelled_orders']}}</h2>
+                        <p class="card-text text-muted mb-1">Total Pending</p>
+                        <h2 class="mb-0 text-dark mainvalue">{{$data['total_pending_orders']}}</h2>
                     </div>
                     <div class="ml-auto">
                         <span class="bg-warning-transparent icon-service text-warning">
-                            <i class="si si-close-loaded  fs-2"></i>
+                            <i class="si si-call-out  fs-2"></i>
                         </span>
                     </div>
                 </div>
