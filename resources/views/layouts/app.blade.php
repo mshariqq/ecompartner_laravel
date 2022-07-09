@@ -1,18 +1,23 @@
 <!doctype html>
+<!-- 
+		Developer	: Md Shariqq Ahmed
+		Website		: www.shariqq.com 
+		Copyright	: Ecompartner
+-->
 <html lang="en" dir="ltr">
 	<head>
 		<meta charset="UTF-8">
 		<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta content="Hogo– Creative Admin Multipurpose Responsive Bootstrap4 Dashboard HTML Template" name="description">
-		<meta content="Spruko Technologies Private Limited" name="author">
-		<meta name="keywords" content="html admin template, bootstrap admin template premium, premium responsive admin template, admin dashboard template bootstrap, bootstrap simple admin template premium, web admin template, bootstrap admin template, premium admin template html5, best bootstrap admin template, premium admin panel template, admin template"/>
+		<meta content="{{config('app.name')}}" name="description">
+		<meta content="Ecompartner Delivery" name="author">
+		<meta name="keywords" content="ecompartner"/>
 
 		<!-- Favicon -->
 		<link rel="icon" href="{{ asset('assets/images/brand/favicon.ico')}}" type="image/x-icon"/>
 		<link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/favicon.ico')}}" />
 		<!-- Title -->
-		<title>Seller Panel - Aissa</title>
+		<title>{{config('app.name')}}</title>
 
 		<!--Bootstrap.min css-->
 		<link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css')}}">
@@ -50,16 +55,6 @@
 		<!-- Jquery js-->
 		<script src="{{ asset('assets/js/vendors/jquery-3.2.1.min.js')}}"></script>
 
-				<!-- Charts js-->
-				<script src="{{ asset('assets/plugins/chart/chart.bundle.js')}}"></script>
-				<script src="{{ asset('assets/plugins/chart/utils.js')}}"></script>
-		
-				<!-- Charts js-->
-				<script src="{{asset('assets/plugins/chart/chart.bundle.js')}}"></script>
-				<script src="{{asset('assets/plugins/chart/chart.extension.js')}}"></script>
-				
-				<script src="{{ asset('assets/js/chartjs.js')}}"></script>
-
 	</head>
 	<body class="app sidebar-mini rtl">
 
@@ -74,9 +69,9 @@
 				<div class="app-header header hor-topheader d-flex">
 					<div class="container">
 						<div class="d-flex">
-						    <a class="header-brand" href="index.html">
-								<img src="{{ asset('assets/images/brand/logo.png')}}" class="header-brand-img main-logo" alt="Hogo logo">
-								<img src="{{ asset('assets/images/brand/icon.png')}}" class="header-brand-img icon-logo" alt="Hogo logo">
+						    <a class="header-brand btn btn-primary btn-sm" href="{{url('/')}}">
+								<img src="{{ asset('frontend/Images/logo.svg')}}" class="header-brand-img main-logo" alt="Hogo logo">
+								<img src="{{ asset('frontend/Images/logo.svg')}}" class="header-brand-img icon-logo" alt="Hogo logo">
 							</a><!-- logo-->
 							<a id="horizontal-navtoggle" class="animated-arrow hor-toggle"><span></span></a>
 							<a href="#" data-toggle="search" class="nav-link nav-link  navsearch"><i class="fa fa-search"></i></a><!-- search icon -->
@@ -91,108 +86,7 @@
                             <ul class="nav navbar">
                                 <li>You are logged in <b>Seller Panel</b></li>
                             </ul>   
-							{{-- <ul class="nav navbar-nav horizontal-nav header-nav">
-								<li class="mega-dropdown nav-item">
-									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-										<i class="fe fe-grid mr-2"></i>UI Kit <i class="fa fa-angle-down ml-1"></i>
-									</a>
-									<ul class="dropdown-menu mega-dropdown-menu container row p-5">
-										<li>
-											<div class="row">
-												<div class="col-md-4">
-													<div class="">
-														<div class="card-body p-0 relative">
-															<div class="arrow-ribbon">Comming Events</div>
-															<img class="" alt="img" src="{{ asset('assets/images/photos/32.jpg')}}">
-															<div class="btn-absolute">
-																<a class="btn btn-primary btn-pill btn-sm" href="#">More info</a>
-																<span id="timer-countercallback1" class="h5 text-white float-right mb-0 mt-1"></span>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="col-2">
-													<h4  class="mb-3">Pages</h4>
-													<a class="dropdown-item pl-0 pr-0" href="#"><i class="fa fa-angle-double-right text-muted mr-1"></i> Client Support</a>
-													<a class="dropdown-item pl-0 pr-0" href="#"><i class="fa fa-angle-double-right text-muted mr-1"></i> About Us</a>
-													<a class="dropdown-item pl-0 pr-0" href="#"><i class="fa fa-angle-double-right text-muted mr-1"></i> Calendar</a>
-													<a class="dropdown-item pl-0 pr-0" href="#"><i class="fa fa-angle-double-right text-muted mr-1"></i> Add New Pages</a>
-													<a class="dropdown-item pl-0 pr-0" href="#"><i class="fa fa-angle-double-right text-muted mr-1"></i> Login Pages</a>
-												</div>
-												<div class="col-2">
-													<h4  class="mb-3">Pages</h4>
-													<a class="dropdown-item pl-0 pr-0" href="#"><i class="fa fa-angle-double-right text-muted mr-1"></i> Documentation</a>
-													<a class="dropdown-item pl-0 pr-0" href="#"><i class="fa fa-angle-double-right text-muted mr-1"></i> Multi Pages</a>
-													<a class="dropdown-item pl-0 pr-0" href="#"><i class="fa fa-angle-double-right text-muted mr-1"></i> Edit Profile</a>
-													<a class="dropdown-item pl-0 pr-0" href="#"><i class="fa fa-angle-double-right text-muted mr-1"></i> Mail Settings</a>
-													<a class="dropdown-item pl-0 pr-0" href="#"><i class="fa fa-angle-double-right text-muted mr-1"></i> Default Setting</a>
-												</div>
-												<div class="col-md-4">
-													<h4  class="mb-3">Current projects</h4>
-													<div class="overflow-hidden">
-														<div class="card-body p-0">
-															<div class="list-group list-lg-group list-group-flush">
-																<a class="list-group-item list-group-item-action overflow-hidden pl-0 pr-0 pb-4" href="#">
-																	<div class="d-flex">
-																		<img class="avatar-xl br-7 mr-3" src="{{ asset('assets/images/photos/33.jpg')}}" alt="Image description">
-																		<div class="media-body">
-																			<div class="align-items-center">
-																				<h5 class="mb-0">
-																					Wordpress project
-																				</h5>
-																			</div>
-																			<div class="mb-2 mt-2">
-																				<p class="mb-2">Project Status<span class="float-right text-default">85%</span></p>
-																				<div class="progress progress-sm mb-0 h-1">
-																					<div class="progress-bar progress-bar-striped progress-bar-animated bg-success w-85"></div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</a>
-																<a class="list-group-item list-group-item-action overflow-hidden pl-0 pr-0 pt-4" href="#">
-																	<div class="d-flex">
-																		<img class="avatar-xl br-7 mr-3" src="{{ asset('assets/images/photos/34.jpg')}}" alt="Image description">
-																		<div class="media-body">
-																			<div class="align-items-center">
-																				<h5 class="mb-0">
-																					Html project
-																				</h5>
-																			</div>
-																			<div class="mb-2 mt-2">
-																				<p class="mb-2">Project Status<span class="float-right text-default">75%</span></p>
-																				<div class="progress progress-sm mb-0 h-1">
-																					<div class="progress-bar progress-bar-striped progress-bar-animated bg-primary w-75"></div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</a>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</li>
-									</ul>
-								</li>
-							</ul> --}}
-							{{-- <ul class="nav header-nav">
 
-								<li class="nav-item dropdown header-option m-2">
-									<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-										<i class="fe fe-settings mr-2"></i>Settings
-									</a>
-									<div class="dropdown-menu dropdown-menu-left">
-										<a class="dropdown-item" href="#">Option 1</a>
-										<a class="dropdown-item" href="#">Option 2</a>
-										<a class="dropdown-item" href="#">Option 3</a>
-										<a class="dropdown-item" href="#">Option 4</a>
-										<a class="dropdown-item" href="#">Option 5</a>
-
-									</div>
-								</li>
-							</ul> --}}
 							<div class="d-flex order-lg-2 ml-auto header-rightmenu">
 								<div class="dropdown">
 									<a  class="nav-link icon full-screen-link" id="fullscreen-button">
@@ -315,8 +209,14 @@
 								</div>
 							</div>
 							<div class="col col-auto">
-								<a class="btn btn-light mt-4 mt-sm-0" href="#"><i class="fe fe-help-circle mr-1 mt-1"></i>  Support</a>
-								<a class="btn btn-success mt-4 mt-sm-0" href="#"><i class="fe fe-plus mr-1 mt-1"></i> Add New</a>
+								<b>
+									<span class="text-orange">
+										@php
+										$dt = new DateTime();
+										echo $dt->format('d F D Y,  H:i:s A');
+										@endphp
+									</span>
+								</b>
 							</div>
 						</div>
 					</div>

@@ -9,4 +9,5 @@ class Lead extends Model
     public function list(){
         return $this->hasOne('App\LeadsList','id','leads_list_id'); 
     }
+
 }

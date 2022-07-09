@@ -13,7 +13,7 @@
 		<link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/favicon.ico')}}" />
 
 		<!-- Title -->
-		<title>Hogo – Creative Admin Multipurpose Responsive Bootstrap4 Dashboard HTML Template</title>
+		<title>{{config('app.name')}}</title>
 
 		<!--Bootstrap.min css-->
 		<link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css')}}">

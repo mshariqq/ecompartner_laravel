@@ -11,8 +11,8 @@
                         @csrf
                         <div class="card">
                             <div class="card-body">
-                                <div class="text-center mb-6">
-                                    <img src="{{asset('assets/images/brand/logo.png')}}" class="" alt="">
+                                <div class="text-center mb-6 bg-primary tag">
+                                    <img src="{{ asset('frontend/Images/logo.svg')}}" class="" alt="">
                                 </div>
                                 <h3>Register</h3>
                                 <p class="text-muted">Create New Account</p>
@@ -56,7 +56,7 @@
                                     <input placeholder="Confirm Password" id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
 
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mt-5">
                                     <label class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" />
                                         <span class="custom-control-label">Agree the <a href="terms.html">terms and policy</a></span>
@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
-                                        <button type="submit" class="btn btn-primary btn-block px-4">Create a new account</button>
+                                        <button type="submit" class="btn btn-primary btn-block px-4">Create a new account <i class="fa fa-caret-right" aria-hidden="true"></i> </button>
                                     </div>
                                 </div>
                                 <div class="mt-6 btn-list">
@@ -73,6 +73,10 @@
                                     <button type="button" class="btn btn-icon btn-twitter"><i class="fa fa-twitter"></i></button>
                                     <button type="button" class="btn btn-icon btn-dribbble"><i class="fa fa-dribbble"></i></button>
                                 </div>
+                                <p class="col-12 mt-5">
+                                    Already have an Account? <br>
+                                    <a href="{{route('login')}}" class="btn btn-indigo">Login <i class="fa fa-arrow-right" aria-hidden="true"></i> </a>
+                                </p>
                             </div>
                         </div>
                     </form>

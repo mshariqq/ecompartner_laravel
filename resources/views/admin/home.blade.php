@@ -6,6 +6,8 @@
 
 @section('content')
 
+<!-- ECharts js -->
+<script src="{{ asset('assets/plugins/echarts/echarts.js')}}"></script>
 
 <div class="page-header">
     <h4>My Admin Dashboard</h4>
@@ -221,8 +223,31 @@
     </div>
 </div>
 
-{{-- last week --}}
 <div class="row">
+    <div class="col-lg-8 col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Last 7 days Leads Import vs Orders confirmed</h3>
+            </div>
+            <div class="card-body">
+                <div id="echart1" class="chartsh chart-dropshadow"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Demographics</h3>
+            </div>
+            <div class="card-body">
+                <div id="echart-1" class="chartsh chart-dropshadow"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- last week --}}
+{{-- <div class="row">
     <div class="col-lg-9 col-md-12">
         <div class="card">
             <div class="card-header">
@@ -267,9 +292,187 @@
             </div>
     </div>
     
-</div>
+</div> --}}
 
 <script>
+    $(document).ready(function(){
+        // calls functions to init
+        barChart7daysLeadsOrders();
+        radarCircleChart();
+    });
+
+
+    // 7 days leads vs order
+    function barChart7daysLeadsOrders(){
+        var cDates = <?php echo json_encode($data['LvsO']['dates'] );?>;
+        var cLeads =<?php echo json_encode($data['LvsO']['leads'] );?>;
+        var cOrders =<?php echo json_encode($data['LvsO']['orders'] );?>;
+
+        var chartdata = [
+            {
+            name: 'leads',
+            type: 'bar',
+            data: cLeads,
+            smooth: true
+            },
+            {
+            name: 'orders',
+            type: 'bar',
+            smooth:true,
+            data: cOrders
+            },
+           
+        ];
+
+        var chart = document.getElementById('echart1');
+        var barChart = echarts.init(chart);
+
+        var option = {
+            grid: {
+            top: '6',
+            right: '0',
+            bottom: '17',
+            left: '25',
+            },
+            xAxis: {
+            data: [ '2014', '2015', '2016', '2017', '2018'],
+            axisLine: {
+                lineStyle: {
+                color: 'rgba(0,0,0,0.03)'
+                }
+            },
+            axisLabel: {
+                fontSize: 10,
+                color: '#bbc1ca'
+            }
+            },
+            tooltip: {
+                show: true,
+                showContent: true,
+                alwaysShowContent: true,
+                triggerOn: 'mousemove',
+                trigger: 'axis',
+                axisPointer:
+                {
+                    label: {
+                        show: false,
+                    }
+                }
+
+            },
+            yAxis: {
+            splitLine: {
+                lineStyle: {
+                color: 'rgba(0,0,0,0.03)'
+                }
+            },
+            axisLine: {
+                lineStyle: {
+                color: 'rgba(0,0,0,0.03)'
+                }
+            },
+            axisLabel: {
+                fontSize: 10,
+                color: '#bbc1ca'
+            }
+            },
+            series: chartdata,
+            color:[ '#1753fc ','#fa626b', '#32cafe',]
+        };
+
+        barChart.setOption(option);
+    }
+    
+    function radarCircleChart(){
+        var myChart2 = echarts.init(document.getElementById('echart-1'));
+        var option2 = {
+            title: {
+                text: '',
+                subtext: '',
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                x: 'center',
+                y: 'bottom',
+                data: ['Products', 'Users', 'Leads', 'Orders', 'Warehouses'],
+                textStyle: {
+                    color: 'rgba(0,0,0,0.3)'
+                }
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: {
+                        show: true
+                    },
+                    dataView: {
+                        show: true,
+                        readOnly: false
+                    },
+                    magicType: {
+                        show: true,
+                        type: ['pie']
+                    },
+                    restore: {
+                        show: true
+                    },
+                    saveAsImage: {
+                        show: true
+                    }
+                }
+            },
+            calculable: true,
+            series: [{
+                name: '',
+                type: 'pie',
+                radius: [20, 110],
+                center: ['50%', '50%'],
+                roseType: 'radius',
+                label: {
+                    normal: {
+                        show: false
+                    },
+                    emphasis: {
+                        show: true
+                    }
+                },
+                lableLine: {
+                    normal: {
+                        show: false
+                    },
+                    emphasis: {
+                        show: true
+                    }
+                },
+                data: [{
+                    value: {{$data['total_products']}},
+                    name: 'Products'
+                }, {
+                    value: {{$data['total_sellers']}},
+                    name: 'Users'
+                }, {
+                    value: {{$data['total_leads']}},
+                    name: 'Leads'
+                }, {
+                    value: {{$data['total_orders']}},
+                    name: 'Orders'
+                }, {
+                    value: {{$data['total_warehouses']}},
+                    name: 'Warehouses'
+                }
+                ]
+            }, ],
+            color: ['#ed00c3', '#ad59ff', ' #00b3ff', '#00d9bf', '#fc0']
+        };
+        myChart2.setOption(option2);
+    }
+</script>
+
+{{-- <script>
 var cDates =<?php echo json_encode($data['LvsO']['dates'] );?>;
 var cLeads =<?php echo json_encode($data['LvsO']['leads'] );?>;
 var cOrders =<?php echo json_encode($data['LvsO']['orders'] );?>;
@@ -362,6 +565,6 @@ var cOrders =<?php echo json_encode($data['LvsO']['orders'] );?>;
 			}
 		}
 	});
-</script>
+</script> --}}
 
 @endsection

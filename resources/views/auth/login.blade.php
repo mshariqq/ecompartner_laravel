@@ -11,8 +11,8 @@
                         @csrf
                         <div class="card">
                             <div class="card-body">
-                                <div class="text-center mb-6">
-                                    <img src="../assets/images/brand/logo.png" class="" alt="">
+                                <div class="text-center mb-6 bg-primary tag">
+                                    <img src="{{ asset('frontend/Images/logo.svg')}}" class="Logo" alt="">
                                 </div>
                                 <h3>Login</h3>
                                 <p class="text-muted">Sign In to your account</p>

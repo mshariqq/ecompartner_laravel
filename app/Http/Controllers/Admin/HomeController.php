@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Lead;
 use App\Order;
+use App\Product;
 use App\User;
+use App\Warehouse;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -57,6 +59,7 @@ class HomeController extends Controller
         $data['LvsO']['dates'] = [];
         foreach ($data['LvsO']['7_dates'] as $key => $value) {
             $data['LvsO']['dates'][] = Carbon::now()->subdays($value)->diffForHumans();
+            
             $data['LvsO']['leads'][] = Lead::where('created_at','>=',Carbon::now()->subdays($value))->count();
             $data['LvsO']['orders'][] = Order::where('created_at','>=',Carbon::now()->subdays($value))->count();
 
@@ -64,6 +67,9 @@ class HomeController extends Controller
 
         $data['total_sellers'] = User::all()->count();
         $data['total_leads'] = Lead::all()->count();
+
+        $data['total_products'] = Product::all()->count();
+        $data['total_warehouses'] = Warehouse::all()->count();
 
         return view('admin.home', compact('data'));
     }
