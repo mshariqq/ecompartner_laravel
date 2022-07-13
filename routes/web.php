@@ -46,6 +46,8 @@ Route::prefix('seller')->middleware('auth')->group(function() {
 	Route::get('orders/all', 'OrdersController@viewAll')->name('orders.all');
 	Route::get('orders/track', 'OrdersController@track')->name('orders.track');
 	Route::post('orders/track/data', 'OrdersController@trackOrder')->name('orders.track.data');
+	Route::post('/orders/export', 'OrdersController@exportOrders')->name('orders.export');
+
 
 	// warehouses
 	Route::get('warehouses/all', 'WarehouseController@all')->name('warehouses.all');
@@ -93,6 +95,7 @@ Route::prefix('admin')->group(function() {
 	// Orders
 	Route::get('/sellers/orders/all', 'Admin\OrdersController@allOrders')->middleware('auth:admin')->name('admin.orders.all');
 	Route::get('/sellers/orders/ajax/change-status/{id}/{status}', 'Admin\OrdersController@changeOrderStatus')->middleware('auth:admin');
+	Route::post('/orders/export', 'Admin\OrdersController@exportOrders')->middleware('auth:admin')->name('admins.orders.export');
 
 	// Warehouses
 	Route::get('/warehouse/all', 'Admin\WarehouseController@all')->middleware('auth:admin')->name('admin.warehouse.all');
@@ -101,7 +104,6 @@ Route::prefix('admin')->group(function() {
 
 	Route::get('/warehouse/buy-stock/product/{id}', 'Admin\WarehouseController@buyStock')->middleware('auth:admin');
 	Route::post('/warehouse/buy-stock/product/store', 'Admin\WarehouseController@buyStockStore')->middleware('auth:admin');
-	
 
 	// Reports
 	Route::get('/reports/orders', 'Admin\ReportsController@orders')->middleware('auth:admin')->name('admin.reports.orders');

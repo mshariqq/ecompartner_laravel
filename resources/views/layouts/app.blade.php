@@ -17,7 +17,7 @@
 		<link rel="icon" href="{{ asset('assets/images/brand/favicon.ico')}}" type="image/x-icon"/>
 		<link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/favicon.ico')}}" />
 		<!-- Title -->
-		<title>{{config('app.name')}}</title>
+		<title>{{config('app.name')}}  @yield('title')</title>
 
 		<!--Bootstrap.min css-->
 		<link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap/css/bootstrap.min.css')}}">
