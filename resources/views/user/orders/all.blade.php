@@ -177,7 +177,7 @@
                         var printContents = document.getElementById('OrdersExportHiddenTable').innerHTML;
                         var originalContents = document.body.innerHTML;
                         
-                        var head = '<html><head><title>Ecompartner-orders-with-dates- '+input.from+'-and-'+input.to+'</title>' + $("head").html()  + ' <style>body{background-color:white !important;} table{width: 100%;} thead{width: 100%;background-color: #eee;} th{border: 1px solid; #aaa;padding: 5px} td{padding: 5px; border: 1px solid #aaa;} @page { size: 1800px 59.4cm;margin: 1cm 1cm 1cm 1cm; }</style></head>';
+                        var head = '<html><head><title>Ecompartner-orders-with-dates- '+input.from+'-and-'+input.to+'</title>' + $("head").html()  + ' <style>body{background-color:white !important;} table{width: 100%;} thead{width: 100%;background-color: #eee;} th{border: 1px solid; #aaa;padding: 5px} td{padding: 5px; border: 1px solid #aaa;} @page { size: 1800px;margin: 1cm 1cm 1cm 1cm; }</style></head>';
                         document.body.innerHTML = head +"<body>" + printContents + "</body>";
                         window.print();
                         document.body.innerHTML = originalContents;

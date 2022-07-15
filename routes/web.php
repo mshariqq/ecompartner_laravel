@@ -34,6 +34,7 @@ Route::prefix('special')->group(function() {
 Route::prefix('seller')->middleware('auth')->group(function() {
 	// list
 	Route::get('leads/leads-list', 'LeadsController@leadsListIndex')->name('leads.leads-list.index');
+	Route::post('/home/ajax/today-filer', 'User\HomeController@todayFilter')->middleware('auth:admin')->name('dashboard.today-filter');
 
 	// import
 	Route::get('leads/import', 'LeadsController@importLeads')->name('leads.import');
@@ -66,6 +67,7 @@ Route::prefix('admin')->group(function() {
 
 	Route::get('/', 'Admin\HomeController@index')->name('admin.dashboard');
 	Route::get('/home', 'Admin\HomeController@index')->name('admin.home');
+	Route::post('/home/ajax/today-filer', 'Admin\AdminsController@todayFilter')->middleware('auth:admin')->name('admins.dashboard.today-filter');
 
 	Route::get('/profile', 'Admin\ProfileController@index')->middleware('auth:admin')->name('admin.profile');
 	Route::put('/profile/update/{id}', 'Admin\ProfileController@update')->middleware('auth:admin')->name('admin.profile.update');

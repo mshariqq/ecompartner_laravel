@@ -149,14 +149,27 @@
 </div>
 
 {{-- orders analytics --}}
-<div class="row">
+<div class="row" id="TDrow">
+    <div class="col-12">
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label for="">Today's Delivery</label>
+                <input type="date" id="TDdate" class="form-control" placeholder="" aria-describedby="helpId">
+            </div>
+            <div class="col-md-3 ">
+                <button id="TDfilterBtn" type="submit" class="btn btn-indigo mt-md-5">Fetch <i class="fa fa-server" aria-hidden="true"></i> </button>
+            </div>
+        </div>
+        
+       
+    </div>
     <div class="col-sm-12 col-lg-6 col-xl-3">
         <div class="card">
             <div class="card-body">
                 <div class="d-flex clearfix">
                     <div class="text-left mt-3">
                         <p class="card-text text-muted mb-1">Total Leads</p>
-                        <h2 class="mb-0 text-dark mainvalue">{{$data['total_leads_count']}}</h2>
+                        <h2 id="TDleads" class="mb-0 text-dark mainvalue">{{$data['total_leads_count']}}</h2>
                     </div>
                     <div class="ml-auto">
                         <span class="bg-primary-transparent icon-service text-primary ">
@@ -173,7 +186,7 @@
                 <div class="d-flex clearfix">
                     <div class="text-left mt-3">
                         <p class="card-text text-muted mb-1">Total Confirmed</p>
-                        <h2 class="mb-0 text-dark mainvalue">{{$data['total_confirmed_orders']}}</h2>
+                        <h2 id="TDconfirmed" class="mb-0 text-dark mainvalue">{{$data['total_confirmed_orders']}}</h2>
                     </div>
                     <div class="ml-auto">
                         <span class="bg-success-transparent icon-service text-success">
@@ -190,7 +203,7 @@
                 <div class="d-flex clearfix">
                     <div class="text-left mt-3">
                         <p class="card-text text-muted mb-1">Total Delivered</p>
-                        <h2 class="mb-0 text-dark mainvalue">{{$data['total_delivered_orders']}}</h2>
+                        <h2 id="TDdelivered" class="mb-0 text-dark mainvalue">{{$data['total_delivered_orders']}}</h2>
                     </div>
                     <div class="ml-auto">
                         <span class="bg-danger-transparent icon-service text-danger">
@@ -207,7 +220,7 @@
                 <div class="d-flex clearfix">
                     <div class="text-left mt-3">
                         <p class="card-text text-muted mb-1">Total Pending</p>
-                        <h2 class="mb-0 text-dark mainvalue">{{$data['total_pending_orders']}}</h2>
+                        <h2 id="TDpending" class="mb-0 text-dark mainvalue">{{$data['total_pending_orders']}}</h2>
                     </div>
                     <div class="ml-auto">
                         <span class="bg-warning-transparent icon-service text-warning">
@@ -296,6 +309,30 @@
         // calls functions to init
         barChart7daysLeadsOrders();
         radarCircleChart();
+
+        $("#TDfilterBtn").on('click', function(){
+            var date = $("#TDdate").val();
+            $(this).removeClass('btn-indigo');
+            $(this).addClass('btn-dark');
+
+            $("#TDrow").addClass("bg-light shadow-lg");
+            $.ajax({
+                type: "POST",
+                url: "{{route('dashboard.today-filter')}}",
+                data: {date:date,_token: "{{ csrf_token() }}",},
+                success: function (response) {
+
+                    $('#TDleads').html(response.data.leads);
+                    $('#TDconfirmed').html(response.data.confirmed);
+                    $('#TDdelivered').html(response.data.delivered);
+                    $('#TDpending').html(response.data.pending);
+
+                    $("#TDfilterBtn").removeClass('btn-dark');
+                    $('#TDfilterBtn').addClass('btn-indigo');
+                    $("#TDrow").removeClass("bg-light shadow-lg");
+                }
+            });
+        });
     });
 
 

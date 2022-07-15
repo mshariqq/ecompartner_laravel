@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Admin;
+use App\Lead;
+use App\Order;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -192,5 +194,26 @@ class AdminsController extends Controller
         $admin->delete();
 
         return redirect('/admin/admins')->with('message', 'Admin Deleted');
+    }
+
+    public function todayFilter(Request $request){
+        $date = $request->date;
+        $toDate = $date . " 23:59:59";
+        $fromDate = $date . " 00:00:00";        
+        
+        if(isset($request->date)){
+            $data= [];
+            //  leads
+            $data['leads'] = Lead::whereBetween('created_at', [$fromDate, $toDate])->count();
+            //  confirmed
+            $data['confirmed'] = Order::whereBetween('created_at', [$fromDate, $toDate])->where('status', 'confirmed')->count();
+            // delivered
+            $data['delivered'] = Order::whereBetween('created_at', [$fromDate, $toDate])->where('status', 'delivered')->count();
+            // pending
+            $data['pending'] = Lead::whereBetween('created_at', [$fromDate, $toDate])->where('status', 'pending')->count();
+            return response()->json(array('code' => 200, 'data' => $data));
+        }else{
+            return response()->json(array('code' => 401, "data" => "date missing"));
+        }
     }
 }

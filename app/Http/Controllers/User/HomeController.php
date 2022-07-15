@@ -97,4 +97,38 @@ class HomeController extends Controller
         }
         return view('user.home', compact('data'));
     }
+
+    public function todayFilter(Request $request){
+        $date = $request->date;
+        $toDate = $date . " 23:59:59";
+        $fromDate = $date . " 00:00:00";        
+        
+        if(isset($request->date)){
+            $data= [];
+            //  leads
+            // $data['leads'] = Lead::whereBetween('created_at', [$fromDate, $toDate])->where()->count();
+            $myLists = LeadsList::where('user_id', auth()->user()->id)->get();
+            $myLcount = 0;
+            foreach ($myLists as $key) {
+                $myLcount += Lead::where('leads_list_id', $key['id'])->whereBetween('created_at', [$fromDate, $toDate])->count();
+            }
+            $data['leads'] = $myLcount;
+
+            //  confirmed
+            $data['confirmed'] = Order::whereBetween('created_at', [$fromDate, $toDate])->where('status', 'confirmed')->where('seller_id', auth()->user()->id)->count();
+            // delivered
+            $data['delivered'] = Order::whereBetween('created_at', [$fromDate, $toDate])->where('status', 'delivered')->where('seller_id', auth()->user()->id)->count();
+            // pending
+            $myLists = LeadsList::where('user_id', auth()->user()->id)->get();
+            $myPl = 0;
+            foreach ($myLists as $key) {
+                $myPl += Lead::where('leads_list_id', $key['id'])->where('status', 'pending')->whereBetween('created_at', [$fromDate, $toDate])->count();
+            }
+            $data['pending'] = $myPl;
+            // $data['pending'] = Lead::whereBetween('created_at', [$fromDate, $toDate])->where('status', 'pending')->where('seller_id', auth()->user()->id)->count();
+            return response()->json(array('code' => 200, 'data' => $data));
+        }else{
+            return response()->json(array('code' => 401, "data" => "date missing"));
+        }
+    }
 }
