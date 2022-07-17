@@ -21,6 +21,7 @@ class HomeController extends Controller
 
     public function index()
     {
+
         $data = [];
 
         $data['total_revenue'] = Order::where('status', 'delivered')->sum('cod_amount');

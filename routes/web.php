@@ -47,8 +47,11 @@ Route::prefix('seller')->middleware('auth')->group(function() {
 	Route::get('orders/all', 'OrdersController@viewAll')->name('orders.all');
 	Route::get('orders/track', 'OrdersController@track')->name('orders.track');
 	Route::post('orders/track/data', 'OrdersController@trackOrder')->name('orders.track.data');
-	Route::post('/orders/export', 'OrdersController@exportOrders')->name('orders.export');
+	Route::post('orders/export', 'OrdersController@exportOrders')->name('orders.export');
 
+	// reports
+	Route::get('reports/orders', 'ReportsController@orders')->name('reports.orders');
+	Route::get('reports/cod', 'ReportsController@cod')->name('reports.cod');
 
 	// warehouses
 	Route::get('warehouses/all', 'WarehouseController@all')->name('warehouses.all');
@@ -109,7 +112,7 @@ Route::prefix('admin')->group(function() {
 
 	// Reports
 	Route::get('/reports/orders', 'Admin\ReportsController@orders')->middleware('auth:admin')->name('admin.reports.orders');
-
+	Route::get('/reports/cod', 'Admin\ReportsController@cod')->name('admin.reports.cod');
 	// Login Logout Routes
 	Route::get('/login', 'Auth\Admin\LoginController@showLoginForm')->name('admin.login');
 	Route::post('/login', 'Auth\Admin\LoginController@login')->name('admin.login.submit');

@@ -24357,7 +24357,7 @@ div[data-acc-step]:not(.open) h5 {
 	position:relative;
 }
 .bg-account .page:before{
-	background: url(../images/photos/bg-pages.png) repeat fixed bottom left;
+	/* background: url(../images/photos/bg-pages.png) repeat fixed bottom left; */
 	background-repeat:no-repeat;
 	content: '';
     position: absolute;
@@ -24367,7 +24367,7 @@ div[data-acc-step]:not(.open) h5 {
     height: 100%;
 }
 .bg-account .page:after{
-	background: url(../images/photos/bg-pages2.png) repeat fixed top right;
+	/* background: url(../images/photos/bg-pages2.png) repeat fixed top right; */
 	background-repeat:no-repeat;
 	content: '';
     position: absolute;

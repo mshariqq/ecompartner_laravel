@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
 
@@ -189,7 +189,7 @@ style="max-height: 1px; max-width: 1px;overflow: hidden"
         // ajax
         $.ajax({
             type: "POST",
-            url: "{{route('admins.orders.export')}}",
+            url: "{{route('orders.export')}}",
             data: input,
             // dataType: "dataType",
             success: function (response) {

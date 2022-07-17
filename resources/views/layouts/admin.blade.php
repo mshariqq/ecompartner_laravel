@@ -295,7 +295,7 @@
 								<li aria-haspopup="true"><a href="#" class="sub-icon "><i class="typcn typcn-cog-outline"></i> Reports <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="{{route('admin.reports.orders')}}">Orders</a></li>
-										
+										<li aria-haspopup="true"><a href="{{route('admin.reports.cod')}}">Income / COD</a></li>
 									</ul>
 								</li>
 								
@@ -376,7 +376,47 @@
 
 					<!-- Right-sidebar-->
 					<div class="sidebar sidebar-right sidebar-animate">
-						<div class="tab-menu-heading siderbar-tabs border-0">
+						<div class="card-body p-0">
+							<div class="header-user text-center mt-4 pb-4">
+								<span class="avatar avatar-xxl brround"><img src="{{ asset('assets/images/users/female/33.png')}}" alt="Profile-img" class="avatar avatar-xxl brround"></span>
+								<div class="dropdown-item text-center font-weight-semibold user h3 mb-0"><span class="text-primary">{{ auth()->user()->name }}</span></div>
+								<small>{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</small>
+								<div class="card-body">
+									
+								</div>
+							</div>
+							<a class="dropdown-item  border-top" href="#">
+								<i class="dropdown-icon zmdi zmdi-globe-lock "></i>
+								{{ request()->ip() }}
+							</a>
+							<a class="dropdown-item border-top" href="#">
+								<i class="dropdown-icon  mdi mdi-calendar"></i> 
+								{{  $dt->format('d F D Y,  H:i:s A')
+							}}
+							
+							</a>
+							<a href="#" class="dropdown-item border-top">
+								<i class="dropdown-icon  mdi mdi-laptop"></i> 
+								{{ request()->server('HTTP_USER_AGENT') }}
+							</a>
+							<div class="card-body border-top">
+								<div class="row">
+									{{-- <div class="col-4 text-center">
+										<a class="" href=""><i class="dropdown-icon mdi  mdi-message-outline fs-30 m-0 leading-tight"></i></a>
+										<div>Inbox</div>
+									</div>
+									<div class="col-4 text-center">
+										<a class="" href=""><i class="dropdown-icon mdi mdi-tune fs-30 m-0 leading-tight"></i></a>
+										<div>Settings</div>
+									</div> --}}
+									<div class="col-4 text-center">
+										<a class="" href="{{route('admin.logout')}}"><i class="dropdown-icon mdi mdi-logout-variant fs-30 m-0 leading-tight"></i></a>
+										<div>Sign out</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						{{-- <div class="tab-menu-heading siderbar-tabs border-0">
 							<div class="tabs-menu ">
 								<!-- Tabs -->
 								<ul class="nav panel-tabs">
@@ -386,8 +426,8 @@
 									<li><a href="#tab3" data-toggle="tab">Todo</a></li>
 								</ul>
 							</div>
-						</div>
-						<div class="panel-body tabs-menu-body side-tab-body p-0 border-0 ">
+						</div> --}}
+						{{-- <div class="panel-body tabs-menu-body side-tab-body p-0 border-0 ">
 							<div class="tab-content border-top">
 								<div class="tab-pane active " id="tab">
 									<div class="card-body p-0">
@@ -794,7 +834,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> --}}
 					</div><!-- End Rightsidebar-->
 
 					<!--footer-->
@@ -802,7 +842,7 @@
 						<div class="container">
 							<div class="row align-items-center flex-row-reverse">
 								<div class="col-lg-12 col-sm-12   text-center">
-									Copyright © 2019 <a href="#">Aissa</a>. Developed by <a href="https://www.shariqq.com/">Shariqq</a> All rights reserved.
+									Copyright © 2022 <a href="#">Ecompartner</a>. Developed by <a href="https://www.shariqq.com/">Shariqq</a> All rights reserved.
 								</div>
 							</div>
 						</div>

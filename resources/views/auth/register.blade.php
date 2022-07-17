@@ -11,8 +11,8 @@
                         @csrf
                         <div class="card">
                             <div class="card-body">
-                                <div class="text-center mb-6 bg-primary tag">
-                                    <img src="{{ asset('frontend/Images/logo.svg')}}" class="" alt="">
+                                <div class="text-center mb-6">
+                                    <img src="{{ asset('frontend/Images/logo-blue.svg')}}" class="" alt="">
                                 </div>
                                 <h3>Register</h3>
                                 <p class="text-muted">Create New Account</p>
