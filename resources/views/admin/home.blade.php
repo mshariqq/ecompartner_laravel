@@ -129,7 +129,7 @@
                 </div>
                 <div class="col-xl-2 col-lg-6 col-sm-6 pr-0 pl-0">
                     <div class="card-body text-center">
-                        <h5 class="text-white">Total Out for Delivery</h5>
+                        <h5 class="text-white">Total OFD</h5>
                         <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{$data['total_outfordeivery_orders']}}</h2>
                         {{-- <span class="text-white">Out for Delivery</span> --}}
                     </div>

@@ -258,7 +258,7 @@
 					<div class="horizontal-mainwrapper container clearfix">
 						<nav class="horizontalMenu clearfix">
 							<ul class="horizontalMenu-list">
-								<li aria-haspopup="true"><a href="{{url('/admin')}}" class="sub-icon active"><i class="typcn typcn-device-desktop hor-icon"></i> Dashboard </a>
+								<li aria-haspopup="true"><a href="{{url('/admin')}}" class="sub-icon"><i class="typcn typcn-device-desktop hor-icon"></i> Dashboard </a>
 									
 								</li>
                                 <li aria-haspopup="true"><a href="#" class="sub-icon"><i class="typcn typcn-group-outline hor-icon"></i> Sellers <i class="fa fa-angle-down horizontal-icon"></i></a>
@@ -294,8 +294,7 @@
 
 								<li aria-haspopup="true"><a href="#" class="sub-icon "><i class="typcn typcn-cog-outline"></i> Reports <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="{{route('admin.reports.orders')}}">Orders</a></li>
-										<li aria-haspopup="true"><a href="{{route('admin.reports.cod')}}">Income / COD</a></li>
+										<li aria-haspopup="true"><a href="{{route('admin.reports.cod-analysis')}}">COD Analysis</a></li>
 									</ul>
 								</li>
 								

@@ -60,7 +60,7 @@
                         <h2>New Way To Launch Your e-commerce Business on Un-Tapped Market All From One Platform
 
                             </h2>
-                        <a href="#" class="btn btn-1">Get Started <i class="fas fa-angle-double-right"></i></a>
+                        <a href="{{route('register')}}" class="btn btn-1">Get Started <i class="fas fa-angle-double-right"></i></a>
                     </div>
                     <div class="home-img">
                         <img src="{{ asset('frontend/Images/Screenshots/1.svg')}}" alt="Gradesy">

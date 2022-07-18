@@ -49,9 +49,10 @@ Route::prefix('seller')->middleware('auth')->group(function() {
 	Route::post('orders/track/data', 'OrdersController@trackOrder')->name('orders.track.data');
 	Route::post('orders/export', 'OrdersController@exportOrders')->name('orders.export');
 
-	// reports
-	Route::get('reports/orders', 'ReportsController@orders')->name('reports.orders');
-	Route::get('reports/cod', 'ReportsController@cod')->name('reports.cod');
+	// Reports
+	Route::get('/reports/cod-analysis/filter/', 'ReportsController@codAnalysisFilter')->name('reports.cod-analysis.filter');
+	Route::get('/reports/cod-analysis', 'ReportsController@codAnalysis')->name('reports.cod-analysis');
+	Route::post('/reports/cod-analysis/ajax/data-fetch', 'ReportsController@codAnalysisAJaxDataFetch')->name('reports.cod-analysis.ajax.datafetch');
 
 	// warehouses
 	Route::get('warehouses/all', 'WarehouseController@all')->name('warehouses.all');
@@ -111,8 +112,10 @@ Route::prefix('admin')->group(function() {
 	Route::post('/warehouse/buy-stock/product/store', 'Admin\WarehouseController@buyStockStore')->middleware('auth:admin');
 
 	// Reports
-	Route::get('/reports/orders', 'Admin\ReportsController@orders')->middleware('auth:admin')->name('admin.reports.orders');
-	Route::get('/reports/cod', 'Admin\ReportsController@cod')->name('admin.reports.cod');
+	Route::get('/reports/cod-analysis/filter/', 'Admin\ReportsController@codAnalysisFilter')->middleware('auth:admin')->name('admin.reports.cod-analysis.filter');
+	Route::get('/reports/cod-analysis', 'Admin\ReportsController@codAnalysis')->middleware('auth:admin')->name('admin.reports.cod-analysis');
+	Route::post('/reports/cod-analysis/ajax/data-fetch', 'Admin\ReportsController@codAnalysisAJaxDataFetch')->middleware('auth:admin')->name('admin.reports.cod-analysis.ajax.datafetch');
+
 	// Login Logout Routes
 	Route::get('/login', 'Auth\Admin\LoginController@showLoginForm')->name('admin.login');
 	Route::post('/login', 'Auth\Admin\LoginController@login')->name('admin.login.submit');

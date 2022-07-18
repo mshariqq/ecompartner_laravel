@@ -6,48 +6,86 @@ use App\Http\Controllers\Controller;
 use App\Lead;
 use App\LeadsList;
 use App\Order;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class ReportsController extends Controller
 {
 
-    public function orders(){
-        $data['orders'] = Order::where('seller_id', auth()->user()->id)->get();
+    public function codAnalysis(){
 
-        $myPl = 0;
-        $myLeads = 0;
-        $myLists = LeadsList::where('user_id', auth()->user()->id)->get();
-        foreach ($myLists as $key) {
-            $myPl += Lead::where('leads_list_id', $key['id'])->where('status', 'pending')->count();
-            $myLeads += Lead::where('leads_list_id', $key['id'])->count();
+        // cod totals
+        $mylists = LeadsList::where('user_id', auth()->user()->id)->get();
+        $PendingCount = 0;
+        foreach ($mylists as $key) {
+            $PendingCount += Lead::where('status', 'pending')->where('leads_list_id', $key['id'])->sum('cod_amount');
         }
-        $data['tl_leads'] = $myLeads;
-        $data['tl_pending'] = $myPl;
-
-        $data['tl_delivered'] = Order::where('status', 'delivered')->where('seller_id', auth()->user()->id)->count();
-        $data['tl_cancelled'] = Order::where('status', 'cancelled')->where('seller_id', auth()->user()->id)->count();
-        $data['tl_ofd'] = Order::where('status', 'out for delivery')->where('seller_id', auth()->user()->id)->count();
-        $data['tl_confirmed'] = Order::where('status', 'confirmed')->where('seller_id', auth()->user()->id)->count();
-        $data['tl_cod'] = Order::where('seller_id', auth()->user()->id)->sum('cod_amount');
-
-        return view('user.reports.orders', compact('data'));
-    }
-
-    public function cod(){
-        $data['tl_cod'] = Order::where('seller_id', auth()->user()->id)->sum('cod_amount');
-
-        $myPl = 0;
-        $myLeads = 0;
-        $myLists = LeadsList::where('user_id', auth()->user()->id)->get();
-        foreach ($myLists as $key) {
-            $myPl += Lead::where('leads_list_id', $key['id'])->where('status', 'pending')->sum('cod_amount');
-        }
-        $data['tl_pending'] = $myPl;
-
+        $data['tl_pending'] = $PendingCount;
         $data['tl_delivered'] = Order::where('status', 'delivered')->where('seller_id', auth()->user()->id)->sum('cod_amount');
         $data['tl_cancelled'] = Order::where('status', 'cancelled')->where('seller_id', auth()->user()->id)->sum('cod_amount');
         $data['tl_ofd'] = Order::where('status', 'out for delivery')->where('seller_id', auth()->user()->id)->sum('cod_amount');
         $data['tl_confirmed'] = Order::where('status', 'confirmed')->where('seller_id', auth()->user()->id)->sum('cod_amount');
+        $data['tl_cod'] = Order::where('seller_id', auth()->user()->id)->sum('cod_amount');
 
-        return view('user.reports.cod', compact('data'));
+        $filter = false;
+
+        // todays cod
+         // cod totals
+         $mylists = LeadsList::where('user_id', auth()->user()->id)->get();
+         $PendingCount = 0;
+         foreach ($mylists as $key) {
+             $PendingCount += Lead::where('status', 'pending')->where('created_at', '>=', Carbon::today())->where('leads_list_id', $key['id'])->sum('cod_amount');
+         }
+        $data['td_pending'] = $PendingCount;
+        $data['td_cancelled'] = Order::where('status', 'cancelled')->where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
+        $data['td_confirmed'] = Order::where('status', 'confirmed')->where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
+        $data['td_cod'] = Order::where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
+
+        return view('admin.reports.cod_analysis', compact('data', 'filter'));
+    }
+
+    public function codAnalysisFilter(Request $request){
+        // attach time to date
+        $from = $request->from;
+        $to = $request->to;
+        $filter = true;
+    
+        // cod totals
+        $mylists = LeadsList::where('user_id', auth()->user()->id)->get();
+        $PendingCount = 0;
+        foreach ($mylists as $key) {
+            $PendingCount += Lead::where('status', 'pending')->whereBetween('created_at', [$from, $to])->where('leads_list_id', $key['id'])->sum('cod_amount');
+        }
+        $data['tl_pending'] = $PendingCount;
+        $data['tl_delivered'] = Order::whereBetween('created_at', [$from, $to])->where('seller_id', auth()->user()->id)->where('status', 'delivered')->sum('cod_amount');
+        $data['tl_cancelled'] = Order::whereBetween('created_at', [$from, $to])->where('seller_id', auth()->user()->id)->where('status', 'cancelled')->sum('cod_amount');
+        $data['tl_ofd'] = Order::whereBetween('created_at', [$from, $to])->where('seller_id', auth()->user()->id)->where('status', 'out for delivery')->sum('cod_amount');
+        $data['tl_confirmed'] = Order::whereBetween('created_at', [$from, $to])->where('seller_id', auth()->user()->id)->where('status', 'confirmed')->sum('cod_amount');
+        $data['tl_cod'] = Order::whereBetween('created_at', [$from, $to])->where('seller_id', auth()->user()->id)->sum('cod_amount');
+
+        // todays cod
+        $mylists = LeadsList::where('user_id', auth()->user()->id)->get();
+        $PendingCount = 0;
+        foreach ($mylists as $key) {
+            $PendingCount += Lead::where('status', 'pending')->where('created_at', '>=', Carbon::today())->where('leads_list_id', $key['id'])->sum('cod_amount');
+        }
+       $data['td_pending'] = $PendingCount;        
+       $data['td_cancelled'] = Order::where('status', 'cancelled')->where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
+        $data['td_confirmed'] = Order::where('status', 'confirmed')->where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
+        $data['td_cod'] = Order::where('created_at', '>=', Carbon::today())->where('seller_id', auth()->user()->id)->sum('cod_amount');
+
+        return view('user.reports.cod_analysis', compact('data', 'filter'));
+    }
+
+    public function codAnalysisAJaxDataFetch(Request $request){
+        
+        if($request->condition == 'total-cod'){
+            $orders = Order::where('seller_id', auth()->user()->id)->paginate(100);
+        }
+        else{
+            $orders = Order::where('status', $request->condition)->where('seller_id', auth()->user()->id)->paginate(100);
+        }
+
+        return view('user.reports.cod_analysi_ajaxdata', compact('orders'));
     }
 }
