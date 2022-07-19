@@ -38,9 +38,14 @@ class OrdersController extends Controller
         }
     }
     
-    public function allOrders(){
-        
-        $orders = Order::orderBy('id','DESC')->paginate(10);
+    public function allOrders($where = false){
+        if($where != false){
+            $orders = Order::orderBy('id','DESC')->where('status', $where)->paginate(25);
+
+        }else{
+            $orders = Order::orderBy('id','DESC')->paginate(25);
+
+        }
         return view('admin.orders.all-orders', compact('orders'));
 
     }

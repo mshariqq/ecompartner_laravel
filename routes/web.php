@@ -34,7 +34,8 @@ Route::prefix('special')->group(function() {
 Route::prefix('seller')->middleware('auth')->group(function() {
 	// list
 	Route::get('leads/leads-list', 'LeadsController@leadsListIndex')->name('leads.leads-list.index');
-	Route::post('/home/ajax/today-filer', 'User\HomeController@todayFilter')->middleware('auth:admin')->name('dashboard.today-filter');
+	Route::post('/home/ajax/today-filer', 'User\HomeController@todayFilter')->name('dashboard.today-filter');
+	Route::post('/home/ajax/data-fetch', 'User\HomeController@DashAJaxDataFetch')->name('dashboard.ajax.datafetch');
 
 	// import
 	Route::get('leads/import', 'LeadsController@importLeads')->name('leads.import');
@@ -44,7 +45,7 @@ Route::prefix('seller')->middleware('auth')->group(function() {
 	Route::get('leads/{id}', 'LeadsController@viewLeads');
 
 	// orders
-	Route::get('orders/all', 'OrdersController@viewAll')->name('orders.all');
+	Route::get('orders/all/{where?}', 'OrdersController@viewAll')->name('orders.all');
 	Route::get('orders/track', 'OrdersController@track')->name('orders.track');
 	Route::post('orders/track/data', 'OrdersController@trackOrder')->name('orders.track.data');
 	Route::post('orders/export', 'OrdersController@exportOrders')->name('orders.export');
@@ -72,6 +73,7 @@ Route::prefix('admin')->group(function() {
 	Route::get('/', 'Admin\HomeController@index')->name('admin.dashboard');
 	Route::get('/home', 'Admin\HomeController@index')->name('admin.home');
 	Route::post('/home/ajax/today-filer', 'Admin\AdminsController@todayFilter')->middleware('auth:admin')->name('admins.dashboard.today-filter');
+	Route::post('/home/ajax/data-fetch', 'Admin\AdminsController@DashAJaxDataFetch')->middleware('auth:admin')->name('admin.dashboard.ajax.datafetch');
 
 	Route::get('/profile', 'Admin\ProfileController@index')->middleware('auth:admin')->name('admin.profile');
 	Route::put('/profile/update/{id}', 'Admin\ProfileController@update')->middleware('auth:admin')->name('admin.profile.update');
@@ -99,7 +101,7 @@ Route::prefix('admin')->group(function() {
 	Route::get('/sellers/lead/ajax/change-status/{id}/{status}', 'Admin\LeadsController@changeOrderStatus')->middleware('auth:admin');
 
 	// Orders
-	Route::get('/sellers/orders/all', 'Admin\OrdersController@allOrders')->middleware('auth:admin')->name('admin.orders.all');
+	Route::get('/sellers/orders/all/{where?}', 'Admin\OrdersController@allOrders')->middleware('auth:admin')->name('admin.orders.all');
 	Route::get('/sellers/orders/ajax/change-status/{id}/{status}', 'Admin\OrdersController@changeOrderStatus')->middleware('auth:admin');
 	Route::post('/orders/export', 'Admin\OrdersController@exportOrders')->middleware('auth:admin')->name('admins.orders.export');
 

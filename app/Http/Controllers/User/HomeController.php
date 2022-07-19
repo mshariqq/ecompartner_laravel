@@ -131,4 +131,16 @@ class HomeController extends Controller
             return response()->json(array('code' => 401, "data" => "date missing"));
         }
     }
+
+    public function DashAJaxDataFetch(Request $request){
+        
+        if($request->condition == 'total-cod'){
+            $orders = Order::where('seller_id', auth()->user()->id)->paginate(100);
+        }
+        else{
+            $orders = Order::where('seller_id', auth()->user()->id)->where('status', $request->condition)->paginate(100);
+        }
+
+        return view('user.reports.cod_analysi_ajaxdata', compact('orders'));
+    }
 }

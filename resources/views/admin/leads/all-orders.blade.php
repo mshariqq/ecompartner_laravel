@@ -14,7 +14,7 @@
     <div class="col-12">
         <div class="table-responsive">
             <table class="bg-white shadow table table-striped table-bordered">
-                <thead class="bg-dark">
+                <thead class="bg-primary">
                     <tr>
                         {{-- <th>View</th> --}}
                         <th width="17%">Change Status</th>

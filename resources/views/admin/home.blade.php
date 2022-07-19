@@ -5,7 +5,17 @@
 @endsection --}}
 
 @section('content')
-
+<style>
+    .blockAjaxText{
+        cursor: pointer;
+        transition: 0.5s;
+    }
+    .blockAjaxText:hover{
+        color: orange !important;
+        cursor: pointer;
+        transition: 0.5s;
+    }
+</style>
 <!-- ECharts js -->
 <script src="{{ asset('assets/plugins/echarts/echarts.js')}}"></script>
 
@@ -113,24 +123,44 @@
                     <div class="card-body text-center">
                         <h5 class="text-white">Total Leads</h5>
                         <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{$data['total_leads']}}</h2>
+                        <div>
+                            <i class="si si-graph mr-1 text-danger"></i><span class="text-white">
+                            <a class="text-white" href="{{route('leads.leads-list.index')}}">More Details <i class="si si-arrow-right-circle text-warning" aria-hidden="true"></i> </a>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-6 col-sm-6 pr-0 pl-0">
                     <div class="card-body text-center">
                         <h5 class="text-white">Total Orders</h5>
                         <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{$data['total_orders']}}</h2>
+                        <div>
+                            <i class="si si-graph mr-1 text-danger"></i><span class="text-white">
+                            <a class="text-white" href="{{route('admin.orders.all', false)}}">More Details <i class="si si-arrow-right-circle text-warning" aria-hidden="true"></i> </a>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-6 col-sm-6 pr-0 pl-0">
                     <div class="card-body text-center">
                         <h5 class="text-white">Total Delivered</h5>
                         <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{$data['total_delivered_orders']}}</h2>
+                        <div>
+                            <i class="si si-graph mr-1 text-danger"></i><span class="text-white">
+                            <a class="text-white" href="{{route('admin.orders.all', 'delivered')}}">More Details <i class="si si-arrow-right-circle text-warning" aria-hidden="true"></i> </a>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-6 col-sm-6 pr-0 pl-0">
                     <div class="card-body text-center">
                         <h5 class="text-white">Total OFD</h5>
                         <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{$data['total_outfordeivery_orders']}}</h2>
+                        <div>
+                            <i class="si si-graph mr-1 text-danger"></i><span class="text-white">
+                            <a class="text-white" href="{{route('admin.orders.all', 'out for delivery')}}">More Details <i class="si si-arrow-right-circle text-warning" aria-hidden="true"></i> </a>
+                            </span>
+                        </div>
                         {{-- <span class="text-white">Out for Delivery</span> --}}
                     </div>
                 </div>
@@ -138,17 +168,29 @@
                     <div class="card-body text-center">
                         <h5 class="text-white">Total Pending</h5>
                         <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{$data['total_pending_orders']}}</h2>
+                        <div>
+                            <i class="si si-graph mr-1 text-danger"></i><span class="text-white">
+                            <a class="text-white" href="{{route('leads.leads-list.index')}}">More Details <i class="si si-arrow-right-circle text-warning" aria-hidden="true"></i> </a>
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-6 col-sm-6 pr-0 pl-0">
                     <div class="card-body text-center">
                         <h5 class="text-white">Total Cancelled</h5>
                         <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{ $data['total_cancelled_orders'] }}</h2>
+                        <div>
+                            <i class="si si-graph mr-1 text-danger"></i><span class="text-white">
+                            <a class="text-white" href="{{route('admin.orders.all', 'canceled')}}">More Details <i class="si si-arrow-right-circle text-warning" aria-hidden="true"></i> </a>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+
 </div>
 
 {{-- orders analytics --}}
@@ -160,80 +202,77 @@
                 <input type="date" id="TDdate" class="form-control" placeholder="" aria-describedby="helpId">
             </div>
             <div class="col-md-3 ">
-                <button id="TDfilterBtn" type="submit" class="btn btn-indigo mt-md-5">Fetch <i class="fa fa-server" aria-hidden="true"></i> </button>
+                <button id="TDfilterBtn" type="submit" class="btn btn-gradient-primary mt-md-5">Fetch <i class="fa fa-server" aria-hidden="true"></i> </button>
             </div>
         </div>
         
        
     </div>
-    <div class="col-sm-12 col-lg-6 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex clearfix">
-                    <div class="text-left mt-3">
-                        <p class="card-text text-muted mb-1">Total Leads</p>
-                        <h2 id="TDleads" class="mb-0 text-dark mainvalue">{{$data['total_leads_count']}}</h2>
-                    </div>
-                    <div class="ml-auto">
-                        <span class="bg-primary-transparent icon-service text-primary ">
-                            <i class="si si-briefcase  fs-2"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-12 col-lg-6 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex clearfix">
-                    <div class="text-left mt-3">
-                        <p class="card-text text-muted mb-1">Total Confirmed</p>
-                        <h2 id="TDconfirmed" class="mb-0 text-dark mainvalue">{{$data['total_confirmed_orders']}}</h2>
-                    </div>
-                    <div class="ml-auto">
-                        <span class="bg-success-transparent icon-service text-success">
-                            <i class="si si-layers fs-2"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-12 col-lg-6 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex clearfix">
-                    <div class="text-left mt-3">
-                        <p class="card-text text-muted mb-1">Total Delivered</p>
-                        <h2 id="TDdelivered" class="mb-0 text-dark mainvalue">{{$data['total_delivered_orders']}}</h2>
-                    </div>
-                    <div class="ml-auto">
-                        <span class="bg-danger-transparent icon-service text-danger">
-                            <i class="si si-plane  fs-2"></i>
-                        </span>
+    <div class="col-lg-12">
+        <div class="card ">
+            <div class="card-body p-4 text-dark">
+                <div class="statistics-info">
+                    <div class="row text-center">
+                        <div class="col-lg-3 col-md-6 mt-4 mb-4">
+                            <div class="counter-status">
+                                <div class="counter-icon text-danger">
+                                    <i class="si si-people"></i>
+                                </div>
+                                <h5 class="text-muted">Total Leads</h5>
+                                <h2 onclick="fetchAjaxData('total-cod')" id="TDleads" class="counter mb-0 blockAjaxText text-dark mainvalue">{{$data['total_leads_count']}}</h2>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mt-4 mb-4">
+                            <div class="counter-status">
+                                <div class="counter-icon text-warning">
+                                    <i class="si si-phone"></i>
+                                </div>
+                                <h5 class="text-muted">Total Confirmed</h5>
+                                <h2 onclick="fetchAjaxData('confirmed')" id="TDconfirmed" class="mb-0 blockAjaxText text-dark mainvalue">{{$data['total_confirmed_orders']}}</h2>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6  mt-4 mb-4">
+                            <div class="counter-statuss">
+                                <div class="counter-icon text-primary">
+                                    <i class="si si-rocket"></i>
+                                </div>
+                                <h5 class="text-muted">Total Delivered</h5>
+                                <h2 onclick="fetchAjaxData('delivered')" id="TDdelivered" class="mb-0 blockAjaxText text-dark mainvalue">{{$data['total_delivered_orders']}}</h2>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mt-4 mb-4">
+                            <div class="counter-status">
+                                <div class="counter-icon text-success">
+                                    <i class="si si-call-out"></i>
+                                </div>
+                                <h5 class="text-muted">Total Pending</h5>
+                                <h2 onclick="fetchAjaxData('pending')" id="TDpending" class="mb-0 blockAjaxText text-dark mainvalue">{{$data['total_pending_orders']}}</h2>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="col-sm-12 col-lg-6 col-xl-3">
-        <div class="card">
-            <div class="card-body">
-                <div class="d-flex clearfix">
-                    <div class="text-left mt-3">
-                        <p class="card-text text-muted mb-1">Total Pending</p>
-                        <h2 id="TDpending" class="mb-0 text-dark mainvalue">{{$data['total_pending_orders']}}</h2>
+
+        {{-- ajax data grid --}}
+        <div style="display: none" id="ajaxData" class="col-12 mb-0">
+            <div class="card">
+                <div class="card-header">
+                    Showing data for <span id="ajaxDataCondition" class="pl-2 text-primary"></span>
+                </div>
+                <div class="card-body">
+                    <div class="progress" id="ajaxDataLoader">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 25%;"
+                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Fteching......</div>
                     </div>
-                    <div class="ml-auto">
-                        <span class="bg-warning-transparent icon-service text-warning">
-                            <i class="si si-call-out  fs-2"></i>
-                        </span>
+                    <div class="col-12" id="ajaxDataContent">
+    
                     </div>
                 </div>
+               
             </div>
         </div>
-    </div>
 </div>
 
 <div class="row">
@@ -337,6 +376,24 @@
         });
     });
 
+    function fetchAjaxData(condition){
+        $("#ajaxDataContent").html("");
+        $('#ajaxData').show();
+        $('#ajaxDataCondition').html(" "+condition);
+        var input = {};
+        input.condition = condition;
+        input._token = "{{csrf_token()}}";
+        $.ajax({
+            type: "POST",
+            url: "{{route('admin.dashboard.ajax.datafetch')}}",
+            data: input,
+            success: function (response) {
+                $('#ajaxDataLoader').hide();
+                $("#ajaxDataContent").html(response);
+                
+            }
+        });
+    }
 
     // 7 days leads vs order
     function barChart7daysLeadsOrders(){

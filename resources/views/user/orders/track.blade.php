@@ -19,7 +19,7 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table id="example" class="table table-striped bg-white table-bordered shadow text-nowrap">
-                        <thead class="bg-dark">
+                        <thead class="bg-primary">
                             <tr>
                                 <th>Status</th>
                                 <th>Tracking ID</th>

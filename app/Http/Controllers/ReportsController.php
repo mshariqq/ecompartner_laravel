@@ -41,7 +41,7 @@ class ReportsController extends Controller
         $data['td_confirmed'] = Order::where('status', 'confirmed')->where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
         $data['td_cod'] = Order::where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
 
-        return view('admin.reports.cod_analysis', compact('data', 'filter'));
+        return view('user.reports.cod_analysis', compact('data', 'filter'));
     }
 
     public function codAnalysisFilter(Request $request){

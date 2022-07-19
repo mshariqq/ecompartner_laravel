@@ -145,7 +145,7 @@
                                                         $MyLeads = \App\LeadsList::where('user_id', $seller->id)->paginate(20);
                                                     @endphp
                                                      <table class="bg-white shadow table table-striped table-bordered text-nowrap w-100">
-                                                        <thead class="bg-dark">
+                                                        <thead class="bg-primary">
                                                             <tr>
                                                                 <th>Seller</th>
                                                                 <th>Name</th>
@@ -246,7 +246,7 @@
 
                             @endphp
                             <table class="bg-white shadow table table-striped table-bordered">
-                                <thead class="bg-dark">
+                                <thead class="bg-primary">
                                     <tr>
                                         {{-- <th>View</th> --}}
                                         <th width="17%">Change Status</th>

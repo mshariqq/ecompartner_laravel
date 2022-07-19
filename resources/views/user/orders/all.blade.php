@@ -60,58 +60,69 @@
         <p style="font-size: 16px" class="text-orange">Note : Scroll the table horizontally for more columns <i class="fa fa-align-right" aria-hidden="true"></i> </p>
 
     </div>
-    <div class="col-12">
-       <div class="table-responsive">
-        <table id="example" class="table table-striped bg-white table-bordered shadow text-nowrap">
-            <thead class="bg-dark">
-                <tr>
-                    <th>Status</th>
-                    <th>Tracking ID</th>
-                    <th>Name</th>
-                    <th>Delivery Address</th>
-                    <th>City</th>
-                    <th>Phone</th>
-                    <th>Country</th>
-                    <th>COD Currency</th>
-                    <th>COD Amount</th>
-                    <th>Pieces</th>
-                    <th>Shipment Desc</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($orders as $item)
-                    <tr>
-                        <td>
-                            @if ($item->status == 'confirmed')
-                            <span class="tag bg-indigo text-white p-1 text-capitalize">{{$item->status}}</span>
-                        @elseif($item->status == 'delivered')
-                            <span class="tag bg-success text-dark text-capitalize">{{$item->status}}</span>
-                        @elseif($item->status == 'cancelled')
-                            <span class="tag bg-danger text-white text-capitalize">{{$item->status}}</span>
-                        @else
-                            <span class="tag bg-dark text-orange text-capitalize">{{$item->status}}</span>
-
-                        @endif
-                        </td>
-                        <td>{{$item->tracking_id}}</td>
-                        <td>{{$item->name}}</td>
-                        <td>{{$item->delivery_address}}</td>
-                        <td>{{$item->city}}</td>
-                        <td>{{$item->phone_number}}</td>
-                        <td>{{$item->country}}</td>
-                        <td>{{$item->cod_currency}}</td>
-                        <td>{{$item->cod_amount}}</td>
-                        <td>{{$item->pieces}}</td>
-                        <td>{{$item->shipment_description}}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-            <tfoot>
-                {{$orders->links()}}
-            </tfoot>
-        </table>
-       </div>
+    @if (count($orders) < 1)
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+        </button>
+        <strong>No Orders!</strong>
     </div>
+    @else
+    <div class="col-12">
+        <div class="table-responsive">
+         <table id="example" class="table table-striped bg-white table-bordered shadow text-nowrap">
+             <thead class="bg-primary">
+                 <tr>
+                     <th>Status</th>
+                     <th>Tracking ID</th>
+                     <th>Name</th>
+                     <th>Delivery Address</th>
+                     <th>City</th>
+                     <th>Phone</th>
+                     <th>Country</th>
+                     <th>COD Currency</th>
+                     <th>COD Amount</th>
+                     <th>Pieces</th>
+                     <th>Shipment Desc</th>
+                 </tr>
+             </thead>
+             <tbody>
+                 @foreach ($orders as $item)
+                     <tr>
+                         <td>
+                             @if ($item->status == 'confirmed')
+                             <span class="tag bg-primary text-white p-1 text-capitalize">{{$item->status}}</span>
+                         @elseif($item->status == 'delivered')
+                             <span class="tag bg-success text-dark text-capitalize">{{$item->status}}</span>
+                         @elseif($item->status == 'cancelled')
+                             <span class="tag bg-danger text-white text-capitalize">{{$item->status}}</span>
+                         @else
+                             <span class="tag bg-orange text-dark text-capitalize">{{$item->status}}</span>
+ 
+                         @endif
+                         </td>
+                         <td>{{$item->tracking_id}}</td>
+                         <td>{{$item->name}}</td>
+                         <td>{{$item->delivery_address}}</td>
+                         <td>{{$item->city}}</td>
+                         <td>{{$item->phone_number}}</td>
+                         <td>{{$item->country}}</td>
+                         <td>{{$item->cod_currency}}</td>
+                         <td>{{$item->cod_amount}}</td>
+                         <td>{{$item->pieces}}</td>
+                         <td>{{$item->shipment_description}}</td>
+                     </tr>
+                 @endforeach
+             </tbody>
+             <tfoot>
+                 {{$orders->links()}}
+             </tfoot>
+         </table>
+        </div>
+     </div>
+    @endif
+
 
     <div 
     class="col-12" id="OrdersExportHiddenTable" 

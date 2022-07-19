@@ -9,9 +9,14 @@ use Illuminate\Http\Request;
 class OrdersController extends Controller
 {
 
-    public function viewAll(){
-        
-        $orders = Order::where('seller_id', auth()->user()->id)->paginate(10);
+    public function viewAll($where = false){
+        if($where != false){
+            $orders = Order::where('seller_id', auth()->user()->id)->where('status', $where)->paginate(15);
+
+        }else{
+            $orders = Order::where('seller_id', auth()->user()->id)->paginate(15);
+
+        }
         return view('user.orders.all', compact('orders'));
 
     }

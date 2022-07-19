@@ -28,7 +28,7 @@
                 <p class="text-danger">No Products Found !</p>
         @else
             <table class="bg-white shadow table table-striped table-bordered">
-                <thead class="bg-dark">
+                <thead class="bg-primary">
                     <tr>
                         {{-- <th>View</th> --}}
                         <th width="17%">Action</th>

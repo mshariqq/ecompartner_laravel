@@ -9,7 +9,7 @@
 <div class="row">
     <div class="col-12">
         <table id="example" class="table table-striped bg-white table-bordered shadow">
-            <thead class="bg-dark">
+            <thead class="bg-primary">
                 <tr>
                     <th>Status</th>
                     <th>Name</th>

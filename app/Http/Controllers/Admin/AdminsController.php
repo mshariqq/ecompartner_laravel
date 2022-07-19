@@ -216,4 +216,16 @@ class AdminsController extends Controller
             return response()->json(array('code' => 401, "data" => "date missing"));
         }
     }
+
+    public function DashAJaxDataFetch(Request $request){
+        
+        if($request->condition == 'total-cod'){
+            $orders = Order::paginate(100);
+        }
+        else{
+            $orders = Order::where('status', $request->condition)->paginate(100);
+        }
+
+        return view('admin.reports.cod_analysi_ajaxdata', compact('orders'));
+    }
 }

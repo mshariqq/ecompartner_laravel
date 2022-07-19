@@ -13,7 +13,7 @@
 <div class="row">
     <div class="col-12">
         <table class="bg-white shadow table table-striped table-bordered text-nowrap w-100">
-            <thead class="bg-dark">
+            <thead class="bg-primary">
                 <tr>
                     <th>#ID</th>
                     <th>Email</th>

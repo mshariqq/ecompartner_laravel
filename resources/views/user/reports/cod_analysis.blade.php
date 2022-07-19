@@ -91,40 +91,6 @@
                     </div>
                     <div class="col-8 text-center">
                         <div class="mt-4 mb-0 text-white">
-                            <h2 onclick="fetchAjaxData('delivered')" class="mb-0 blockAjaxText">{{$data['tl_delivered']}}</h2>
-                            <p class="text-white mt-1">Delivered COD </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-        <div class="card card-counter bg-gradient-primary ">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-4">
-                        <i class="fa fa-usd text-white-transparent" aria-hidden="true"></i>
-                    </div>
-                    <div class="col-8 text-center">
-                        <div class="mt-4 mb-0 text-white">
-                            <h2 onclick="fetchAjaxData('pending')" class="mb-0 blockAjaxText">{{$data['tl_pending']}}</h2>
-                            <p class="text-white mt-1">Pending COD </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-        <div class="card card-counter bg-gradient-primary ">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-4">
-                        <i class="fa fa-usd text-white-transparent" aria-hidden="true"></i>
-                    </div>
-                    <div class="col-8 text-center">
-                        <div class="mt-4 mb-0 text-white">
                             <h2 onclick="fetchAjaxData('confirmed')" class="mb-0 blockAjaxText">{{$data['tl_confirmed']}}</h2>
                             <p class="text-white mt-1">Confirmed COD </p>
                         </div>
@@ -133,6 +99,24 @@
             </div>
         </div>
     </div>
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+        <div class="card card-counter bg-gradient-primary ">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <i class="fa fa-usd text-white-transparent" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-8 text-center">
+                        <div class="mt-4 mb-0 text-white">
+                            <h2 onclick="fetchAjaxData('delivered')" class="mb-0 blockAjaxText">{{$data['tl_delivered']}}</h2>
+                            <p class="text-white mt-1">Delivered COD </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
         <div class="card card-counter bg-gradient-primary ">
             <div class="card-body">
@@ -161,6 +145,23 @@
                         <div class="mt-4 mb-0 text-white">
                             <h2 onclick="fetchAjaxData('cancelled')" class="mb-0 blockAjaxText">{{$data['tl_cancelled']}}</h2>
                             <p class="text-white mt-1">Cancelled COD </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+        <div class="card card-counter bg-gradient-primary ">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <i class="fa fa-usd text-white-transparent" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-8 text-center">
+                        <div class="mt-4 mb-0 text-white">
+                            <h2 onclick="fetchAjaxData('pending')" class="mb-0 blockAjaxText">{{$data['tl_pending']}}</h2>
+                            <p class="text-white mt-1">Pending COD </p>
                         </div>
                     </div>
                 </div>

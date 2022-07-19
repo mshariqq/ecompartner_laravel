@@ -10,7 +10,7 @@
     <div class="col-12">
         <div class="table-responsive">
             <table class="bg-white shadow table table-striped table-bordered text-nowrap w-100">
-                <thead class="bg-dark">
+                <thead class="bg-primary">
                     <tr>
                         <th>Seller</th>
                         <th>Name</th>

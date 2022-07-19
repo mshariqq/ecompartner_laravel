@@ -14,7 +14,7 @@
     </h2>
     <p class="float-right text-end text-right">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-indigo" data-toggle="modal" data-target="#modelId">
+        <button type="button" class="btn btn-gradient-primary" data-toggle="modal" data-target="#modelId">
           Export Orders <i class="fa fa-file-excel-o" aria-hidden="true"></i>
         </button>
         {{-- <a href="" target="__blank" class="btn btn-indigo"> <i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Orders</a> --}}
@@ -66,9 +66,18 @@
 
 <div class="row">
     <div class="col-12">
+        @if (count($orders) < 1)
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <strong>No Orders!</strong>
+            </div>
+        @else
         <div class="table-responsive">
             <table class="bg-white shadow table table-striped table-bordered  text-nowrap">
-                <thead class="bg-dark">
+                <thead class="bg-primary">
                     <tr>
                         {{-- <th>View</th> --}}
                         <th>Change Status</th>
@@ -123,13 +132,13 @@
                               
                             <td id="tdStatus{{$item->id}}">
                                     @if ($item->status == 'confirmed')
-                                        <span class="tag bg-indigo text-white p-1 text-capitalize">{{$item->status}}</span>
+                                        <span class="tag bg-primary text-white p-1 text-capitalize">{{$item->status}}</span>
                                     @elseif($item->status == 'delivered')
                                         <span class="tag bg-success text-dark text-capitalize">{{$item->status}}</span>
                                     @elseif($item->status == 'cancelled')
                                         <span class="tag bg-danger text-white text-capitalize">{{$item->status}}</span>
                                     @else
-                                        <span class="tag bg-dark text-orange text-capitalize">{{$item->status}}</span>
+                                        <span class="tag bg-orange text-dark text-capitalize">{{$item->status}}</span>
  
                                     @endif
                                     <br>
@@ -158,6 +167,8 @@
                 </tfoot>
             </table>
         </div>
+        @endif
+
 
     </div>
 
