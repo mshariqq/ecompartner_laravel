@@ -41,8 +41,8 @@
                             
                         </td>
                         <td>
-                            <i class="fa fa-history" aria-hidden="true"></i> Imported {{$item->created_at->diffForHumans()}} 
-                            <br> Last Update {{$item->updated_at->diffForHumans()}} </td>
+                            <i class="fa fa-history" aria-hidden="true"></i> Imported {{$item->created_at}} 
+                            <br> Last Update {{$item->updated_at}} </td>
                     </tr>
                 @endforeach
             </tbody>

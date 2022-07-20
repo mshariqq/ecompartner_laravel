@@ -1,6 +1,10 @@
 @extends('layouts.admin')
 
 @section('content')
+{{-- hidden feilds for filter --}}
+<input type="hidden" id="filterDate" value="{{$data['dateTimeValidated']}}">
+<input type="hidden" id="filterFromDate" value="{{$data['from_date']}}">
+<input type="hidden" id="filterToDate" value="{{$data['to_date']}}">
 <style>
     .blockAjaxText{
         cursor: pointer;
@@ -23,7 +27,7 @@
         <span aria-hidden="true">&times;</span>
         <span class="sr-only">Close</span>
     </button>
-    <strong>Filter Successful</strong>
+    <strong>Filter Successful for <span class="text-orange">{{$data['from_date']}}</span> & <span class="text-orange">{{$data['to_date']}}</span> </strong>
 </div>
 @endif
 
@@ -198,66 +202,49 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-sm-12 col-md-3 col-lg-3">
-                        <div class="card bg-indigo">
-                            <div class="card-body">
-                                <div class="d-flex no-block align-items-center">
-                                    <div>
-                                        <h6 class="text-white">Total COD</h6>
-                                        <h2 class="text-white m-0 ">{{$data['td_cod']}}</h2>
+                    <div class="col-lg-12 p-0">
+                        <div class="statistics-info">
+                            <div class="row text-center">
+                                <div class="col-lg-3 col-md-6 mt-4 mb-4">
+                                    <div class="counter-status">
+                                        <div class="counter-icon text-danger">
+                                            <i class="si si-grid"></i>
+                                        </div>
+                                        <h5 class="text-muted">Total COD</h5>
+                                        <h2 class="counter text-primary mb-0">{{$data['td_cod']}}</h2>
                                     </div>
-                                    <div class="ml-auto">
-                                        <span class="text-white display-6"><i class="fa fa-file-text-o fa-2x"></i></span>
+                                </div>
+                                <div class="col-lg-3 col-md-6 mt-4 mb-4">
+                                    <div class="counter-status">
+                                        <div class="counter-icon text-warning">
+                                            <i class="si si-phone"></i>
+                                        </div>
+                                        <h5 class="text-muted">Confirmed COD</h5>
+                                        <h2 class="counter text-primary  mb-0">{{$data['td_confirmed']}}</h2>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6  mt-4 mb-4">
+                                    <div class="counter-statuss">
+                                        <div class="counter-icon text-primary">
+                                            <i class="si si-call-out"></i>
+                                        </div>
+                                        <h5 class="text-muted">Pending COD</h5>
+                                        <h2 class="counter text-primary mb-0">{{$data['td_pending']}}</h2>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-6 mt-4 mb-4">
+                                    <div class="counter-status">
+                                        <div class="counter-icon text-success">
+                                            <i class="si si-close"></i>
+                                        </div>
+                                        <h5 class="text-muted">Cancelled COD</h5>
+                                        <h2 class="counter text-primary  mb-0">{{$data['td_cancelled']}}</h2>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-3 col-lg-3">
-                        <div class="card bg-info">
-                            <div class="card-body">
-                                <div class="d-flex no-block align-items-center">
-                                    <div>
-                                        <h6 class="text-white">Confirmed COD</h6>
-                                        <h2 class="text-white m-0 ">{{$data['td_confirmed']}}</h2>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <span class="text-white display-6"><i class="fa fa-check-circle fa-2x"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-3 col-lg-3">
-                        <div class="card bg-success">
-                            <div class="card-body">
-                                <div class="d-flex no-block align-items-center">
-                                    <div>
-                                        <h6 class="text-white">Pending COD</h6>
-                                        <h2 class="text-white m-0 ">{{$data['td_pending']}} {{env("APP_CURRENCY")}}</h2>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <span class="text-white display-6"><i class="fa fa-phone fa-2x"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-3 col-lg-3">
-                        <div class="card bg-orange">
-                            <div class="card-body">
-                                <div class="d-flex no-block align-items-center">
-                                    <div>
-                                        <h6 class="text-white">Cancelled COD</h6>
-                                        <h2 class="text-white m-0 ">{{$data['td_cancelled']}} {{env("APP_CURRENCY")}}</h2>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <span class="text-white display-6"><i class="fa fa-close fa-2x"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
             
@@ -266,13 +253,19 @@
 </div>
 
 <script>
+
     function fetchAjaxData(condition){
+
         $("#ajaxDataContent").html("");
         $('#ajaxData').show();
         $('#ajaxDataCondition').html(" "+condition);
         var input = {};
         input.condition = condition;
         input._token = "{{csrf_token()}}";
+        input.is_date = $("#filterDate").val();
+        input.from_date = $("#filterFromDate").val();
+        input.to_date = $("#filterToDate").val(); 
+
         $.ajax({
             type: "POST",
             url: "{{route('admin.reports.cod-analysis.ajax.datafetch')}}",

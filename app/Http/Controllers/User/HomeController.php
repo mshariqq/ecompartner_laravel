@@ -51,7 +51,7 @@ class HomeController extends Controller
         }
         $data['total_orders'] = Order::where('seller_id', auth()->user()->id)->count();
         $data['total_delivered_orders'] = Order::where('seller_id', auth()->user()->id)->where('status', 'delivered')->count();
-        $data['total_outfordeivery_orders'] = Order::where('seller_id', auth()->user()->id)->where('status', 'out for delivery')->count();
+        $data['total_outfordelivery_orders'] = Order::where('seller_id', auth()->user()->id)->where('status', 'out for delivery')->count();
 
         $data['total_pending_orders'] = 0;
         foreach ($myLists as $key) {
@@ -72,18 +72,30 @@ class HomeController extends Controller
 
         // dd(Carbon::now()->subdays(365));
         $data['LvsO'] = [];
-        $data['LvsO']['7_dates'] = array(1, 2, 3, 4, 5, 6, 7);
+        $data['LvsO']['7_dates'] = array(0, 1, 2, 3, 4, 5, 6);
         $data['LvsO']['leads'] = [];
         $data['LvsO']['orders'] = [];
         $data['LvsO']['dates'] = [];
         foreach ($data['LvsO']['7_dates'] as $key => $value) {
-            $data['LvsO']['dates'][] = Carbon::now()->subdays($value)->diffForHumans();
+            $d1 = date('Y-m-d', strtotime('-'.$value.' days'));
+            $val = $value - 1;
+            $d2 = date('Y-m-d', strtotime('-'.$val.' days'));
+
+            if($value == 0){
+                $data['LvsO']['dates'][] = 'Today';
+
+            }else{
+                $data['LvsO']['dates'][] = Carbon::now()->subdays($value)->diffForHumans();
+
+            }
+
+            // $data['LvsO']['dates'][] = Carbon::now()->subdays($value)->diffForHumans();
             $myleads_count_from_lists = 0;
             foreach ($myLists as $key) {
-                $myleads_count_from_lists += Lead::where('leads_list_id', $key['id'])->where('created_at','>=',Carbon::now()->subdays($value))->count();
+                $myleads_count_from_lists += Lead::where('leads_list_id', $key['id'])->whereBetween('created_at', [$d1, $d2])->count();
             }
             $data['LvsO']['leads'][] = $myleads_count_from_lists;
-            $data['LvsO']['orders'][] = Order::where('seller_id', auth()->user()->id)->where('created_at','>=',Carbon::now()->subdays($value))->count();
+            $data['LvsO']['orders'][] = Order::where('seller_id', auth()->user()->id)->whereBetween('created_at', [$d1, $d2])->count();
 
         }
 
@@ -100,9 +112,11 @@ class HomeController extends Controller
 
     public function todayFilter(Request $request){
         $date = $request->date;
-        $toDate = $date . " 23:59:59";
         $fromDate = $date . " 00:00:00";        
         
+        $your_date = strtotime("1 day", strtotime($date));
+        $toDate = date("Y-m-d h:s:m", $your_date);
+
         if(isset($request->date)){
             $data= [];
             //  leads
@@ -133,14 +147,48 @@ class HomeController extends Controller
     }
 
     public function DashAJaxDataFetch(Request $request){
-        
-        if($request->condition == 'total-cod'){
-            $orders = Order::where('seller_id', auth()->user()->id)->paginate(100);
+        $isLeads = false;
+
+        if($request->condition == 'Total Leads'){
+            // means lead
+            $isLeads = true;
+            if(isset($request->date)){
+                // if date given, filter leads on date of the seller
+                $date = $request->date;
+                $fromDate = $date . " 00:00:00"; 
+                $your_date = strtotime("1 day", strtotime($date));
+                $toDate = date("Y-m-d h:s:m", $your_date);
+
+                $myLists = LeadsList::where('user_id', auth()->user()->id)->get();
+                $myLeads = [];
+                foreach ($myLists as $key) {
+                    $myLeads[] = Lead::where('leads_list_id', $key['id'])->whereBetween('created_at', [$fromDate, $toDate])->get();
+                }
+                $orders = $myLeads;
+            }else{
+                // if date not given, all leads of the seller
+                $myLists = LeadsList::where('user_id', auth()->user()->id)->get();
+                $myLeads = [];
+                foreach ($myLists as $key) {
+                    $myLeads[] =  Lead::where('leads_list_id', $key['id'])->get();
+                }
+                $orders = $myLeads;
+            }
         }
         else{
-            $orders = Order::where('seller_id', auth()->user()->id)->where('status', $request->condition)->paginate(100);
+            if(isset($request->date)){
+                $date = $request->date;
+                $fromDate = $date . " 00:00:00"; 
+                $your_date = strtotime("1 day", strtotime($date));
+                $toDate = date("Y-m-d h:s:m", $your_date);
+
+                $orders = Order::where('seller_id', auth()->user()->id)->whereBetween('created_at', [$fromDate, $toDate])->where('status', $request->condition)->get();
+            }else{
+                $orders = Order::where('seller_id', auth()->user()->id)->where('status', $request->condition)->get();
+            }
+            // $orders = Order::where('seller_id', auth()->user()->id)->where('status', $request->condition)->paginate(100);
         }
 
-        return view('user.reports.cod_analysi_ajaxdata', compact('orders'));
+        return view('user.reports.cod_analysi_ajaxdata', compact('orders', 'isLeads'));
     }
 }

@@ -261,28 +261,28 @@
 								<li aria-haspopup="true"><a href="{{url('/admin')}}" class="sub-icon"><i class="typcn typcn-device-desktop hor-icon"></i> Dashboard </a>
 									
 								</li>
-                                <li aria-haspopup="true"><a href="#" class="sub-icon"><i class="typcn typcn-group-outline hor-icon"></i> Sellers <i class="fa fa-angle-down horizontal-icon"></i></a>
+                                <li aria-haspopup="true"><a href="#" class="sub-icon"><i class="si si-people"></i> Sellers <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="{{route('admin.sellers.all')}}">All Sellers</a></li>
 										<li aria-haspopup="true"><a href="{{route('admin.sellers.add')}}">Add Seller</a></li>
 										
 									</ul>
 								</li>
-								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="typcn typcn-th-large-outline hor-icon"></i> Leads <i class="fa fa-angle-down horizontal-icon"></i></a>
+								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="si si-book-open"></i> Leads <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="{{route('admin.leads.all')}}">All Leads</a></li>
 										<li aria-haspopup="true"><a href="{{route('admin.leads.import')}}">Import Leads</a></li>
 										
 									</ul>
 								</li>
-								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="typcn typcn-chart-pie-outline"></i> Orders <i class="fa fa-angle-down horizontal-icon"></i></a>
+								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="si si-handbag"></i> Orders <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="{{route('admin.orders.all')}}">All Orders</a></li>
 										{{-- <li aria-haspopup="true"><a href="chart-morris.html">Reports</a></li> --}}
 										
 									</ul>
 								</li>
-								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="typcn typcn-briefcase"></i> Warehouse & Purchases </a>
+								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="si si-basket-loaded"></i> Warehouse & Purchases </a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="{{route('admin.warehouse.all')}}">Warehouses</a></li>
 										<li aria-haspopup="true"><a href="{{route('admin.warehouse.products.all')}}">Products</a></li>
@@ -292,7 +292,7 @@
 									</ul>
 								</li>
 
-								<li aria-haspopup="true"><a href="#" class="sub-icon "><i class="typcn typcn-cog-outline"></i> Reports <i class="fa fa-angle-down horizontal-icon"></i></a>
+								<li aria-haspopup="true"><a href="#" class="sub-icon "><i class="si si-pie-chart"></i> Reports <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="{{route('admin.reports.cod-analysis')}}">COD Analysis</a></li>
 									</ul>
@@ -311,7 +311,7 @@
 						<div class="row">
 							<div class="col">
 								<div class="d-flex">
-                                    <h6 class="mb-0 mt-2">Admin Logged in as <span class="text-primary">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</span></h6>
+                                    <h5 class="mb-0">Admin Logged in as <span class="text-primary">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</span></h5>
 								</div>
 							</div>
 							<div class="col col-auto">

@@ -110,7 +110,7 @@
                                     <option value="null">Change Status</option>
                                     {{-- <option value="pending">Pending</option> --}}
                                     <option value="packing">Packing</option>
-                                    <option value="out for deivery">Out for Delivery</option>
+                                    <option value="out for delivery">Out for Delivery</option>
                                     <option value="delivered">Delivered</option>
                                     {{-- <option value="reschedule">Reschedule</option> --}}
                                     <option value="cancelled">Cancelled</option>
@@ -134,14 +134,16 @@
                                     @if ($item->status == 'confirmed')
                                         <span class="tag bg-primary text-white p-1 text-capitalize">{{$item->status}}</span>
                                     @elseif($item->status == 'delivered')
-                                        <span class="tag bg-success text-dark text-capitalize">{{$item->status}}</span>
+                                        <span class="tag bg-success text-white text-capitalize">{{$item->status}}</span>
                                     @elseif($item->status == 'cancelled')
                                         <span class="tag bg-danger text-white text-capitalize">{{$item->status}}</span>
+                                    @elseif($item->status == 'packing')
+                                        <span class="tag bg-warning text-dark text-capitalize">{{$item->status}}</span>
                                     @else
                                         <span class="tag bg-orange text-dark text-capitalize">{{$item->status}}</span>
  
                                     @endif
-                                    <br>
+                                    
 
                             </td>
 

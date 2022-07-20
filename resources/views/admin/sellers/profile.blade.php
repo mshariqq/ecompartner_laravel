@@ -277,7 +277,7 @@
                                                     <option value="null">Change Status</option>
                                                     {{-- <option value="pending">Pending</option> --}}
                                                     <option value="packing">Packing</option>
-                                                    <option value="out for deivery">Out for Delivery</option>
+                                                    <option value="out for delivery">Out for Delivery</option>
                                                     <option value="delivered">Delivered</option>
                                                     {{-- <option value="reschedule">Reschedule</option> --}}
                                                     <option value="cancelled">Cancelled</option>

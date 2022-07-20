@@ -41,6 +41,10 @@ class ReportsController extends Controller
         $data['td_confirmed'] = Order::where('status', 'confirmed')->where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
         $data['td_cod'] = Order::where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
 
+        $data['dateTimeValidated'] = false;
+        $data['from_date'] = 'null';
+        $data['to_date'] = 'null';
+
         return view('user.reports.cod_analysis', compact('data', 'filter'));
     }
 
@@ -73,19 +77,35 @@ class ReportsController extends Controller
        $data['td_cancelled'] = Order::where('status', 'cancelled')->where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
         $data['td_confirmed'] = Order::where('status', 'confirmed')->where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
         $data['td_cod'] = Order::where('created_at', '>=', Carbon::today())->where('seller_id', auth()->user()->id)->sum('cod_amount');
+        
+        $data['dateTimeValidated'] = true;
+        $data['from_date'] = $request->from;
+        $data['to_date'] = $request->to;
 
         return view('user.reports.cod_analysis', compact('data', 'filter'));
     }
 
     public function codAnalysisAJaxDataFetch(Request $request){
-        
-        if($request->condition == 'total-cod'){
-            $orders = Order::where('seller_id', auth()->user()->id)->paginate(100);
-        }
-        else{
-            $orders = Order::where('status', $request->condition)->where('seller_id', auth()->user()->id)->paginate(100);
-        }
+        $isLeads = false;
+        if($request->is_date){
+            // if date filter is on, then filter based on dates
+            $from = $request->from_date .' 00:00:00';
+            $to = $request->to_date . ' 23:59:59';
 
-        return view('user.reports.cod_analysi_ajaxdata', compact('orders'));
+            if($request->condition == 'total-cod'){
+                $orders = Order::where('seller_id', auth()->user()->id)->whereBetween('created_at', [$from, $to])->paginate(100);
+            }
+            else{
+                $orders = Order::where('status', $request->condition)->whereBetween('created_at', [$from, $to])->where('seller_id', auth()->user()->id)->paginate(100);
+            }
+        }else{
+            if($request->condition == 'total-cod'){
+                $orders = Order::where('seller_id', auth()->user()->id)->paginate(100);
+            }
+            else{
+                $orders = Order::where('status', $request->condition)->where('seller_id', auth()->user()->id)->paginate(100);
+            }
+        }
+        return view('user.reports.cod_analysi_ajaxdata', compact('orders', 'isLeads'));
     }
 }

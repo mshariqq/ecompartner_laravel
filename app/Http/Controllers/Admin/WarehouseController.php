@@ -71,7 +71,7 @@ class WarehouseController extends Controller
     }
 
     public function productPurchases(){
-        $purchases = ProductPurchase::paginate(25);
+        $purchases = ProductPurchase::orderBy('created_at', 'DESC')->paginate(25);
         return view('admin.warehouses.purchases', compact('purchases'));
     }
 

@@ -10,11 +10,14 @@ use App\Product;
 
 class LeadsController extends Controller
 {
+
+    public function importLeads(){
+        return redirect()->back()->with('error', "Import from your Seller account not from admin account!");
+    }
     // sell all leads in admin
     public function allLeads(){
         $leads = LeadsList::orderBy('id','DESC')->paginate(10);
         return view('admin.leads.all-leads', compact('leads'));
-
     }
 
     // admin can change the status
@@ -73,6 +76,9 @@ class LeadsController extends Controller
                                 'msg' => $co['1']
                             );
                         }
+                    }else{
+                        $lead->save();
+
                     }
 
                     return array(

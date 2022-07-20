@@ -48,7 +48,7 @@
 
                             <td>
                                 
-                                <span class="text-primary"> {{ $item->name }} </span>
+                                <span class="text-primary"> #{{$item->id}} <br> {{ $item->name }} </span>
                                 
                             </td>
                             <td>

@@ -7,7 +7,7 @@
 @section('content')
 
 <div class="page-header">
-    <h4> <a href="{{route('admin.leads.all')}}"><i class="fa fa-arrow-left" aria-hidden="true"></i></a> Showing Leads of <span class="text-primary">{{$lead->name}} Lead</span> uploaded by <span class="text-primary">{{$lead->user->name}}</span> on <span class="text-orange">{{$lead->created_at->diffForHumans()}}</span></h4>
+    <h4> <a href="{{route('admin.leads.all')}}"><i class="fa fa-arrow-left" aria-hidden="true"></i></a> Showing Leads of <span class="text-primary">{{$lead->name}} Lead</span> uploaded by <span class="text-primary">{{$lead->user->name}}</span> <span class="text-orange">{{$lead->created_at->diffForHumans()}}</span></h4>
 </div>
 
 <div class="row">
@@ -53,13 +53,13 @@
                                </td>
                             <td id="tdStatus{{$item->id}}">
                                     @if ($item->status == 'confirmed')
-                                        <span class="text-dark tag bg-success p-1 text-capitalize">{{$item->status}}</span>
+                                        <span class="text-white tag bg-primary p-1 text-capitalize">{{$item->status}}</span>
                                     @elseif($item->status == 'no response')
-                                        <span class="text-dark tag bg-orange text- text-capitalize">{{$item->status}}</span>
+                                        <span class="text-white tag bg-orange text- text-capitalize">{{$item->status}}</span>
                                     @elseif($item->status == 'cancelled')
                                         <span class="text-white tag bg-danger text-capitalize">{{$item->status}}</span>
                                     @else
-                                        <span class="bg-orange text-dark tag text-capitalize">{{$item->status}}</span>
+                                        <span class="bg-warning text-dark tag text-capitalize">{{$item->status}}</span>
  
                                     @endif
                             </td>
@@ -70,12 +70,11 @@
                             </td>
                            <td>{{$item->delivery_address}}</td>
                            <td>
-                                {{$item->product_id}}
-                                <br>
+                                
                                 @php
                                    $product = \App\Product::find($item->product_id);
                                    if($product){
-                                    echo "<span class='text-indigo'>".$product->name."</span>";
+                                    echo "<span class='text-indigo'> #" . $product->id . $product->name."</span>";
                                    }else {
                                     // if no product
                                     echo "<span class='text-danger'>No Product Found</span>";

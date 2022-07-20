@@ -52,7 +52,7 @@
                             <td>
                                 <span class="tag bg-danger">
                                     @php
-                                    echo $item->product->stock - $item->qty;
+                                    echo $item->product->stock + $item->qty;
                                  @endphp
                                 </span>
                             

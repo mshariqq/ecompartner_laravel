@@ -1,12 +1,82 @@
-<div class="page-header">
-    <h2 class="float-left">Data Fetch Result <span class="text-orange">{{count($orders)}}</span>
-        <br>
-        <small style="font-size: 16px" class="text-orange">Note : Scroll the table horizontally for more columns <i class="fa fa-align-right" aria-hidden="true"></i> </small>
+@if ($isLeads)
 
+<h4>Showing Leads</h4>
+<div class="row">
+    <div class="col-12">
+        <table id="example" class="table table-striped bg-white table-bordered shadow">
+            <thead class="bg-primary">
+                <tr>
+                    <th>Status</th>
+                    <th>Name</th>
+                    <th>Delivery Address</th>
+                    <th>City</th>
+                    <th>Product ID</th>
+                    <th>Phone</th>
+                    <th>Country</th>
+                    <th>COD Currency</th>
+                    <th>COD Amount</th>
+                    <th>Pieces</th>
+                    <th>Shipment Desc</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($orders as $key)
+                @foreach ($key as $item)
+                <tr>
+                    <td>
+                        @if ($item->status == 'confirmed')
+                                    <span class="text-white tag bg-primary p-1 text-capitalize">{{$item->status}}</span>
+                                @elseif($item->status == 'no response')
+                                    <span class="text-white tag bg-orange text- text-capitalize">{{$item->status}}</span>
+                                @elseif($item->status == 'cancelled')
+                                    <span class="text-white tag bg-danger text-capitalize">{{$item->status}}</span>
+                                @else
+                                    <span class="bg-warning text-dark tag text-capitalize">{{$item->status}}</span>
+
+                        @endif
+                    </td>
+                    <td>{{$item->name}}</td>
+                    <td>{{$item->delivery_address}}</td>
+                    <td>{{$item->city}}</td>
+                    <td>
+                        {{$item->product_id}}
+                        <br>
+                        @php
+                           $product = \App\Product::find($item->product_id);
+                           if($product){
+                            echo "<span class='text-indigo'>".$product->name."</span>";
+                           }else {
+                            // if no product
+                            echo "<span class='text-danger'>No Product Found</span>";
+                           }
+                        @endphp
+                   </td>
+                    <td>{{$item->phone_number}}</td>
+                    <td>{{$item->country}}</td>
+                    <td>{{$item->cod_currency}}</td>
+                    <td>{{$item->cod_amount}}</td>
+                    <td>{{$item->pieces}}</td>
+                    <td>{{$item->shipment_description}}</td>
+                </tr>
+            @endforeach
+                    
+                @endforeach
+            </tbody>
+           
+        </table>
+    </div>
+</div>
+
+
+
+@else
+
+<div class="page-header">
+    <h2 class="float-left">Showing Your Orders <span class="text-orange">{{count($orders)}}</span>
     </h2>
     <p class="float-right text-end text-right">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-indigo" data-toggle="modal" data-target="#modelId">
+        <button type="button" class="btn btn-gradient-primary" data-toggle="modal" data-target="#modelId">
           Export Orders <i class="fa fa-file-excel-o" aria-hidden="true"></i>
         </button>
         {{-- <a href="" target="__blank" class="btn btn-indigo"> <i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Orders</a> --}}
@@ -63,8 +133,6 @@
                 <thead class="bg-primary">
                     <tr>
                         {{-- <th>View</th> --}}
-                        <th>Change Status</th>
-                        <th>Seller</th>
                         <th>Tracking ID</th>
                         <th>Status</th>
                         <th>Name</th>
@@ -85,28 +153,8 @@
                             {{-- <td>
                                 <a href="http://" class="btn btn-primary"> <i class="fa fa-eye" aria-hidden="true"></i> View</a>
                                </td> --}}
-                               <td>
-                                <p class="">Converted : <b>{{$item->created_at->diffForHumans()}}</b></p>
-
-                                <div class="form-group">
-                                  <select onchange="changeStatus(this, '{{$item->id}}')" class="form-control" name="status" id="">
-                                    <option value="null">Change Status</option>
-                                    {{-- <option value="pending">Pending</option> --}}
-                                    <option value="packing">Packing</option>
-                                    <option value="out for deivery">Out for Delivery</option>
-                                    <option value="delivered">Delivered</option>
-                                    {{-- <option value="reschedule">Reschedule</option> --}}
-                                    <option value="cancelled">Cancelled</option>
-                                  </select>
-                                </div>
-                                
                                
-                               </td>
-                               <td>
-                                <a href="{{route('admin.sellers.profile', $item->seller->id)}}"> <i class="fa fa-user" aria-hidden="true"></i> {{$item->seller->name}}</a>
-                                
-
-                               </td>
+                               
                                <td>
                                 {{
                                     $item->tracking_id
@@ -114,17 +162,18 @@
                                </td>
                               
                             <td id="tdStatus{{$item->id}}">
-                                    @if ($item->status == 'confirmed')
-                                        <span class="tag bg-indigo text-white p-1 text-capitalize">{{$item->status}}</span>
-                                    @elseif($item->status == 'delivered')
-                                        <span class="tag bg-success text-dark text-capitalize">{{$item->status}}</span>
-                                    @elseif($item->status == 'cancelled')
-                                        <span class="tag bg-danger text-white text-capitalize">{{$item->status}}</span>
-                                    @else
-                                        <span class="tag bg-dark text-orange text-capitalize">{{$item->status}}</span>
- 
-                                    @endif
-                                    <br>
+                                @if ($item->status == 'confirmed')
+                                    <span class="tag bg-primary text-white p-1 text-capitalize">{{$item->status}}</span>
+                                @elseif($item->status == 'delivered')
+                                    <span class="tag bg-success text-white text-capitalize">{{$item->status}}</span>
+                                @elseif($item->status == 'cancelled')
+                                    <span class="tag bg-danger text-white text-capitalize">{{$item->status}}</span>
+                                @elseif($item->status == 'packing')
+                                    <span class="tag bg-warning text-dark text-capitalize">{{$item->status}}</span>
+                                @else
+                                    <span class="tag bg-orange text-dark text-capitalize">{{$item->status}}</span>
+
+                                @endif
 
                             </td>
 
@@ -145,9 +194,7 @@
                         </tr>
                     @endforeach
                 </tbody>
-                <tfoot>
-                    {{ $orders->links() }}
-                </tfoot>
+                
             </table>
         </div>
 
@@ -201,7 +248,7 @@
             // ajax
             $.ajax({
                 type: "POST",
-                url: "{{route('admins.orders.export')}}",
+                url: "{{route('orders.export')}}",
                 data: input,
                 // dataType: "dataType",
                 success: function (response) {
@@ -258,3 +305,7 @@
         });
     }
 </script>
+
+
+@endif
+

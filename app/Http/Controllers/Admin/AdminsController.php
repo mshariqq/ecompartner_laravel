@@ -198,8 +198,9 @@ class AdminsController extends Controller
 
     public function todayFilter(Request $request){
         $date = $request->date;
-        $toDate = $date . " 23:59:59";
-        $fromDate = $date . " 00:00:00";        
+        $fromDate = $date . " 00:00:00";     
+        $your_date = strtotime("1 day", strtotime($date));
+        $toDate = date("Y-m-d h:s:m", $your_date);   
         
         if(isset($request->date)){
             $data= [];
@@ -218,14 +219,34 @@ class AdminsController extends Controller
     }
 
     public function DashAJaxDataFetch(Request $request){
-        
-        if($request->condition == 'total-cod'){
-            $orders = Order::paginate(100);
+        $isLeads = false;
+        if($request->condition == 'Total Leads'){
+            // means lead
+            $isLeads = true;
+            if(isset($request->date)){
+                $date = $request->date;
+                $fromDate = $date . " 00:00:00"; 
+                $your_date = strtotime("1 day", strtotime($date));
+                $toDate = date("Y-m-d h:s:m", $your_date);
+
+                $orders = Lead::whereBetween('created_at', [$fromDate, $toDate])->get();
+            }else{
+                $orders = Lead::all();
+            }
         }
         else{
-            $orders = Order::where('status', $request->condition)->paginate(100);
+            if(isset($request->date)){
+                $date = $request->date;
+                $fromDate = $date . " 00:00:00"; 
+                $your_date = strtotime("1 day", strtotime($date));
+                $toDate = date("Y-m-d h:s:m", $your_date);
+
+                $orders = Order::whereBetween('created_at', [$fromDate, $toDate])->where('status', $request->condition)->get();
+            }else{
+                $orders = Order::where('status', $request->condition)->get();
+            }
         }
 
-        return view('admin.reports.cod_analysi_ajaxdata', compact('orders'));
+        return view('admin.reports.cod_analysi_ajaxdata', compact('orders', 'isLeads'));
     }
 }

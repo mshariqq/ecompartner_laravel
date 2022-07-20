@@ -15,6 +15,15 @@
         cursor: pointer;
         transition: 0.5s;
     }
+    .goToCodAnalysis{
+        cursor: pointer;
+        transition: 0.5s;
+
+    }
+    .goToCodAnalysis:hover{
+        cursor: pointer;
+        background-color: #F5F5F5 !important;
+    }
 </style>
 <!-- ECharts js -->
 <script src="{{ asset('assets/plugins/echarts/echarts.js')}}"></script>
@@ -36,7 +45,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-8">
+                        <div class="col-8 goToCodAnalysis">
                             <div class="card-body p-3  d-flex">
                                 <div>
                                     <p class="text-muted mb-1">Total COD</p>
@@ -57,7 +66,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-8">
+                        <div class="col-8 goToCodAnalysis">
                             <div class="card-body p-3  d-flex">
                                 <div>
                                     <p class="text-muted mb-1">Total Confirmed</p>
@@ -78,7 +87,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-8">
+                        <div class="col-8 goToCodAnalysis">
                             <div class="card-body p-3  d-flex">
                                 <div>
                                     <p class="text-muted mb-1">Total Delivered</p>
@@ -99,7 +108,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-8">
+                        <div class="col-8 goToCodAnalysis">
                             <div class="card-body p-3  d-flex">
                                 <div>
                                     <p class="text-muted mb-1">Total Pending</p>
@@ -155,7 +164,7 @@
                 <div class="col-xl-2 col-lg-6 col-sm-6 pr-0 pl-0">
                     <div class="card-body text-center">
                         <h5 class="text-white">Total OFD</h5>
-                        <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{$data['total_outfordeivery_orders']}}</h2>
+                        <h2 class="mb-2 mt-3 fs-2 text-white mainvalue">{{$data['total_outfordelivery_orders']}}</h2>
                         <div>
                             <i class="si si-graph mr-1 text-danger"></i><span class="text-white">
                             <a class="text-white" href="{{route('admin.orders.all', 'out for delivery')}}">More Details <i class="si si-arrow-right-circle text-warning" aria-hidden="true"></i> </a>
@@ -219,7 +228,7 @@
                                     <i class="si si-people"></i>
                                 </div>
                                 <h5 class="text-muted">Total Leads</h5>
-                                <h2 onclick="fetchAjaxData('total-cod')" id="TDleads" class="counter mb-0 blockAjaxText text-dark mainvalue">{{$data['total_leads_count']}}</h2>
+                                <h2 onclick="fetchAjaxData('Total Leads')" id="TDleads" class="counter mb-0 blockAjaxText text-dark mainvalue">{{$data['total_leads_count']}}</h2>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 mt-4 mb-4">
@@ -347,6 +356,7 @@
 </div> --}}
 
 <script>
+    var dataFilterWithDate = false;
     $(document).ready(function(){
         // calls functions to init
         barChart7daysLeadsOrders();
@@ -354,6 +364,7 @@
 
         $("#TDfilterBtn").on('click', function(){
             var date = $("#TDdate").val();
+            dataFilterWithDate = true;
             $(this).removeClass('btn-indigo');
             $(this).addClass('btn-dark');
 
@@ -374,6 +385,10 @@
                 }
             });
         });
+
+        $('.goToCodAnalysis').on('click', function(){
+            window.location.href = "{{route('admin.reports.cod-analysis')}}";
+        });
     });
 
     function fetchAjaxData(condition){
@@ -383,6 +398,9 @@
         var input = {};
         input.condition = condition;
         input._token = "{{csrf_token()}}";
+        if(dataFilterWithDate == true){
+            input.date = $("#TDdate").val();
+        }
         $.ajax({
             type: "POST",
             url: "{{route('admin.dashboard.ajax.datafetch')}}",
@@ -394,12 +412,12 @@
             }
         });
     }
-
+        
     // 7 days leads vs order
     function barChart7daysLeadsOrders(){
-        var cDates = <?php echo json_encode($data['LvsO']['dates'] );?>;
-        var cLeads =<?php echo json_encode($data['LvsO']['leads'] );?>;
-        var cOrders =<?php echo json_encode($data['LvsO']['orders'] );?>;
+        var cDates = @php echo json_encode($data['LvsO']['dates'] ) @endphp;
+        var cLeads = @php echo json_encode($data['LvsO']['leads'] ) @endphp;
+        var cOrders = @php echo json_encode($data['LvsO']['orders'] ) @endphp;
 
         var chartdata = [
             {
@@ -428,7 +446,7 @@
             left: '25',
             },
             xAxis: {
-            data: [ '2014', '2015', '2016', '2017', '2018'],
+            data: cDates,
             axisLine: {
                 lineStyle: {
                 color: 'rgba(0,0,0,0.03)'
@@ -436,7 +454,7 @@
             },
             axisLabel: {
                 fontSize: 10,
-                color: '#bbc1ca'
+                color: '#54595f'
             }
             },
             tooltip: {
@@ -448,7 +466,7 @@
                 axisPointer:
                 {
                     label: {
-                        show: false,
+                        show: true,
                     }
                 }
 
@@ -456,17 +474,17 @@
             yAxis: {
             splitLine: {
                 lineStyle: {
-                color: 'rgba(0,0,0,0.03)'
+                color: 'rgba(0,0,0,0.05)'
                 }
             },
             axisLine: {
                 lineStyle: {
-                color: 'rgba(0,0,0,0.03)'
+                color: 'rgba(0,0,0,0.05)'
                 }
             },
             axisLabel: {
                 fontSize: 10,
-                color: '#bbc1ca'
+                color: '#aaa'
             }
             },
             series: chartdata,

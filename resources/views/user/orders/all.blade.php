@@ -6,7 +6,7 @@
     <h4 class="mb-0 float-left"> <a href="{{route('leads.leads-list.index')}}"><i class="fa fa-arrow-left" aria-hidden="true"></i> </a> Showing Orders from your Leads   </h4>
     <p class="float-right text-end text-right">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-indigo" data-toggle="modal" data-target="#modelId">
+        <button type="button" class="btn btn-gradient-primary" data-toggle="modal" data-target="#modelId">
           Export Orders <i class="fa fa-file-excel-o" aria-hidden="true"></i>
         </button>
         {{-- <a href="" target="__blank" class="btn btn-indigo"> <i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Orders</a> --}}
@@ -92,15 +92,17 @@
                      <tr>
                          <td>
                              @if ($item->status == 'confirmed')
-                             <span class="tag bg-primary text-white p-1 text-capitalize">{{$item->status}}</span>
-                         @elseif($item->status == 'delivered')
-                             <span class="tag bg-success text-dark text-capitalize">{{$item->status}}</span>
-                         @elseif($item->status == 'cancelled')
-                             <span class="tag bg-danger text-white text-capitalize">{{$item->status}}</span>
-                         @else
-                             <span class="tag bg-orange text-dark text-capitalize">{{$item->status}}</span>
- 
-                         @endif
+                                <span class="tag bg-primary text-white p-1 text-capitalize">{{$item->status}}</span>
+                            @elseif($item->status == 'delivered')
+                                <span class="tag bg-success text-dark text-capitalize">{{$item->status}}</span>
+                            @elseif($item->status == 'cancelled')
+                                <span class="tag bg-danger text-white text-capitalize">{{$item->status}}</span>
+                            @elseif($item->status == 'packing')
+                                <span class="tag bg-warning text-dark text-capitalize">{{$item->status}}</span>
+                            @else
+                                <span class="tag bg-orange text-dark text-capitalize">{{$item->status}}</span>
+    
+                            @endif
                          </td>
                          <td>{{$item->tracking_id}}</td>
                          <td>{{$item->name}}</td>

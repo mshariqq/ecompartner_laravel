@@ -11,6 +11,7 @@
         <table id="example" class="table table-striped bg-white table-bordered shadow">
             <thead class="bg-primary">
                 <tr>
+                    <th>Imported On</th>
                     <th>Status</th>
                     <th>Name</th>
                     <th>Delivery Address</th>
@@ -28,16 +29,19 @@
                 @foreach ($leads as $item)
                     <tr>
                         <td>
+                            {{$item->created_at}}
+                        </td>
+                        <td>
                             @if ($item->status == 'confirmed')
-                            <span class="text-dark tag bg-success p-1 text-capitalize">{{$item->status}}</span>
-                            @elseif($item->status == 'no response')
-                                <span class="text-dark tag bg-orange text- text-capitalize">{{$item->status}}</span>
-                            @elseif($item->status == 'cancelled')
-                                <span class="text-white tag bg-danger text-capitalize">{{$item->status}}</span>
-                            @else
-                                <span class="bg-warning text-dark tag text-capitalize">{{$item->status}}</span>
-
-                            @endif
+                                        <span class="text-white tag bg-primary p-1 text-capitalize">{{$item->status}}</span>
+                                    @elseif($item->status == 'no response')
+                                        <span class="text-white tag bg-orange text- text-capitalize">{{$item->status}}</span>
+                                    @elseif($item->status == 'cancelled')
+                                        <span class="text-white tag bg-danger text-capitalize">{{$item->status}}</span>
+                                    @else
+                                        <span class="bg-warning text-dark tag text-capitalize">{{$item->status}}</span>
+ 
+                                    @endif
                         </td>
                         <td>{{$item->name}}</td>
                         <td>{{$item->delivery_address}}</td>

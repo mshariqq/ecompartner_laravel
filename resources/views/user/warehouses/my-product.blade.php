@@ -26,6 +26,7 @@
                         <th width="17%">Action</th>
                         <th>Warehouse</th>
                         <th>Name</th>
+                        <th>Stock</th>
                         <th>Details</th>
                         <th>Price</th>
                         <th>Info</th>
@@ -47,8 +48,11 @@
                             </td>
 
                             <td>
-                                <span class="text-primary"> {{ $item->name }} </span>
+                                <span class="text-primary"> #{{$item->id}} {{ $item->name }} </span>
                                 
+                            </td>
+                            <td>
+                                {{$item->stock}}
                             </td>
                             <td>
                                 {!! $item->description !!}

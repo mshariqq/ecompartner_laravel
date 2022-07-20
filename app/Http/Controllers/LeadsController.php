@@ -57,6 +57,13 @@ class LeadsController extends BaseController
                             if(empty($getData[0]) && empty($getData[1]) && empty($getData[2]) && empty($getData[3]) && empty($getData[4])){
                                 $LeadsLog .= "Empt Row Value given in this row <br>";
                             }else{
+                                // validate data
+                                if($getData[9] == null || $getData[9] == "" || $getData[9] == " "){
+                                    return array(
+                                        'code' => 500,
+                                        'msg'   => 'Error, Product ID not found!'
+                                    );
+                                }
                                 // model of leads
                                 $Leads = new Lead();
                                 $Leads->name = $getData[0];
@@ -70,7 +77,7 @@ class LeadsController extends BaseController
                                 $Leads->shipment_description = $getData[8];
                                 $Leads->leads_list_id = $LLid;
                                 $Leads->product_id = $getData[9];
-                                $Leads->status = 'Draft';
+                                $Leads->status = 'pending';
 
                                 // insert the current row
                                 $save_lead = $Leads->save();

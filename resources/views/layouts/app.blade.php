@@ -159,14 +159,14 @@
 								<li aria-haspopup="true"><a href="{{url('/home')}}" class="sub-icon"><i class="typcn typcn-device-desktop hor-icon"></i> Dashboard </a>
 									
 								</li>
-								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="typcn typcn-th-large-outline hor-icon"></i> Leads <i class="fa fa-angle-down horizontal-icon"></i></a>
+								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="si si-book-open"></i> Leads <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="{{route('leads.leads-list.index')}}">All Leads</a></li>
 										<li aria-haspopup="true"><a href="{{route('leads.import')}}">Import Leads</a></li>
 										
 									</ul>
 								</li>
-								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="typcn typcn-chart-pie-outline"></i> Orders <i class="fa fa-angle-down horizontal-icon"></i></a>
+								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="si si-handbag"></i> Orders <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="{{route("orders.all")}}">Browse Orders</a></li>
 										<li aria-haspopup="true"><a href="{{route("orders.track")}}">Track Order</a></li>
@@ -174,7 +174,7 @@
 										
 									</ul>
 								</li>
-								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="typcn typcn-briefcase"></i> Warehouse </a>
+								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="si si-basket-loaded"></i> Warehouse </a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="{{route('warehouses.all')}}">My Warehouses</a></li>
 										<li aria-haspopup="true"><a href="{{route('warehouses.products')}}">My Products</a></li>
@@ -182,7 +182,7 @@
 									</ul>
 								</li>
 
-								<li aria-haspopup="true"><a href="#" class="sub-icon "><i class="typcn typcn-cog-outline"></i> Reports <i class="fa fa-angle-down horizontal-icon"></i></a>
+								<li aria-haspopup="true"><a href="#" class="sub-icon "><i class="si si-pie-chart"></i> Reports <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="{{route('reports.cod-analysis')}}">COD Analysis</a></li>
 									</ul>
@@ -201,7 +201,7 @@
 						<div class="row">
 							<div class="col">
 								<div class="d-flex">
-                                    <h3 class="mb-0 mt-2">Welcome Back <span class="text-primary">{{ auth()->user()->name }}</span></h3>
+                                    <h5 class="mb-0">Welcome Back <span class="text-primary">{{ auth()->user()->name }}</span></h5>
 									{{-- <a class="btn btn-danger" href="#"><i class="fe fe-rotate-cw mr-1 mt-1"></i> Upgrade </a> --}}
 								</div>
 							</div>

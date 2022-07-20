@@ -1,12 +1,135 @@
-<div class="page-header">
-    <h2 class="float-left">Data Fetch Result <span class="text-orange">{{count($orders)}}</span>
-        <br>
-        <small style="font-size: 16px" class="text-orange">Note : Scroll the table horizontally for more columns <i class="fa fa-align-right" aria-hidden="true"></i> </small>
+@if ($isLeads)
+<h4>Showing Leads <span class="text-primary">{{count($orders)}}</span> </h4>
+<div class="row">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="bg-white shadow table table-striped table-bordered table-nowrap text-nowrap">
+                <thead class="bg-primary">
+                    <tr>
+                        {{-- <th>View</th> --}}
+                        <th width="17%">Change Status</th>
+                        <th>Status</th>
+                        <th>Name</th>
+                        <th>Delivery Address</th>
+                        <th>Product Id</th>
+                        <th>City</th>
+                        <th>Phone</th>
+                        <th>Country</th>
+                        <th>COD Currency</th>
+                        <th>COD Amount</th>
+                        <th>Pieces</th>
+                        <th>Shipment Description</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($orders as $item)
+                        <tr id="TR{{$item->id}}">
+                            {{-- <td>
+                                <a href="http://" class="btn btn-primary"> <i class="fa fa-eye" aria-hidden="true"></i> View</a>
+                               </td> --}}
+                               <td>
+                                <p class="">Imported : <b>{{$item->created_at->diffForHumans()}}</b></p>
 
+                                <div class="form-group">
+                                  <select onchange="changeStatus(this, '{{$item->id}}')" class="form-control" name="status" id="">
+                                    <option value="draft">Change Status</option>
+                                    <option value="confirmed">Confirmed</option>
+                                    <option value="no response">No Response</option>
+                                    <option value="cancelled">Cancelled</option>
+                                   
+                                  </select>
+                                </div>
+                               </td>
+                            <td id="tdStatus{{$item->id}}">
+                                    @if ($item->status == 'confirmed')
+                                        <span class="text-white tag bg-primary p-1 text-capitalize">{{$item->status}}</span>
+                                    @elseif($item->status == 'no response')
+                                        <span class="text-white tag bg-orange text- text-capitalize">{{$item->status}}</span>
+                                    @elseif($item->status == 'cancelled')
+                                        <span class="text-white tag bg-danger text-capitalize">{{$item->status}}</span>
+                                    @else
+                                        <span class="bg-warning text-dark tag text-capitalize">{{$item->status}}</span>
+ 
+                                    @endif
+                            </td>
+
+                            <td>
+                                <span class="text-primary"> {{ $item->name }} </span>
+                                
+                            </td>
+                           <td>{{$item->delivery_address}}</td>
+                           <td>
+                                
+                                @php
+                                   $product = \App\Product::find($item->product_id);
+                                   if($product){
+                                    echo "<span class='text-indigo'> #" . $product->id . $product->name."</span>";
+                                   }else {
+                                    // if no product
+                                    echo "<span class='text-danger'>No Product Found</span>";
+                                   }
+                                @endphp
+                           </td>
+                           <td>{{$item->city}}</td>
+                           <td>{{$item->phone_number}}</td>
+                           <td>{{$item->country}}</td>
+                           <td>{{$item->cod_currency}}</td>
+                           <td>{{$item->cod_amount}}</td>
+                           <td>{{$item->pieces}}</td>
+                           <td>{{$item->shipment_description}}</td>
+                            {{-- <td>{{$item->created_at->diffForHumans()}}</td> --}}
+                           
+                        </tr>
+                    @endforeach
+                </tbody>
+                
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function changeStatus(select, id){
+        var elID = "#TR" + id;
+        $(select).addClass('bg-primary');
+        var tdStatus = "#tdStatus" + id;
+        var status = $(select).val();
+
+        $.ajax({
+            url: '{{url("admin/sellers/lead/ajax/change-status")}}' + "/" + id + "/" + status,
+            method: 'get',
+            success: function(res){
+                // var rp = JSON.parse(res);
+                if(res.code == 200 || res.code == '200'){
+                    $(select).addClass('bg-success');
+                    $(tdStatus).html(status);
+
+                }else{
+                    alert(res.msg);
+                    $(select).addClass('bg-danger');
+
+                }
+            },
+            error: function(res){
+                console.log(res);
+                alert('Something went wrong, please check console');
+                    $(select).addClass('bg-danger');
+                
+            }
+        });
+    }
+</script>
+@else
+
+<div class="page-header">
+    <h2 class="float-left">Showing Orders <span class="text-orange">{{count($orders)}}</span>
+        
     </h2>
     <p class="float-right text-end text-right">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-indigo" data-toggle="modal" data-target="#modelId">
+        <button type="button" class="btn btn-gradient-primary" data-toggle="modal" data-target="#modelId">
           Export Orders <i class="fa fa-file-excel-o" aria-hidden="true"></i>
         </button>
         {{-- <a href="" target="__blank" class="btn btn-indigo"> <i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Orders</a> --}}
@@ -93,7 +216,7 @@
                                     <option value="null">Change Status</option>
                                     {{-- <option value="pending">Pending</option> --}}
                                     <option value="packing">Packing</option>
-                                    <option value="out for deivery">Out for Delivery</option>
+                                    <option value="out for delivery">Out for Delivery</option>
                                     <option value="delivered">Delivered</option>
                                     {{-- <option value="reschedule">Reschedule</option> --}}
                                     <option value="cancelled">Cancelled</option>
@@ -114,17 +237,18 @@
                                </td>
                               
                             <td id="tdStatus{{$item->id}}">
-                                    @if ($item->status == 'confirmed')
-                                        <span class="tag bg-indigo text-white p-1 text-capitalize">{{$item->status}}</span>
-                                    @elseif($item->status == 'delivered')
-                                        <span class="tag bg-success text-dark text-capitalize">{{$item->status}}</span>
-                                    @elseif($item->status == 'cancelled')
-                                        <span class="tag bg-danger text-white text-capitalize">{{$item->status}}</span>
-                                    @else
-                                        <span class="tag bg-dark text-orange text-capitalize">{{$item->status}}</span>
- 
-                                    @endif
-                                    <br>
+                                @if ($item->status == 'confirmed')
+                                    <span class="tag bg-primary text-white p-1 text-capitalize">{{$item->status}}</span>
+                                @elseif($item->status == 'delivered')
+                                    <span class="tag bg-success text-white text-capitalize">{{$item->status}}</span>
+                                @elseif($item->status == 'cancelled')
+                                    <span class="tag bg-danger text-white text-capitalize">{{$item->status}}</span>
+                                @elseif($item->status == 'packing')
+                                    <span class="tag bg-warning text-dark text-capitalize">{{$item->status}}</span>
+                                @else
+                                    <span class="tag bg-orange text-dark text-capitalize">{{$item->status}}</span>
+
+                                @endif
 
                             </td>
 
@@ -145,9 +269,7 @@
                         </tr>
                     @endforeach
                 </tbody>
-                <tfoot>
-                    {{ $orders->links() }}
-                </tfoot>
+               
             </table>
         </div>
 
@@ -258,3 +380,4 @@
         });
     }
 </script>
+@endif

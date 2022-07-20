@@ -6,7 +6,7 @@
     <h4 class="mb-0 float-left"> <a href="{{route('leads.leads-list.index')}}"><i class="fa fa-arrow-left" aria-hidden="true"></i> </a> Orders Report   </h4>
     <p class="float-right text-end text-right">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-indigo" data-toggle="modal" data-target="#modelId">
+        <button type="button" class="btn btn-gradient-primary" data-toggle="modal" data-target="#modelId">
           Export Orders <i class="fa fa-file-excel-o" aria-hidden="true"></i>
         </button>
         {{-- <a href="" target="__blank" class="btn btn-indigo"> <i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Orders</a> --}}

@@ -196,9 +196,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `tracking_id`, `lead_id`, `seller_id`, `name`, `delivery_address`, `city`, `phone_number`, `country`, `cod_currency`, `cod_amount`, `pieces`, `shipment_description`, `status`, `created_at`, `updated_at`) VALUES
-(1, NULL, 51, 1, 'farangis', 'Liwan , Queue Point, building-Mazaya 10 b, Flat 315', 'Dubai', '971522328676    ', 'United Arab Emirates', 'AED', 200, '1', 'Wingeless ® dyson  Hair Airwrap 5 in 1  ', 'out for deivery', '2022-06-20 03:54:59', '2022-06-28 04:50:37'),
+(1, NULL, 51, 1, 'farangis', 'Liwan , Queue Point, building-Mazaya 10 b, Flat 315', 'Dubai', '971522328676    ', 'United Arab Emirates', 'AED', 200, '1', 'Wingeless ® dyson  Hair Airwrap 5 in 1  ', 'out for delivery', '2022-06-20 03:54:59', '2022-06-28 04:50:37'),
 (2, NULL, 47, 1, 'anji atef said', 'Abu Hail next to Abu Hail Training Center', 'Dubai', '971501241948    ', 'United Arab Emirates', 'AED', 200, '1', 'Wingeless ® dyson  Hair Airwrap 5 in 1  ', 'delivered', '2022-06-21 03:03:57', '2022-06-24 11:24:29'),
-(3, NULL, 44, 1, 'tien tien', ' Discovery garden street 3 building 79', 'Dubai', '971507636272    ', 'United Arab Emirates', 'AED', 200, '1', 'Wingeless ® dyson  Hair Airwrap 5 in 1  ', 'out for deivery', '2022-06-21 03:05:26', '2022-06-24 11:24:27'),
+(3, NULL, 44, 1, 'tien tien', ' Discovery garden street 3 building 79', 'Dubai', '971507636272    ', 'United Arab Emirates', 'AED', 200, '1', 'Wingeless ® dyson  Hair Airwrap 5 in 1  ', 'out for delivery', '2022-06-21 03:05:26', '2022-06-24 11:24:27'),
 (4, NULL, 68, 1, 'John', 'XXXXXX', 'Abu Dhabi', '9', 'United Arab Emirates', 'AED', 500, '2', 'something', 'confirmed', '2022-06-24 11:16:43', '2022-06-24 11:16:43'),
 (5, NULL, 63, 1, 'farangis', 'Liwan , Queue Point, building-Mazaya 10 b, Flat 315', 'Dubai', '971522328676', 'United Arab Emirates', 'AED', 200, '1', 'Wingeless ® dyson  Hair Airwrap 5 in 1  ', 'confirmed', '2022-06-24 11:28:06', '2022-06-24 11:28:06'),
 (6, NULL, 61, 1, 'Amer Awad', 'South Shamkha (Riyadh) Basin (8) Vila (25)', 'Abu Dhabi', '971565231133    ', 'United Arab Emirates', 'AED', 190, '1', 'Wingeless ® One Step Hair Brush', 'confirmed', '2022-06-24 11:36:08', '2022-06-24 11:36:08'),
