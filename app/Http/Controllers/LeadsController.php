@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Lead;
 use App\LeadsList;
+use App\Product;
+use App\Warehouse;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 
@@ -51,7 +53,7 @@ class LeadsController extends BaseController
                     {
 
                         if(empty($getData)){
-                            $LeadsLog .= "Empt Row Given in CSV <br>";
+                            $LeadsLog .= "Invalid CSV data format <br>";
 
                         }else{
                             if(empty($getData[0]) && empty($getData[1]) && empty($getData[2]) && empty($getData[3]) && empty($getData[4])){
@@ -63,6 +65,29 @@ class LeadsController extends BaseController
                                         'code' => 500,
                                         'msg'   => 'Error, Product ID not found!'
                                     );
+                                }else{
+                                    $product = Product::find($getData[9]);
+                                    if($product){
+                                        // get warehouse id
+                                        $warehouse = Warehouse::where('id', $product->warehouse_id)->where('seller_id', auth()->user()->id)->get();
+                                        if(count($warehouse) < 1){
+                                            return array(
+                                                'code' => 500,
+                                                'msg'   => 'Error, The product does not belongs to you!'
+                                            );
+                                        }
+                                        if($product->status == 'pending' || $product->status == 'rejected' || $product->status = 'Pending' || $product->status = 'Rejected'){
+                                            return array(
+                                                'code' => 500,
+                                                'msg'   => 'Error, The product is not verified by Admin or not Active'
+                                            );
+                                        }
+                                    }else{
+                                        return array(
+                                            'code' => 500,
+                                            'msg'   => 'Error, No Product Found witj that ID #'.$getData[9]
+                                        );
+                                    }
                                 }
                                 // model of leads
                                 $Leads = new Lead();

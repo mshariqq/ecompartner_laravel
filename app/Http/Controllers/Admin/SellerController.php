@@ -26,4 +26,28 @@ class SellerController extends Controller
             return redirect()->back()->with('error', "Seller not found");
         }
     }
+
+    public function profileBlock($id, $status){
+        $seller = User::find($id);
+        if($status == 'true'){
+            $seller->status = 'blocked';
+            if($seller->save()){
+                return redirect()->back()->with('success', "Seller Blocked!");
+    
+            }else{
+                return redirect()->back()->with('error', "Error while updating database!");
+    
+            }
+        }else{
+            $seller->status = 'active';
+            if($seller->save()){
+                return redirect()->back()->with('success', "Seller Un Blocked!");
+    
+            }else{
+                return redirect()->back()->with('error', "Error while updating database!");
+    
+            }
+        }
+        
+    }
 }

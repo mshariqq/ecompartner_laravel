@@ -9,14 +9,20 @@ use App\Order;
 use App\Product;
 use App\ProductPurchase;
 use App\Warehouse;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class WarehouseController extends Controller
 {
 
-    public function allProducts(){
-        
-        $products = Product::paginate(10);
+    public function allProducts($where = false){
+        if($where != false){
+            $products = Product::where('status', $where)->paginate(10);
+
+        }else{
+            $products = Product::paginate(10);
+
+        }
         return view('admin.warehouses.all-products', compact('products'));
 
     }
@@ -73,6 +79,32 @@ class WarehouseController extends Controller
     public function productPurchases(){
         $purchases = ProductPurchase::orderBy('created_at', 'DESC')->paginate(25);
         return view('admin.warehouses.purchases', compact('purchases'));
+    }
+
+    public function productApproval($id, $status){
+        if($status == 'approve'){
+            $status = 'active';
+        
+        }elseif($status == 'reject'){
+            $status = 'rejected';
+        }
+        // get the product
+        $product = Product::find($id);
+        if($product){
+            $product->status = $status;
+            $product->approval_date = Carbon::today();
+            $product->approved_admin = auth()->user()->id;
+            if($product->save()){
+                return redirect()->back()->with('success', "Product Approved");
+
+            }else{
+                return redirect()->back()->with('error', "Error while updating the product database!");
+
+            }
+        }else{
+            return redirect()->back()->with('error', "No Product Found, or ID is incorrect");
+        }
+       
     }
 
 }

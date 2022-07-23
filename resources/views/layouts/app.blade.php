@@ -1,3 +1,22 @@
+@if (auth()->user()->status == 'blocked')
+
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>402 Blocked - You can't access the page</title>
+	</head>
+	<body>
+		<h1 style="color: red;">You are Blocked! 😄</h1>
+		<p>Please contact the admin for more details</p>
+	</body>
+	</html>
+
+@else
+
+
 <!doctype html>
 <!-- 
 		Developer	: Md Shariqq Ahmed
@@ -56,6 +75,7 @@
 		<script src="{{ asset('assets/js/vendors/jquery-3.2.1.min.js')}}"></script>
 
 	</head>
+	
 	<body class="app sidebar-mini rtl">
 
 		<!--Global-Loader-->
@@ -66,26 +86,16 @@
 		<div class="page">
 			<div class="page-main">
 				<!--app-header-->
-				<div class="app-header header hor-topheader d-flex">
+				<div class="app-header header bg-primary text-white hor-topheader d-flex">
 					<div class="container">
 						<div class="d-flex">
 						    <a class="header-brand" href="{{url('/')}}">
-								<img src="{{ asset('frontend/Images/logo-blue.svg')}}" class="header-brand-img main-logo" alt="">
-								<img src="{{ asset('frontend/Images/logo-blue.svg')}}" class="header-brand-img icon-logo" alt="">
+								<img src="{{ asset('frontend/Images/logo.svg')}}" class="header-brand-img main-logo" alt="">
+								<img src="{{ asset('frontend/Images/logo.svg')}}" class="header-brand-img icon-logo" alt="">
 							</a><!-- logo-->
 							<a id="horizontal-navtoggle" class="animated-arrow hor-toggle"><span></span></a>
 							<a href="#" data-toggle="search" class="nav-link nav-link  navsearch"><i class="fa fa-search"></i></a><!-- search icon -->
-							<div class="header-form">
-								<form class="form-inline">
-									<div class="search-element mr-3">
-										<input class="form-control" type="search" placeholder="Search" aria-label="Search">
-										<span class="Search-icon"><i class="fa fa-search"></i></span>
-									</div>
-								</form><!-- search-bar -->
-							</div>
-                            <ul class="nav navbar">
-                                <li>You are logged in <b>Seller Panel</b></li>
-                            </ul>   
+							
 
 							<div class="d-flex order-lg-2 ml-auto header-rightmenu">
 								<div class="dropdown">
@@ -96,7 +106,7 @@
 								<div class="dropdown header-notify">
 									<a class="nav-link icon" data-toggle="dropdown" aria-expanded="false">
 										<i class="fe fe-bell "></i>
-										<span class="pulse bg-success"></span>
+										{{-- <span class="pulse bg-success"></span> --}}
 									</a>
 									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow ">
 										<a href="#" class="dropdown-item text-center">0 New Notifications</a>
@@ -109,7 +119,7 @@
 								<div class="dropdown header-user">
 									<a class="nav-link leading-none siderbar-link"  data-toggle="sidebar-right" data-target=".sidebar-right">
 										<span class="mr-3 d-none d-lg-block ">
-											<span class="text-gray-white"><span class="ml-2">{{ auth()->user()->name }}</span></span>
+											<span class="text-transparent-white"><span class="ml-2">{{ auth()->user()->name }}</span></span>
 										</span>
 										<span class="avatar avatar-md brround"><img src="{{ asset('assets/images/users/female/33.png')}}" alt="Profile-img" class="avatar avatar-md brround"></span>
 									</a>
@@ -156,17 +166,17 @@
 					<div class="horizontal-mainwrapper container clearfix">
 						<nav class="horizontalMenu clearfix">
 							<ul class="horizontalMenu-list">
-								<li aria-haspopup="true"><a href="{{url('/home')}}" class="sub-icon"><i class="typcn typcn-device-desktop hor-icon"></i> Dashboard </a>
+								<li aria-haspopup="true"><a href="{{url('/home')}}" class="sub-icon"><i class="pe pe-7s-monitor hor-icon"></i> Dashboard </a>
 									
 								</li>
-								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="si si-book-open"></i> Leads <i class="fa fa-angle-down horizontal-icon"></i></a>
+								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="typcn typcn-group"></i> Leads <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="{{route('leads.leads-list.index')}}">All Leads</a></li>
 										<li aria-haspopup="true"><a href="{{route('leads.import')}}">Import Leads</a></li>
 										
 									</ul>
 								</li>
-								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="si si-handbag"></i> Orders <i class="fa fa-angle-down horizontal-icon"></i></a>
+								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fe fe-box"></i> Orders <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="{{route("orders.all")}}">Browse Orders</a></li>
 										<li aria-haspopup="true"><a href="{{route("orders.track")}}">Track Order</a></li>
@@ -174,7 +184,7 @@
 										
 									</ul>
 								</li>
-								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="si si-basket-loaded"></i> Warehouse </a>
+								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="zmdi zmdi-home"></i> Warehouse <i class="fa fa-angle-down horizontal-icon"></i> </a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="{{route('warehouses.all')}}">My Warehouses</a></li>
 										<li aria-haspopup="true"><a href="{{route('warehouses.products')}}">My Products</a></li>
@@ -182,7 +192,7 @@
 									</ul>
 								</li>
 
-								<li aria-haspopup="true"><a href="#" class="sub-icon "><i class="si si-pie-chart"></i> Reports <i class="fa fa-angle-down horizontal-icon"></i></a>
+								<li aria-haspopup="true"><a href="#" class="sub-icon "><i class="si si-chart"></i> Reports <i class="fa fa-angle-down horizontal-icon"></i></a>
 									<ul class="sub-menu">
 										<li aria-haspopup="true"><a href="{{route('reports.cod-analysis')}}">COD Analysis</a></li>
 									</ul>
@@ -237,34 +247,30 @@
 					<!-- Right-sidebar-->
 					<div class="sidebar sidebar-right sidebar-animate">
 						<div class="card-body p-0">
+							<div class="col-12">
+								<a href="{{url('/')}}" class="dropdown-item text-primary">
+									You are logged in <b>Seller Panel</b></a>
+							</div>
 							<div class="header-user text-center mt-4 pb-4">
 								<span class="avatar avatar-xxl brround"><img src="{{ asset('assets/images/users/female/33.png')}}" alt="Profile-img" class="avatar avatar-xxl brround"></span>
 								<div class="dropdown-item text-center font-weight-semibold user h3 mb-0"><span class="text-primary">{{ auth()->user()->name }}</span></div>
 								<small>{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</small>
-								<div class="card-body">
-									
-								</div>
+								
 							</div>
-							<a class="dropdown-item  border-top" href="#">
-								<i class="dropdown-icon zmdi zmdi-globe-lock "></i>
-								{{ request()->ip() }}
+							<a class="dropdown-item text-center  border-top" href="{{route('seller.profile')}}">
+								<i class="fe fe-user "></i>
+								My Profile
 							</a>
-							<a class="dropdown-item border-top" href="#">
-								<i class="dropdown-icon  mdi mdi-calendar"></i> 
-								{{  $dt->format('d F D Y,  H:i:s A')
-							}}
 							
-							</a>
-							<a href="#" class="dropdown-item border-top">
-								<i class="dropdown-icon  mdi mdi-laptop"></i> 
-								{{ request()->server('HTTP_USER_AGENT') }}
-							</a>
 							<div class="card-body border-top">
 								<div class="row">
-									
-									<div class="col-4 text-center">
+									<div class="col-md-4 col-12"></div>
+
+									<div class="col-md-4 col-12 text-center">
 										<a class="" href="{{route('admin.logout')}}"><i class="dropdown-icon mdi mdi-logout-variant fs-30 m-0 leading-tight"></i></a>
 										<div>Sign out</div>
+										<div class="col-md-4 col-12"></div>
+
 									</div>
 								</div>
 							</div>
@@ -336,3 +342,6 @@
 
 	</body>
 </html>
+
+@endif
+

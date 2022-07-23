@@ -70,9 +70,10 @@ class WarehouseController extends Controller
             $file = $request->file('photo');
 
             //Move Uploaded File
+            $filename =time() + auth()->user()->id .".".  $file->extension();
             $destinationPath = 'uploads/sellers/products/' . auth()->user()->id;
-            $file_with_destination = $destinationPath . "/" . $file->getClientOriginalName();
-            $move = $file->move($destinationPath,$file->getClientOriginalName());
+            $file_with_destination = $destinationPath . "/" . $filename;
+            $move = $file->move($destinationPath,$filename);
 
             if($move){
                 $product = new Product();
@@ -81,13 +82,13 @@ class WarehouseController extends Controller
                 $product->description = $request->description;
                 $product->stock = $request->stock;
                 $product->price = $request->price;
-                $product->status = $request->status;
+                $product->status = 'pending';
                 $product->photo = $file_with_destination;
                 $product->warehouse_id = $request->warehouse_id;
 
                 $save = $product->save();
                 if($save){
-                    return redirect("seller/warehouses/products/".$request->warehouse_id)->with('success', 'Error while uploading the Photo');
+                    return redirect("seller/warehouses/products/".$request->warehouse_id)->with('success', 'Product added & Submitted for Approval!');
 
                 }else{
                     return Redirect::back()->with('errors', 'Error while saving the data');

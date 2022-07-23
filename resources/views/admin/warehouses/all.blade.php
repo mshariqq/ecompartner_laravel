@@ -28,7 +28,7 @@
                             <p class="text-primary mb-1"><a href="#">{{$item->name}}</a></p>
                             <h2 class="mb-0 text-dark"><b class="text-orange">{{ \App\Product::where('warehouse_id', $item->id)->get()->count() }}</b> <small style="font-size: 18px">Products</small> </h2>
                             <p>Owner : <b>{{$item->seller->name}}</b></p>
-                            <p>{{$item->created_at->diffForHumans()}}</p>
+                            <p><span class="tag bg-light text-dark border">{{$item->created_at}}</span></p>
 
                         </div>
                     </div>

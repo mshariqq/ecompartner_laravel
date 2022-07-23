@@ -74,9 +74,8 @@
                             </td>
                             
                             <td>
-                                {{$item->created_at->diffForHumans()}}
-                                <br>
-                                <span class="text-muted">{{$item->created_at}}</span>
+                                <span class="tag bg-light text-dark border">{{$item->created_at}}</span>
+                               
                             </td>
                         
                         </tr>

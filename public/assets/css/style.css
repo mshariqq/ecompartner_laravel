@@ -12904,12 +12904,12 @@ body.fixed-header .header {
 	margin-right:0;
 }
 .app-header .horizontal-nav:hover{
-	color: #4b4992;
-	background-color:#f4f3f9;
+	color: #fff;
+	background-color: transparent !important;
 }
 .app-header .dropdown:hover{
-	color: #4b4992;
-	background-color:#f4f3f9;
+	color: #fff !important;
+	background-color: transparent !important;
 }
 .header-brand:hover {
 	color: inherit;
@@ -13750,7 +13750,7 @@ a.icon {
 	cursor: pointer;
 }
 a.icon:hover {
-	color: #1753fc !important;
+	color: #eee !important;
 }
 .o-auto {
 	overflow: auto !important;

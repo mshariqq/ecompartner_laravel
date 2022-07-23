@@ -211,7 +211,11 @@ class AdminsController extends Controller
             // delivered
             $data['delivered'] = Order::whereBetween('created_at', [$fromDate, $toDate])->where('status', 'delivered')->count();
             // pending
-            $data['pending'] = Lead::whereBetween('created_at', [$fromDate, $toDate])->where('status', 'pending')->count();
+            $data['pending'] = Order::whereBetween('created_at', [$fromDate, $toDate])->where('status', 'out for delivery')->count();
+
+            $data['packing'] = Order::whereBetween('created_at', [$fromDate, $toDate])->where('status', 'packing')->count();
+
+            $data['cancelled'] = Order::whereBetween('created_at', [$fromDate, $toDate])->where('status', 'cancelled')->count();
             return response()->json(array('code' => 200, 'data' => $data));
         }else{
             return response()->json(array('code' => 401, "data" => "date missing"));
@@ -220,18 +224,18 @@ class AdminsController extends Controller
 
     public function DashAJaxDataFetch(Request $request){
         $isLeads = false;
-        if($request->condition == 'Total Leads'){
+        if($request->condition == 'Total Orders'){
             // means lead
-            $isLeads = true;
+            $isLeads = false;
             if(isset($request->date)){
                 $date = $request->date;
                 $fromDate = $date . " 00:00:00"; 
                 $your_date = strtotime("1 day", strtotime($date));
                 $toDate = date("Y-m-d h:s:m", $your_date);
 
-                $orders = Lead::whereBetween('created_at', [$fromDate, $toDate])->get();
+                $orders = Order::whereBetween('created_at', [$fromDate, $toDate])->get();
             }else{
-                $orders = Lead::all();
+                $orders = Order::all();
             }
         }
         else{
@@ -249,4 +253,5 @@ class AdminsController extends Controller
 
         return view('admin.reports.cod_analysi_ajaxdata', compact('orders', 'isLeads'));
     }
+
 }

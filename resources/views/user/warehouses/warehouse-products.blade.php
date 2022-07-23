@@ -52,10 +52,22 @@
                             </td>
                             <td>
                                     {{$item->warehouse->name}}
+                                    
+                                    
                             </td>
 
                             <td>
                                 <span class="text-primary"> {{ $item->name }} </span>
+                                <br>
+                                    @if ($item->status == 'pending')
+                                        <span class="tag bg-warning border text-dark">Pending</span>
+                                    @elseif($item->status == 'rejected')
+                                        <span class="tag bg-danger border">Rejected </span>
+                                    @elseif($item->status == 'active' || $item->status == 'Active')
+                                        <span class="tag bg-success border">Active</span>
+                                    @else
+                                        <span class="tag bg-light border text-dark">{{$item->status}}</span>
+                                    @endif
                                 
                             </td>
                             <td>

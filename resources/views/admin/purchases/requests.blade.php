@@ -36,7 +36,7 @@
                     <br>
                     New Stock Request: <b><span class="text-primary"> {{$item->qty}} </span></b>
                     <br>
-                    Request Date : <b>{{$item->created_at->diffForHumans()}}</b>
+                    Request Date : <b><span class="tag bg-light text-dark border">{{$item->created_at}}</span></b>
                     
 
                 </div>

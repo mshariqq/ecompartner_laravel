@@ -14,7 +14,7 @@ class ReportsController extends Controller
     public function codAnalysis(){
 
         // cod totals
-        $data['tl_pending'] = Lead::where('status', 'pending')->sum('cod_amount');
+        $data['tl_packing'] = Order::where('status', 'packing')->sum('cod_amount');
         $data['tl_delivered'] = Order::where('status', 'delivered')->sum('cod_amount');
         $data['tl_cancelled'] = Order::where('status', 'cancelled')->sum('cod_amount');
         $data['tl_ofd'] = Order::where('status', 'out for delivery')->sum('cod_amount');
@@ -24,10 +24,12 @@ class ReportsController extends Controller
         $filter = false;
 
         // todays cod
-        $data['td_pending'] = Lead::where('status', 'pending')->where('created_at', '>=', Carbon::today())->sum('cod_amount');
+        $data['td_ofd'] = Order::where('status', 'out for delivery')->where('created_at', '>=', Carbon::today())->sum('cod_amount');
         $data['td_cancelled'] = Order::where('status', 'cancelled')->where('created_at', '>=', Carbon::today())->sum('cod_amount');
-        $data['td_confirmed'] = Order::where('status', 'confirmed')->where('created_at', '>=', Carbon::today())->sum('cod_amount');
+        $data['td_delivered'] = Order::where('status', 'delivered')->where('created_at', '>=', Carbon::today())->sum('cod_amount');
         $data['td_cod'] = Order::all()->where('created_at', '>=', Carbon::today())->sum('cod_amount');
+        $data['td_confirmed'] = Order::where('status', 'confirmed')->where('created_at', '>=', Carbon::today())->sum('cod_amount');
+        $data['td_packing'] = Order::where('status', 'packing')->where('created_at', '>=', Carbon::today())->sum('cod_amount');
 
         $data['dateTimeValidated'] = false;
         $data['from_date'] = 'null';
@@ -43,7 +45,7 @@ class ReportsController extends Controller
         $filter = true;
     
         // cod totals
-        $data['tl_pending'] = Lead::whereBetween('created_at', [$from, $to])->where('status', 'pending')->sum('cod_amount');
+        $data['tl_packing'] = Order::whereBetween('created_at', [$from, $to])->where('status', 'packing')->sum('cod_amount');
         $data['tl_delivered'] = Order::whereBetween('created_at', [$from, $to])->where('status', 'delivered')->sum('cod_amount');
         $data['tl_cancelled'] = Order::whereBetween('created_at', [$from, $to])->where('status', 'cancelled')->sum('cod_amount');
         $data['tl_ofd'] = Order::whereBetween('created_at', [$from, $to])->where('status', 'out for delivery')->sum('cod_amount');
@@ -55,6 +57,9 @@ class ReportsController extends Controller
         $data['td_cancelled'] = Order::where('status', 'cancelled')->where('created_at', '>=', Carbon::today())->sum('cod_amount');
         $data['td_confirmed'] = Order::where('status', 'confirmed')->where('created_at', '>=', Carbon::today())->sum('cod_amount');
         $data['td_cod'] = Order::where('created_at', '>=', Carbon::today())->sum('cod_amount');
+        $data['td_delivered'] = Order::where('status', 'delivered')->where('created_at', '>=', Carbon::today())->sum('cod_amount');
+        $data['td_packing'] = Order::where('status', 'packing')->where('created_at', '>=', Carbon::today())->sum('cod_amount');
+        $data['td_ofd'] = Order::where('status', 'out for delivery')->where('created_at', '>=', Carbon::today())->sum('cod_amount');
 
         $data['dateTimeValidated'] = true;
         $data['from_date'] = $request->from;

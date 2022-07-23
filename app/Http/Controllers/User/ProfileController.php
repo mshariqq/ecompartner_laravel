@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Hash;
@@ -19,7 +20,7 @@ class ProfileController extends Controller
     {
         $admin = Auth::user();
 
-        return view('admin.profile.index')->with(['admin' => $admin]);
+        return view('user.profile.index')->with(['admin' => $admin]);
     }
 
     /**
@@ -29,7 +30,7 @@ class ProfileController extends Controller
      */
     public function password()
     {
-        return view('admin.profile.password');
+        return view('user.profile.password');
     }
 
     /**
@@ -47,30 +48,31 @@ class ProfileController extends Controller
 
         $admin = Auth::user();
 
-        $admin->first_name = $data['first_name'];
-        $admin->last_name = $data['last_name'];
+        $admin->name = $data['name'];
+        $admin->country = $data['country'];
+        // $admin->last_name = $data['last_name'];
         $admin->save();
 
         if($data['email'] != $admin->email) {
             $this->validate($request, [
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
+                'email' => ['required', 'string', 'email', 'max:255'],
             ]);
             $admin->email = $data['email'];
             $admin->email_verified_at = null;
             $admin->save();
-            $admin->sendEmailVerificationNotification();
+            // $admin->sendEmailVerificationNotification();
         }
 
         if($data['phone'] != $admin->phone) {
             $this->validate($request, [
-                'phone' => ['nullable', 'string'],
+                'phone' => ['nullable', 'string', 'regex:/^(961(3|70|71)|(03|70|71))\d{6}$/'],
             ]);
 
             $admin->phone = $data['phone'];
             $admin->save();
         }
 
-        return redirect('/admin/profile')->with('message', 'Profile Updated');
+        return redirect('/seller/profile')->with('message', 'Profile Updated');
     }
 
     /**
@@ -124,8 +126,8 @@ class ProfileController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
+            'country' => ['required', 'string', 'max:255'],
         ]);
     }
 }

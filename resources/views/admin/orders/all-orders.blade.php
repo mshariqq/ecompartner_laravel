@@ -14,8 +14,9 @@
     </h2>
     <p class="float-right text-end text-right">
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-gradient-primary" data-toggle="modal" data-target="#modelId">
-          Export Orders <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modelId">
+            <i class="fa fa-download" aria-hidden="true"></i>
+            Export Orders 
         </button>
         {{-- <a href="" target="__blank" class="btn btn-indigo"> <i class="fa fa-file-excel-o" aria-hidden="true"></i> Export Orders</a> --}}
     </p>
@@ -103,7 +104,7 @@
                                 <a href="http://" class="btn btn-primary"> <i class="fa fa-eye" aria-hidden="true"></i> View</a>
                                </td> --}}
                                <td>
-                                <p class="">Converted : <b>{{$item->created_at->diffForHumans()}}</b></p>
+                                <p class="tag bg-light text-dark">Converted : <b>{{$item->created_at}}</b></p>
 
                                 <div class="form-group">
                                   <select onchange="changeStatus(this, '{{$item->id}}')" class="form-control" name="status" id="">
@@ -124,7 +125,7 @@
                                 
 
                                </td>
-                               <td>
+                               <td >
                                 {{
                                     $item->tracking_id
                                 }}

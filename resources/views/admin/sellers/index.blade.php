@@ -35,7 +35,7 @@
                         </td>
                         <td>{{$item->phone}}</td>
                         <td>{{$item->name}}</td>
-                        <td>{{$item->created_at->diffForHumans()}}</td>
+                        <td> <span class="tag bg-light text-dark border">{{$item->created_at}}</span> </td>
                         <td>{{$item->country}}</td>
                         <td>
                             <a href="{{route('admin.sellers.profile', $item->id)}}" class="btn btn-sm btn-primary"> <i class="fa fa-eye" aria-hidden="true"></i> View</a>

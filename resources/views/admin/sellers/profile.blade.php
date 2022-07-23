@@ -52,11 +52,15 @@
                         <span><i class="fa fa-star-half-o text-warning"></i></span>
                         <span><i class="fa fa-star-o text-warning"></i></span>
                     </div> --}}
-                    <button class="btn btn-orange btn-sm">
-                        <i class="fa fa-ban" aria-hidden="true"></i>
-                        Block
-                    </button>
-                    <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash" aria-hidden="true"></i> Delete Seller</a>
+                    @if ($seller->status == 'blocked')
+                    <a href="{{route('admin.sellers.profile.block', [$seller->id, 'false'])}}" class="btn btn-success btn-sm"> <i class="fa fa-history" aria-hidden="true"></i> Unblock</a>
+
+                    @else 
+                    <a href="{{route('admin.sellers.profile.block', [$seller->id, 'true'])}}" class="btn btn-danger btn-sm"><i class="fa fa-times-circle-o" aria-hidden="true"></i> Block Seller</a>
+
+                    @endif
+
+                    <a href="mailto:{{$seller->email}}" class="btn btn-primary btn-sm"><i class="fa fa-envelope-o" aria-hidden="true"></i> Send Email</a>
                 </div>
                 <div class="card-body">
                     <div class="nav-wrapper p-0">
@@ -65,13 +69,13 @@
                                 <a class="nav-link mb-sm-3 mb-md-0 mt-md-2 mt-0 mt-lg-0 active show" id="tabs-icons-text-1-tab" data-toggle="tab" href="#tabs-icons-text-1" role="tab" aria-controls="tabs-icons-text-1" aria-selected="true"> <i class="fa fa-user-circle-o" aria-hidden="true"></i> Profile</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mb-sm-3 mb-md-0 mt-md-2 mt-0 mt-lg-0" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false"><i class="fa fa-users mr-2"></i>Leads</a>
+                                <a class="nav-link mb-sm-3 mb-md-0 mt-md-2 mt-0 mt-lg-0" id="tabs-icons-text-2-tab" data-toggle="tab" href="#tabs-icons-text-2" role="tab" aria-controls="tabs-icons-text-2" aria-selected="false"><i class="fe fe-users"></i>Leads</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mb-sm-3 mb-md-0 mt-md-2 mt-0 mt-lg-0" id="tabs-icons-text-3-tab" data-toggle="tab" href="#tabs-icons-text-3" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"> <i class="fa fa-home" aria-hidden="true"></i> Warehouses</a>
+                                <a class="nav-link mb-sm-3 mb-md-0 mt-md-2 mt-0 mt-lg-0" id="tabs-icons-text-3-tab" data-toggle="tab" href="#tabs-icons-text-3" role="tab" aria-controls="tabs-icons-text-3" aria-selected="false"> <i class="fe fe-home" aria-hidden="true"></i> Warehouses</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mb-sm-3 mb-md-0 mt-md-2 mt-0 mt-lg-0" id="tabs-icons-text-4-tab" data-toggle="tab" href="#tabs-icons-text-4" role="tab" aria-controls="tabs-icons-text-4" aria-selected="false"> <i class="fa fa-product-hunt" aria-hidden="true"></i> Orders</a>
+                                <a class="nav-link mb-sm-3 mb-md-0 mt-md-2 mt-0 mt-lg-0" id="tabs-icons-text-4-tab" data-toggle="tab" href="#tabs-icons-text-4" role="tab" aria-controls="tabs-icons-text-4" aria-selected="false"> <i class="fe fe-box" aria-hidden="true"></i> Orders</a>
                             </li>
                             {{--<li class="nav-item">
                                 <a class="nav-link mb-sm-0 mb-md-0 mt-md-2 mt-0 mt-lg-0" id="tabs-icons-text-5-tab" data-toggle="tab" href="#tabs-icons-text-5" role="tab" aria-controls="tabs-icons-text-5" aria-selected="false"> <i class="fa fa-money" aria-hidden="true"></i> Transactions</a>
@@ -88,24 +92,24 @@
                                 <table class="table row table-borderless w-100 m-0 border">
                                     <tbody class="col-lg-6 p-0">
                                         <tr>
-                                            <td><strong>Name :</strong> Alison</td>
+                                            <td><strong>Name :</strong> {{$seller->name}}</td>
                                         </tr>
                                         <tr>
-                                            <td><strong>Email :</strong> Uk</td>
+                                            <td><strong>Email :</strong> {{$seller->email}}</td>
                                         </tr>
                                         <tr>
-                                            <td><strong>Phone :</strong> English, German, Spanish.</td>
+                                            <td><strong>Phone :</strong> {{$seller->phone}}</td>
                                         </tr>
                                         <tr>
-                                            <td><strong>Country :</strong> 21/05/1991</td>
+                                            <td><strong>Country :</strong> {{$seller->country}}</td>
                                         </tr>
                                     </tbody>
                                     <tbody class="col-lg-6 p-0">
                                         <tr>
-                                            <td><strong>Status :</strong> Web Designer</td>
+                                            <td><strong>Status :</strong> <span class="tag border text-dark bg-light">{{$seller->status}}</span></td>
                                         </tr>
                                         <tr>
-                                            <td><strong>Joined on :</strong> camal.com</td>
+                                            <td><strong>Joined on :</strong> {{$seller->created_at}}</td>
                                         </tr>
                                         @php
                                                 $warehouses = \App\Warehouse::where('seller_id', $seller->id)->count();
@@ -210,10 +214,10 @@
                                    <div class="row">
                                     @foreach ($MyWarehouses as $item)
                                    
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
                                         <div class="card">
                                             <div class="row">
-                                                <div class="col-4">
+                                                <div class="col-md-4 col-12">
                                                     <div class="feature" style="height: 100%">
                                                         <div class="fa-stack fa-lg fa-2x icon bg-green">
                                                             <i class="fa fa-home fa-stack-1x text-white"></i>
@@ -226,7 +230,7 @@
                                                             <p class="text-primary mb-1"><a href="#">{{$item->name}}</a></p>
                                                             <h2 class="mb-0 text-dark"><b class="text-orange">{{ \App\Product::where('warehouse_id', $item->id)->get()->count() }}</b> <small style="font-size: 18px">Products</small> </h2>
                                                             <p>Owner : <b>{{$item->seller->name}}</b></p>
-                                                            <p>{{$item->created_at->diffForHumans()}}</p>
+                                                            <p><span class="tag bg-light text-dark border">{{$item->created_at}}</span></p>
                                 
                                                         </div>
                                                     </div>
@@ -287,16 +291,18 @@
                                                 <a href="#" class="btn btn-sm btn-primary"> <i class="fa fa-user-circle-o" aria-hidden="true"></i> View Seller <i class="fa fa-arrow-right" aria-hidden="true"></i> </a>
                                                </td>
                                             <td id="tdStatus{{$item->id}}">
-                                                    @if ($item->status == 'confirmed')
-                                                        <span class="tag bg-indigo text-white p-1 text-capitalize">{{$item->status}}</span>
-                                                    @elseif($item->status == 'delivered')
-                                                        <span class="tag bg-success text-dark text-capitalize">{{$item->status}}</span>
-                                                    @elseif($item->status == 'cancelled')
-                                                        <span class="tag bg-danger text-white text-capitalize">{{$item->status}}</span>
-                                                    @else
-                                                        <span class="tag bg-dark text-orange text-capitalize">{{$item->status}}</span>
-                 
-                                                    @endif
+                                                @if ($item->status == 'confirmed')
+                                                    <span class="tag bg-primary text-white p-1 text-capitalize">{{$item->status}}</span>
+                                                @elseif($item->status == 'delivered')
+                                                    <span class="tag bg-success text-white text-capitalize">{{$item->status}}</span>
+                                                @elseif($item->status == 'cancelled')
+                                                    <span class="tag bg-danger text-white text-capitalize">{{$item->status}}</span>
+                                                @elseif($item->status == 'packing')
+                                                    <span class="tag bg-warning text-dark text-capitalize">{{$item->status}}</span>
+                                                @else
+                                                    <span class="tag bg-orange text-dark text-capitalize">{{$item->status}}</span>
+            
+                                                @endif
                                             </td>
                 
                                             <td>

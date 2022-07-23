@@ -12,6 +12,15 @@
 
     <div class="row">
         <div class="col-12">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <strong>Note: Your CSV file must not contain more than 10000 Rows</strong>
+            </div>
+        </div>
+        <div class="col-12">
             <form id="ImportForm" class="card" method="POST" enctype="multipart/form-data" >
                 @csrf
                 <div class="card-body ">
@@ -33,7 +42,7 @@
                               <input type="file"
                               required
                                 class="form-control" name="csv" id="csvFile" aria-describedby="helpId" placeholder="Ex: Dubai June 2022 Leads">
-                              <small id="helpId" class="form-text text-danger">File must be in CSV Format</small>
+                              <small id="helpId" class="form-text text-danger">File must be in CSV Format & not more than 10000 rows</small>
                             </div>
                         </div>
 

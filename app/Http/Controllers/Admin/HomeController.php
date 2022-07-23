@@ -27,10 +27,11 @@ class HomeController extends Controller
         $data['total_revenue'] = Order::where('status', 'delivered')->sum('cod_amount');
 
         // total leads cod who are pending
-        $data['total_pending_cod'] = Lead::where('status', 'pending')->sum('cod_amount');
+        $data['total_ofd_cod'] = Order::where('status', 'out for delivery')->sum('cod_amount');
 
-        $data['total_confirmed'] = Order::where('status', 'confirmed')->sum('cod_amount');
-
+        $data['total_cancelled_cod'] = Order::where('status', 'cancelled')->sum('cod_amount');
+        $data['total_confirmed_cod'] = Order::where('status', 'confirmed')->sum('cod_amount');
+        $data['total_packing_cod'] = Order::where('status', 'packing')->sum('cod_amount');
         $data['total_income'] = Order::all()->sum('cod_amount');
 
         // blue box
@@ -38,10 +39,12 @@ class HomeController extends Controller
         $data['total_orders'] = Order::all()->count();
         $data['total_delivered_orders'] = Order::where('status', 'delivered')->count();
         $data['total_outfordelivery_orders'] = Order::where('status', 'out for delivery')->count();
-        $data['total_pending_orders'] = Lead::where('status', 'pending')->count();
+        $data['total_packing_orders'] = Order::where('status', 'packing')->count();
         $data['total_cancelled_orders'] = Order::where('status', 'cancelled')->count();
         $data['total_confirmed_orders'] = Order::where('status', 'confirmed')->count();
-        
+        // today orders count
+        $data['total_orders_count'] = Order::where('created_at', '>=', Carbon::today())->count();
+
         $data['total_leads_count'] = Lead::all()->count();
 
         $data['yesterday_orders'] = Order::where('created_at','>=',Carbon::now()->subdays(1))->where('status', 'delivered')->sum('cod_amount');

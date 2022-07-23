@@ -7,7 +7,7 @@
 @section('content')
 
 <div class="page-header">
-    <h4> <a href="{{route('admin.leads.all')}}"><i class="fa fa-arrow-left" aria-hidden="true"></i></a> Showing Leads of <span class="text-primary">{{$lead->name}} Lead</span> uploaded by <span class="text-primary">{{$lead->user->name}}</span> <span class="text-orange">{{$lead->created_at->diffForHumans()}}</span></h4>
+    <h4> <a href="{{route('admin.leads.all')}}"><i class="fa fa-arrow-left" aria-hidden="true"></i></a> Showing Leads of <span class="text-primary">{{$lead->name}} Lead</span> uploaded by <span class="text-primary">{{$lead->user->name}}</span> <span class="text-orange">{{$lead->created_at}}</span></h4>
 </div>
 
 <div class="row">
@@ -39,7 +39,9 @@
                                 <a href="http://" class="btn btn-primary"> <i class="fa fa-eye" aria-hidden="true"></i> View</a>
                                </td> --}}
                                <td>
-                                <p class="">Imported : <b>{{$item->created_at->diffForHumans()}}</b></p>
+                                <span >Imported : <b>
+                                    <span class="tag bg-light text-dark border">{{$item->created_at}}</span></b></span>
+                                <br>
 
                                 <div class="form-group">
                                   <select onchange="changeStatus(this, '{{$item->id}}')" class="form-control" name="status" id="">

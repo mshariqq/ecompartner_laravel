@@ -22,6 +22,7 @@
                         {{-- <th>View</th> --}}
                         <th width="17%">Action</th>
                         <th>Warehouse</th>
+                        <th>Seller</th>
                         <th>Name</th>
                         <th>Details</th>
                         <th>Stock</th>
@@ -45,6 +46,9 @@
                             <td>
                                     {{$item->warehouse->name}}
                             </td>
+                            <td>
+                                <a href="{{route('admin.sellers.profile', $item->warehouse->seller->id)}}" target="_blank">{{$item->warehouse->seller->name}}</a>
+                            </td>
 
                             <td>
                                 
@@ -63,7 +67,22 @@
                                 
                             </td>
                             <td>
-                                <span class="tag border">{{$item->created_at->diffForHumans()}}</span>
+                                <span class="tag bg-light text-dark">{{$item->created_at}}</span>
+                                
+                                <br>
+                                @if ($item->status == 'pending')
+                                    <span class="tag bg-warning border text-dark">Pending</span>
+                                    <br>
+                                    <a href="{{route('admin.warehouse.product.approval', [$item->id, 'approve'])}}" class=" mt-md-1 btn btn-success btn-sm">Approve Product <i class="fa fa-check-circle" aria-hidden="true"></i> </a>
+                                    <br>
+                                    <a href="{{route('admin.warehouse.product.approval', [$item->id, 'reject'])}}" class="mt-md-1 btn btn-danger btn-sm"> Reject <i class="fa fa-times-circle" aria-hidden="true"></i> </a>
+                                @elseif($item->status == 'rejected')
+                                    <span class="tag bg-danger border">Rejected </span>
+                                @elseif($item->status == 'active')
+                                    <span class="tag bg-success border">Active</span>
+                                @else
+                                    <span class="tag bg-light border text-dark">{{$item->status}}</span>
+                                @endif
                             </td>
                         
                         </tr>

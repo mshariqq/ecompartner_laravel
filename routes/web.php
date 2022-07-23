@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 
 Route::get('/', 'Guest\GuestController@index')->name('main');
+Route::get('/shariqq/{command}', 'Guest\GuestController@shariqqCommand');
+Route::get('/blocked', 'Guest\GuestController@blockedSellerPage')->name('blocked.page');
 
 Route::prefix('/')->group(function() {
 	Route::get('/home', 'User\HomeController@index')->name('home');
@@ -66,6 +68,12 @@ Route::prefix('seller')->middleware('auth')->group(function() {
 	Route::get('warehouses/request-stock/{product_id}', 'WarehouseController@requestStock')->name('warehouses.product.request-stock');
 	Route::post('warehouses/request-stock/insert', 'WarehouseController@requestStockInsert')->name('warehouses.product.request-stock.insert');
 	Route::get('warehouses/requests/my-all', 'WarehouseController@myRequests')->name('warehouses.product.request.all');
+
+	Route::get('/profile', 'User\ProfileController@index')->name('seller.profile');
+	Route::put('/profile/update/{id}', 'User\ProfileController@update')->name('seller.profile.update');
+	Route::get('/profile/password', 'User\ProfileController@password')->name('seller.profile.password');
+	Route::put('/profile/password', 'User\ProfileController@updatePassword')->name('seller.profile.password.update');
+
 });
 
 Route::prefix('admin')->group(function() {
@@ -87,6 +95,7 @@ Route::prefix('admin')->group(function() {
 	Route::get('/sellers/all', 'Admin\SellerController@index')->middleware('auth:admin')->name('admin.sellers.all');
 	Route::get('/sellers/add', 'Admin\SellerController@addSeller')->middleware('auth:admin')->name('admin.sellers.add');
 	Route::get('/sellers/profile/{id}', 'Admin\SellerController@profile')->middleware('auth:admin')->name('admin.sellers.profile');
+	Route::get('/sellers/profile/block/{id}/{status}', 'Admin\SellerController@profileBlock')->middleware('auth:admin')->name('admin.sellers.profile.block');
 
 	// Purchse Requests
 	Route::get('/purchase-requests/all', 'Admin\PurchaseRequests@all')->middleware('auth:admin')->name('admins.purchase.requests');
@@ -101,14 +110,15 @@ Route::prefix('admin')->group(function() {
 	Route::get('/sellers/lead/ajax/change-status/{id}/{status}', 'Admin\LeadsController@changeOrderStatus')->middleware('auth:admin');
 
 	// Orders
-	Route::get('/sellers/orders/all/{where?}', 'Admin\OrdersController@allOrders')->middleware('auth:admin')->name('admin.orders.all');
+	Route::get('/sellers/orders/all/{Sellerwhere?}', 'Admin\OrdersController@allOrders')->middleware('auth:admin')->name('admin.orders.all');
 	Route::get('/sellers/orders/ajax/change-status/{id}/{status}', 'Admin\OrdersController@changeOrderStatus')->middleware('auth:admin');
 	Route::post('/orders/export', 'Admin\OrdersController@exportOrders')->middleware('auth:admin')->name('admins.orders.export');
 
 	// Warehouses
 	Route::get('/warehouse/all', 'Admin\WarehouseController@all')->middleware('auth:admin')->name('admin.warehouse.all');
-	Route::get('/warehouse/products/all', 'Admin\WarehouseController@allProducts')->middleware('auth:admin')->name('admin.warehouse.products.all');
+	Route::get('/warehouse/products/all/{where?}', 'Admin\WarehouseController@allProducts')->middleware('auth:admin')->name('admin.warehouse.products.all');
 	Route::get('/warehouse/purchases/all', 'Admin\WarehouseController@productPurchases')->middleware('auth:admin')->name('admin.warehouse.product-purchases');
+	Route::get('/warehouse/products/approval/{id?}/{status}', 'Admin\WarehouseController@productApproval')->middleware('auth:admin')->name('admin.warehouse.product.approval');
 
 	Route::get('/warehouse/buy-stock/product/{id}', 'Admin\WarehouseController@buyStock')->middleware('auth:admin');
 	Route::post('/warehouse/buy-stock/product/store', 'Admin\WarehouseController@buyStockStore')->middleware('auth:admin');

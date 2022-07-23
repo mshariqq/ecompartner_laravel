@@ -25,7 +25,6 @@
                             <b>{{$item->name}}</b>
                             <br>
                             <a href="{{url('seller/leads/' . $item->id)}}" class="btn btn-primary btn-sm mr-md-2"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                            <a href="http://" class="btn btn-danger btn-sm mr-md-2"><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
                         <td>{{ $ll_leads[$item->id] }} <span class="text-muted">Leads</span></td>
                         <td>
@@ -41,7 +40,7 @@
                             
                         </td>
                         <td>
-                            <i class="fa fa-history" aria-hidden="true"></i> Imported {{$item->created_at}} 
+                            <i class="fa fa-history" aria-hidden="true"></i> Imported <span class="tag bg-light text-dark border">{{$item->created_at}}</span>
                             <br> Last Update {{$item->updated_at}} </td>
                     </tr>
                 @endforeach

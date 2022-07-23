@@ -52,14 +52,14 @@
             <label for="">Photo</label>
             <input required type="file" name="photo" id="" class="form-control bg-white text-primary" placeholder="">
         </div>
-        <div class="form-group mb-md-3">
+        {{-- <div class="form-group mb-md-3">
           <label for=""></label>
           <select required class="form-control bg-white text-dark" name="status" id="">
             <option>Select Status</option>
             <option>Active</option>
             <option>In Active</option>
           </select>
-        </div>
+        </div> --}}
         <div class="input-group">
             <button class="btn btn-orange" type="submit">Publish Now <i class="fa fa-upload" aria-hidden="true"></i> </button>
         </div>

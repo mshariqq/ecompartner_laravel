@@ -27,7 +27,7 @@
         <span aria-hidden="true">&times;</span>
         <span class="sr-only">Close</span>
     </button>
-    <strong>Filter Successful</strong>
+    <strong>Filter Successful for <span class="text-orange">{{$data['from_date']}}</span> & <span class="text-orange">{{$data['to_date']}}</span> </strong>
 </div>
 @endif
 
@@ -38,7 +38,7 @@
     <div class="col-12">
         <div class="card">
             
-            <form  action="{{route('admin.reports.cod-analysis.filter')}}" method="GET" class="card-body">
+            <form  action="{{route('reports.cod-analysis.filter')}}" method="GET" class="card-body">
                 <div class="row">
                     @csrf
                     <div class="col-md-3 col-12">
@@ -164,8 +164,8 @@
                     </div>
                     <div class="col-8 text-center">
                         <div class="mt-4 mb-0 text-white">
-                            <h2 onclick="fetchAjaxData('pending')" class="mb-0 blockAjaxText">{{$data['tl_pending']}}</h2>
-                            <p class="text-white mt-1">Pending COD </p>
+                            <h2 onclick="fetchAjaxData('packing')" class="mb-0 blockAjaxText">{{$data['tl_packing']}}</h2>
+                            <p class="text-white mt-1">Packing COD </p>
                         </div>
                     </div>
                 </div>
@@ -205,40 +205,58 @@
                     <div class="col-lg-12 p-0">
                         <div class="statistics-info">
                             <div class="row text-center">
-                                <div class="col-lg-3 col-md-6 mt-4 mb-4">
+                                <div class="col-lg-2 col-md-3 mt-4 mb-4">
                                     <div class="counter-status">
                                         <div class="counter-icon text-danger">
-                                            <i class="si si-grid"></i>
+                                            <i class="fe fe-dollar-sign"></i>
                                         </div>
                                         <h5 class="text-muted">Total COD</h5>
                                         <h2 class="counter text-primary mb-0">{{$data['td_cod']}}</h2>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-md-6 mt-4 mb-4">
+                                <div class="col-lg-2 col-md-3 mt-4 mb-4">
+                                    <div class="counter-status">
+                                        <div class="counter-icon text-danger">
+                                            <i class="fe fe-dollar-sign"></i>
+                                        </div>
+                                        <h5 class="text-muted">Total Confrimed</h5>
+                                        <h2 class="counter text-primary mb-0">{{$data['td_confirmed']}}</h2>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-3 mt-4 mb-4">
                                     <div class="counter-status">
                                         <div class="counter-icon text-warning">
-                                            <i class="si si-phone"></i>
+                                            <i class="fe fe-dollar-sign"></i>
                                         </div>
-                                        <h5 class="text-muted">Confirmed COD</h5>
-                                        <h2 class="counter text-primary  mb-0">{{$data['td_confirmed']}}</h2>
+                                        <h5 class="text-muted">Total Delivered</h5>
+                                        <h2 class="counter text-primary  mb-0">{{$data['td_delivered']}}</h2>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-md-6  mt-4 mb-4">
+                                <div class="col-lg-2 col-md-3  mt-4 mb-4">
                                     <div class="counter-statuss">
                                         <div class="counter-icon text-primary">
-                                            <i class="si si-call-out"></i>
+                                            <i class="fe fe-dollar-sign"></i>
                                         </div>
-                                        <h5 class="text-muted">Pending COD</h5>
-                                        <h2 class="counter text-primary mb-0">{{$data['td_pending']}}</h2>
+                                        <h5 class="text-muted">Total OFD</h5>
+                                        <h2 class="counter text-primary mb-0">{{$data['td_ofd']}}</h2>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-md-6 mt-4 mb-4">
+                                <div class="col-lg-2 col-md-3 mt-4 mb-4">
                                     <div class="counter-status">
                                         <div class="counter-icon text-success">
-                                            <i class="si si-close"></i>
+                                            <i class="fe fe-dollar-sign"></i>
                                         </div>
-                                        <h5 class="text-muted">Cancelled COD</h5>
+                                        <h5 class="text-muted">Total Cancelled</h5>
                                         <h2 class="counter text-primary  mb-0">{{$data['td_cancelled']}}</h2>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-3 mt-4 mb-4">
+                                    <div class="counter-status">
+                                        <div class="counter-icon text-success">
+                                            <i class="fe fe-dollar-sign"></i>
+                                        </div>
+                                        <h5 class="text-muted">Total Packing</h5>
+                                        <h2 class="counter text-primary  mb-0">{{$data['td_packing']}}</h2>
                                     </div>
                                 </div>
                             </div>

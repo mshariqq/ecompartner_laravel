@@ -29,7 +29,9 @@
                                <span class="text-muted"> {{$item->user->email}}</span>
                             </td>
                            <td>{{$item->name}}</td>
-                            <td>{{$item->created_at->diffForHumans()}}</td>
+                            <td>
+                                <span class="tag bg-light text-dark border">{{$item->created_at}}</span>
+                            </td>
                            <td id="tdStatus{{$item->id}}">
                                 @if ($item->status == 'processing')
                                     <span class="tag bg-success text-white p-1 text-capitalize">{{$item->status}}</span>

@@ -36,9 +36,11 @@
                             <td>{{$item->product->name}}</td>
                             <td>{{$item->qty}}</td>
                             <td><span class="tag bg-light p-1 border text-dark">{{$item->status}}</span></td>
-                            <td>{{$item->created_at->diffForHumans()}}</td>
                             <td>
-                                <a href="http://" class="btn btn-danger"> <i class="fa fa-backward" aria-hidden="true"></i> Cancel</a>
+                                <span class="tag bg-light text-dark border">{{$item->created_at}}</span>
+                            </td>
+                            <td>
+                                {{-- <a href="http://" class="btn btn-danger"> <i class="fa fa-backward" aria-hidden="true"></i> Cancel</a> --}}
                             </td>
                         </tr>
                        

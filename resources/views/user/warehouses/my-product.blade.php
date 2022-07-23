@@ -49,6 +49,16 @@
 
                             <td>
                                 <span class="text-primary"> #{{$item->id}} {{ $item->name }} </span>
+                                <br>
+                                @if ($item->status == 'pending')
+                                    <span class="tag bg-warning border text-dark">Pending</span>
+                                @elseif($item->status == 'rejected')
+                                    <span class="tag bg-danger border">Rejected </span>
+                                @elseif($item->status == 'active')
+                                    <span class="tag bg-success border">Active</span>
+                                @else
+                                    <span class="tag bg-light border text-dark">{{$item->status}}</span>
+                                @endif
                                 
                             </td>
                             <td>
@@ -63,7 +73,7 @@
                                 
                             </td>
                             <td>
-                                {{$item->created_at->diffForHumans()}}
+                                <span class="tag bg-light text-dark border">{{$item->created_at}}</span>
                                 <br>                                <a class="btn btn-primary btn-sm" href="{{url('seller/warehouses/products')}}/{{$item1->id}}">view warehouse <i class="fa fa-arrow-right" aria-hidden="true"></i> </a>    
                                 <br>
                                 <a href="{{route('warehouses.product.request-stock', $item->id)}}" class="btn btn-orange mt-1">Request Stock <i class="fa fa-question" aria-hidden="true"></i> </a>                        

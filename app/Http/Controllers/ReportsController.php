@@ -15,12 +15,14 @@ class ReportsController extends Controller
     public function codAnalysis(){
 
         // cod totals
-        $mylists = LeadsList::where('user_id', auth()->user()->id)->get();
-        $PendingCount = 0;
-        foreach ($mylists as $key) {
-            $PendingCount += Lead::where('status', 'pending')->where('leads_list_id', $key['id'])->sum('cod_amount');
-        }
-        $data['tl_pending'] = $PendingCount;
+        // $mylists = LeadsList::where('user_id', auth()->user()->id)->get();
+        // $PendingCount = 0;
+        // foreach ($mylists as $key) {
+        //     $PendingCount += Lead::where('status', 'pending')->where('leads_list_id', $key['id'])->sum('cod_amount');
+        // }
+        // $data['tl_pending'] = $PendingCount;
+        $data['tl_packing'] = Order::where('status', 'packing')->where('seller_id', auth()->user()->id)->sum('cod_amount');
+
         $data['tl_delivered'] = Order::where('status', 'delivered')->where('seller_id', auth()->user()->id)->sum('cod_amount');
         $data['tl_cancelled'] = Order::where('status', 'cancelled')->where('seller_id', auth()->user()->id)->sum('cod_amount');
         $data['tl_ofd'] = Order::where('status', 'out for delivery')->where('seller_id', auth()->user()->id)->sum('cod_amount');
@@ -31,15 +33,18 @@ class ReportsController extends Controller
 
         // todays cod
          // cod totals
-         $mylists = LeadsList::where('user_id', auth()->user()->id)->get();
-         $PendingCount = 0;
-         foreach ($mylists as $key) {
-             $PendingCount += Lead::where('status', 'pending')->where('created_at', '>=', Carbon::today())->where('leads_list_id', $key['id'])->sum('cod_amount');
-         }
-        $data['td_pending'] = $PendingCount;
-        $data['td_cancelled'] = Order::where('status', 'cancelled')->where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
+        //  $mylists = LeadsList::where('user_id', auth()->user()->id)->get();
+        //  $PendingCount = 0;
+        //  foreach ($mylists as $key) {
+        //      $PendingCount += Lead::where('status', 'pending')->where('created_at', '>=', Carbon::today())->where('leads_list_id', $key['id'])->sum('cod_amount');
+        //  }
+        // $data['td_pending'] = $PendingCount;
+        $data['td_ofd'] = Order::where('status', 'out for delivery')->where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
         $data['td_confirmed'] = Order::where('status', 'confirmed')->where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
+        $data['td_cancelled'] = Order::where('status', 'cancelled')->where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
+        $data['td_delivered'] = Order::where('status', 'delivered')->where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
         $data['td_cod'] = Order::where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
+        $data['td_packing'] = Order::where('status', 'packing')->where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
 
         $data['dateTimeValidated'] = false;
         $data['from_date'] = 'null';
@@ -55,12 +60,14 @@ class ReportsController extends Controller
         $filter = true;
     
         // cod totals
-        $mylists = LeadsList::where('user_id', auth()->user()->id)->get();
-        $PendingCount = 0;
-        foreach ($mylists as $key) {
-            $PendingCount += Lead::where('status', 'pending')->whereBetween('created_at', [$from, $to])->where('leads_list_id', $key['id'])->sum('cod_amount');
-        }
-        $data['tl_pending'] = $PendingCount;
+        // $mylists = LeadsList::where('user_id', auth()->user()->id)->get();
+        // $PendingCount = 0;
+        // foreach ($mylists as $key) {
+        //     $PendingCount += Lead::where('status', 'pending')->whereBetween('created_at', [$from, $to])->where('leads_list_id', $key['id'])->sum('cod_amount');
+        // }
+        // $data['tl_pending'] = $PendingCount;
+        $data['tl_packing'] = Order::whereBetween('created_at', [$from, $to])->where('seller_id', auth()->user()->id)->where('status', 'packing')->sum('cod_amount');
+
         $data['tl_delivered'] = Order::whereBetween('created_at', [$from, $to])->where('seller_id', auth()->user()->id)->where('status', 'delivered')->sum('cod_amount');
         $data['tl_cancelled'] = Order::whereBetween('created_at', [$from, $to])->where('seller_id', auth()->user()->id)->where('status', 'cancelled')->sum('cod_amount');
         $data['tl_ofd'] = Order::whereBetween('created_at', [$from, $to])->where('seller_id', auth()->user()->id)->where('status', 'out for delivery')->sum('cod_amount');
@@ -77,7 +84,10 @@ class ReportsController extends Controller
        $data['td_cancelled'] = Order::where('status', 'cancelled')->where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
         $data['td_confirmed'] = Order::where('status', 'confirmed')->where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
         $data['td_cod'] = Order::where('created_at', '>=', Carbon::today())->where('seller_id', auth()->user()->id)->sum('cod_amount');
-        
+        $data['td_delivered'] = Order::where('status', 'delivered')->where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
+        $data['td_ofd'] = Order::where('status', 'out for delivery')->where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
+        $data['td_packing'] = Order::where('status', 'packing')->where('seller_id', auth()->user()->id)->where('created_at', '>=', Carbon::today())->sum('cod_amount');
+
         $data['dateTimeValidated'] = true;
         $data['from_date'] = $request->from;
         $data['to_date'] = $request->to;
