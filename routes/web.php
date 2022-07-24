@@ -34,6 +34,7 @@ Route::prefix('special')->group(function() {
 
 // Seller / user Leads
 Route::prefix('seller')->middleware('auth')->group(function() {
+	Route::post('/survey/submit', 'User\ProfileController@storeSurvey')->name('survey.submit');
 	// list
 	Route::get('leads/leads-list', 'LeadsController@leadsListIndex')->name('leads.leads-list.index');
 	Route::post('/home/ajax/today-filer', 'User\HomeController@todayFilter')->name('dashboard.today-filter');

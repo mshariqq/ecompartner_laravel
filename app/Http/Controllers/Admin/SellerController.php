@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Survey;
 use App\User;
 
 class SellerController extends Controller
@@ -20,8 +21,9 @@ class SellerController extends Controller
 
     public function profile($id){
         $seller = User::find($id);
+        $surveys = Survey::where('seller_id', $id)->get();
         if($seller){
-            return view('admin.sellers.profile', compact('seller'));
+            return view('admin.sellers.profile', compact('seller', 'surveys'));
         }else{
             return redirect()->back()->with('error', "Seller not found");
         }

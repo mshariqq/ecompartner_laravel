@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Survey;
 use App\User;
 use Illuminate\Http\Request;
 use Auth;
@@ -129,5 +130,25 @@ class ProfileController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'country' => ['required', 'string', 'max:255'],
         ]);
+    }
+
+    public function storeSurvey(Request $request){
+        $survey = new Survey();
+        $survey->seller_id = auth()->user()->id;
+        $survey->q1 = $request->q1;
+        $survey->q2 = $request->q2;
+        $survey->q3 = $request->q3;
+
+        if($survey->save()){
+            // update the user status
+            $user = User::find(auth()->user()->id);
+            $user->survey = 1;
+            if($user->save()){
+                return redirect()->route('home')->with('success', 'Thanks, Your Dashboard is ready!');
+
+            }
+        }
+        return redirect()->route('home')->with('error', 'Something went wrong, please try again!');
+
     }
 }

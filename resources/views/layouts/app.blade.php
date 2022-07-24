@@ -16,7 +16,6 @@
 
 @else
 
-
 <!doctype html>
 <!-- 
 		Developer	: Md Shariqq Ahmed
@@ -85,212 +84,278 @@
 
 		<div class="page">
 			<div class="page-main">
-				<!--app-header-->
-				<div class="app-header header bg-primary text-white hor-topheader d-flex">
+				@if (auth()->user()->survey == 0)
+					{{-- means survey is not complete --}}
 					<div class="container">
-						<div class="d-flex">
-						    <a class="header-brand" href="{{url('/')}}">
-								<img src="{{ asset('frontend/Images/logo.svg')}}" class="header-brand-img main-logo" alt="">
-								<img src="{{ asset('frontend/Images/logo.svg')}}" class="header-brand-img icon-logo" alt="">
-							</a><!-- logo-->
-							<a id="horizontal-navtoggle" class="animated-arrow hor-toggle"><span></span></a>
-							<a href="#" data-toggle="search" class="nav-link nav-link  navsearch"><i class="fa fa-search"></i></a><!-- search icon -->
-							
-
-							<div class="d-flex order-lg-2 ml-auto header-rightmenu">
-								<div class="dropdown">
-									<a  class="nav-link icon full-screen-link" id="fullscreen-button">
-										<i class="fe fe-maximize-2"></i>
-									</a>
-								</div><!-- full-screen -->
-								<div class="dropdown header-notify">
-									<a class="nav-link icon" data-toggle="dropdown" aria-expanded="false">
-										<i class="fe fe-bell "></i>
-										{{-- <span class="pulse bg-success"></span> --}}
-									</a>
-									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow ">
-										<a href="#" class="dropdown-item text-center">0 New Notifications</a>
-										<div class="dropdown-divider"></div>
-										
-										<div class="dropdown-divider"></div>
-										<a href="#" class="dropdown-item text-center">View all Notifications</a>
+						<div class="row">
+							<div class="col-12 pt-5 mt-5">
+								@if (\Session::has('success'))
+								<div class="alert alert-success">
+									<p>{!! \Session::get('success') !!}</p>
+								</div>
+								@elseif (\Session::has('error'))
+									<div class="alert alert-danger">
+										<p>{!! \Session::get('error') !!}</p>
 									</div>
-								</div><!-- notifications -->
-								<div class="dropdown header-user">
-									<a class="nav-link leading-none siderbar-link"  data-toggle="sidebar-right" data-target=".sidebar-right">
-										<span class="mr-3 d-none d-lg-block ">
-											<span class="text-transparent-white"><span class="ml-2">{{ auth()->user()->name }}</span></span>
-										</span>
-										<span class="avatar avatar-md brround"><img src="{{ asset('assets/images/users/female/33.png')}}" alt="Profile-img" class="avatar avatar-md brround"></span>
-									</a>
-									<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-										<div class="header-user text-center mt-4 pb-4">
-											<span class="avatar avatar-xxl brround"><img src="{{ asset('assets/images/users/female/33.png')}}" alt="Profile-img" class="avatar avatar-xxl brround"></span>
-											<a href="#" class="dropdown-item text-center font-weight-semibold user h3 mb-0">{{ auth()->user()->name }}</a>
-											<small>XXXX</small>
+								@endif
+								<h3> <i class="pe pe-7s-like2" aria-hidden="true"></i> Please answer the following questions to activate profile</h3>
+							</div>
+							<form action="{{route('survey.submit')}}" method="POST" class="col-12">
+								<div class="card ">
+									
+									<div class="card-body">
+											@csrf
+											<div class="form-group">
+											  <label for="">Are you already seller?</label>
+											  <select required class="form-control" name="q1" id="">
+												<option value="Yes I'm selling online">Yes I'm selling online</option>
+												<option value="I'm not selling product yet">I'm not selling product yet</option>
+												<option value="I'm selling, but not online">I'm selling, but not online</option>
+											  </select>
+											</div>
+											<div class="form-group">
+												<label for="">What's your capital for this project?</label>
+												<select required class="form-control" name="q2" id="">
+												  <option value="Between $0 to 500$">Between $0 to 500$</option>
+												  <option value="Between $500 - 1000$">Between $500 - 1000$</option>
+												  <option value="Between $1000 and 5000$">Between $1000 and 5000$</option>
+												  <option value="Between $5000 and 10000$">Between $5000 and 10000$</option>
+												  <option value="More than 10000$">More than 10000$</option>
+												</select>
+											  </div>
+											  <div class="form-group">
+												<label for="">What is your shipment volume per day?</label>
+												<select required class="form-control" name="q3" id="">
+												  <option value="0 shipment, Just getting started">0 shipment, Just getting started</option>
+												  <option value="5 - 25 Shipments per day">5 - 25 Shipments per day</option>
+												  <option value="25 - 50 Shipments per day">25 - 50 Shipments per day</option>
+												  <option value="50 - 100 Shipments per day">50 - 100 Shipments per day</option>
+												  <option value="100 - 500 Shipments per day">100 - 500 Shipments per day</option>
+												  <option value="more than 500 shipments per day">more than 500 shipments per day</option>
+												</select>
+											  </div>
+										
+									</div>
+									<div class="card-footer bg-light">
+										<div class="form-group">
+											<button type="submit" class="btn btn-primary">Submit & Proceed <i class="fa fa-caret-right" aria-hidden="true"></i> </button>
 										</div>
+									</div>
+									
+								</div>
+							</form>
+							
+						</div>
+					</div>
+				@else
+					<!--app-header-->
+					<div class="app-header header bg-primary text-white hor-topheader d-flex">
+						<div class="container">
+							<div class="d-flex">
+								<a class="header-brand" href="{{url('/')}}">
+									<img src="{{ asset('frontend/Images/logo.svg')}}" class="header-brand-img main-logo" alt="">
+									<img src="{{ asset('frontend/Images/logo.svg')}}" class="header-brand-img icon-logo" alt="">
+								</a><!-- logo-->
+								<a id="horizontal-navtoggle" class="animated-arrow hor-toggle"><span></span></a>
+								<a href="#" data-toggle="search" class="nav-link nav-link  navsearch"><i class="fa fa-search"></i></a><!-- search icon -->
+								
 
-										<a class="dropdown-item" href="#">
-											<i class="dropdown-icon mdi mdi-account-outline "></i> Spruko technologies
+								<div class="d-flex order-lg-2 ml-auto header-rightmenu">
+									<div class="dropdown">
+										<a  class="nav-link icon full-screen-link" id="fullscreen-button">
+											<i class="fe fe-maximize-2"></i>
 										</a>
-										<a class="dropdown-item" href="#">
-											<i class="dropdown-icon  mdi mdi-account-plus"></i> Add another Account
+									</div><!-- full-screen -->
+									<div class="dropdown header-notify">
+										<a class="nav-link icon" data-toggle="dropdown" aria-expanded="false">
+											<i class="fe fe-bell "></i>
+											{{-- <span class="pulse bg-success"></span> --}}
 										</a>
-										<div class="card-body border-top">
-											<div class="row">
-												<div class="col-6 text-center">
-													<a class="" href=""><i class="dropdown-icon mdi  mdi-message-outline fs-30 m-0 leading-tight"></i></a>
-													<div>Inbox</div>
-												</div>
-												<div class="col-6 text-center">
-													<a class="" href="{{route('user.logout')}}"><i class="dropdown-icon mdi mdi-logout-variant fs-30 m-0 leading-tight"></i></a>
-													<div>Sign out</div>
+										<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow ">
+											<a href="#" class="dropdown-item text-center">0 New Notifications</a>
+											<div class="dropdown-divider"></div>
+											
+											<div class="dropdown-divider"></div>
+											<a href="#" class="dropdown-item text-center">View all Notifications</a>
+										</div>
+									</div><!-- notifications -->
+									<div class="dropdown header-user">
+										<a class="nav-link leading-none siderbar-link"  data-toggle="sidebar-right" data-target=".sidebar-right">
+											<span class="mr-3 d-none d-lg-block ">
+												<span class="text-transparent-white"><span class="ml-2">{{ auth()->user()->name }}</span></span>
+											</span>
+											<span class="avatar avatar-md brround"><img src="{{ asset('assets/images/users/female/33.png')}}" alt="Profile-img" class="avatar avatar-md brround"></span>
+										</a>
+										<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+											<div class="header-user text-center mt-4 pb-4">
+												<span class="avatar avatar-xxl brround"><img src="{{ asset('assets/images/users/female/33.png')}}" alt="Profile-img" class="avatar avatar-xxl brround"></span>
+												<a href="#" class="dropdown-item text-center font-weight-semibold user h3 mb-0">{{ auth()->user()->name }}</a>
+												<small>XXXX</small>
+											</div>
+
+											<a class="dropdown-item" href="#">
+												<i class="dropdown-icon mdi mdi-account-outline "></i> Spruko technologies
+											</a>
+											<a class="dropdown-item" href="#">
+												<i class="dropdown-icon  mdi mdi-account-plus"></i> Add another Account
+											</a>
+											<div class="card-body border-top">
+												<div class="row">
+													<div class="col-6 text-center">
+														<a class="" href=""><i class="dropdown-icon mdi  mdi-message-outline fs-30 m-0 leading-tight"></i></a>
+														<div>Inbox</div>
+													</div>
+													<div class="col-6 text-center">
+														<a class="" href="{{route('user.logout')}}"><i class="dropdown-icon mdi mdi-logout-variant fs-30 m-0 leading-tight"></i></a>
+														<div>Sign out</div>
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-								</div><!-- profile -->
-								<div class="dropdown">
-									<a  class="nav-link icon siderbar-link" data-toggle="sidebar-right" data-target=".sidebar-right">
-										<i class="fe fe-more-horizontal"></i>
-									</a>
-								</div><!-- Right-siebar-->
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--app-header end-->
-
-				<!-- Horizontal-menu -->
-				<div class="horizontal-main hor-menu clearfix">
-					<div class="horizontal-mainwrapper container clearfix">
-						<nav class="horizontalMenu clearfix">
-							<ul class="horizontalMenu-list">
-								<li aria-haspopup="true"><a href="{{url('/home')}}" class="sub-icon"><i class="pe pe-7s-monitor hor-icon"></i> Dashboard </a>
-									
-								</li>
-								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="typcn typcn-group"></i> Leads <i class="fa fa-angle-down horizontal-icon"></i></a>
-									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="{{route('leads.leads-list.index')}}">All Leads</a></li>
-										<li aria-haspopup="true"><a href="{{route('leads.import')}}">Import Leads</a></li>
-										
-									</ul>
-								</li>
-								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fe fe-box"></i> Orders <i class="fa fa-angle-down horizontal-icon"></i></a>
-									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="{{route("orders.all")}}">Browse Orders</a></li>
-										<li aria-haspopup="true"><a href="{{route("orders.track")}}">Track Order</a></li>
-										{{-- <li aria-haspopup="true"><a href="chart-morris.html">Reports</a></li> --}}
-										
-									</ul>
-								</li>
-								<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="zmdi zmdi-home"></i> Warehouse <i class="fa fa-angle-down horizontal-icon"></i> </a>
-									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="{{route('warehouses.all')}}">My Warehouses</a></li>
-										<li aria-haspopup="true"><a href="{{route('warehouses.products')}}">My Products</a></li>
-										
-									</ul>
-								</li>
-
-								<li aria-haspopup="true"><a href="#" class="sub-icon "><i class="si si-chart"></i> Reports <i class="fa fa-angle-down horizontal-icon"></i></a>
-									<ul class="sub-menu">
-										<li aria-haspopup="true"><a href="{{route('reports.cod-analysis')}}">COD Analysis</a></li>
-									</ul>
-								</li>
-								
-							</ul>
-						</nav>
-						<!--Nav end -->
-					</div>
-				</div>
-				<!-- Horizontal-menu end -->
-
-				<!--Header submenu -->
-				<div class="bg-white p-3 header-secondary header-submenu">
-					<div class="container ">
-						<div class="row">
-							<div class="col">
-								<div class="d-flex">
-                                    <h5 class="mb-0">Welcome Back <span class="text-primary">{{ auth()->user()->name }}</span></h5>
-									{{-- <a class="btn btn-danger" href="#"><i class="fe fe-rotate-cw mr-1 mt-1"></i> Upgrade </a> --}}
+									</div><!-- profile -->
+									<div class="dropdown">
+										<a  class="nav-link icon siderbar-link" data-toggle="sidebar-right" data-target=".sidebar-right">
+											<i class="fe fe-more-horizontal"></i>
+										</a>
+									</div><!-- Right-siebar-->
 								</div>
 							</div>
-							<div class="col col-auto">
-								<b>
-									<span class="text-orange">
-										@php
-										$dt = new DateTime();
-										echo $dt->format('d F D Y,  H:i:s A');
-										@endphp
-									</span>
-								</b>
-							</div>
 						</div>
 					</div>
-				</div><!--End Header submenu -->
+					<!--app-header end-->
 
-                <!-- app-content-->
-				<div class="container content-area">
-					<div class="side-app">
-						@if (\Session::has('success'))
-							<div class="alert alert-success">
-								<p>{!! \Session::get('success') !!}</p>
-							</div>
-						@elseif (\Session::has('error'))
-							<div class="alert alert-danger">
-								<p>{!! \Session::get('error') !!}</p>
-							</div>
-						@endif
-                        @yield('content')
-					</div><!--End side app-->
+					<!-- Horizontal-menu -->
+					<div class="horizontal-main hor-menu clearfix">
+						<div class="horizontal-mainwrapper container clearfix">
+							<nav class="horizontalMenu clearfix">
+								<ul class="horizontalMenu-list">
+									<li aria-haspopup="true"><a href="{{url('/home')}}" class="sub-icon"><i class="pe pe-7s-monitor hor-icon"></i> Dashboard </a>
+										
+									</li>
+									<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="typcn typcn-group"></i> Leads <i class="fa fa-angle-down horizontal-icon"></i></a>
+										<ul class="sub-menu">
+											<li aria-haspopup="true"><a href="{{route('leads.leads-list.index')}}">All Leads</a></li>
+											<li aria-haspopup="true"><a href="{{route('leads.import')}}">Import Leads</a></li>
+											
+										</ul>
+									</li>
+									<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="fe fe-box"></i> Orders <i class="fa fa-angle-down horizontal-icon"></i></a>
+										<ul class="sub-menu">
+											<li aria-haspopup="true"><a href="{{route("orders.all")}}">Browse Orders</a></li>
+											<li aria-haspopup="true"><a href="{{route("orders.track")}}">Track Order</a></li>
+											{{-- <li aria-haspopup="true"><a href="chart-morris.html">Reports</a></li> --}}
+											
+										</ul>
+									</li>
+									<li aria-haspopup="true"><a href="#" class="sub-icon"><i class="zmdi zmdi-home"></i> Warehouse <i class="fa fa-angle-down horizontal-icon"></i> </a>
+										<ul class="sub-menu">
+											<li aria-haspopup="true"><a href="{{route('warehouses.all')}}">My Warehouses</a></li>
+											<li aria-haspopup="true"><a href="{{route('warehouses.products')}}">My Products</a></li>
+											
+										</ul>
+									</li>
 
-					<!-- Right-sidebar-->
-					<div class="sidebar sidebar-right sidebar-animate">
-						<div class="card-body p-0">
-							<div class="col-12">
-								<a href="{{url('/')}}" class="dropdown-item text-primary">
-									You are logged in <b>Seller Panel</b></a>
+									<li aria-haspopup="true"><a href="#" class="sub-icon "><i class="si si-chart"></i> Reports <i class="fa fa-angle-down horizontal-icon"></i></a>
+										<ul class="sub-menu">
+											<li aria-haspopup="true"><a href="{{route('reports.cod-analysis')}}">COD Analysis</a></li>
+										</ul>
+									</li>
+									
+								</ul>
+							</nav>
+							<!--Nav end -->
+						</div>
+					</div>
+					<!-- Horizontal-menu end -->
+
+					<!--Header submenu -->
+					<div class="bg-white p-3 header-secondary header-submenu">
+						<div class="container ">
+							<div class="row">
+								<div class="col">
+									<div class="d-flex">
+										<h5 class="mb-0">Welcome Back <span class="text-primary">{{ auth()->user()->name }}</span></h5>
+										{{-- <a class="btn btn-danger" href="#"><i class="fe fe-rotate-cw mr-1 mt-1"></i> Upgrade </a> --}}
+									</div>
+								</div>
+								<div class="col col-auto">
+									<b>
+										<span class="text-orange">
+											@php
+											$dt = new DateTime();
+											echo $dt->format('d F D Y,  H:i:s A');
+											@endphp
+										</span>
+									</b>
+								</div>
 							</div>
-							<div class="header-user text-center mt-4 pb-4">
-								<span class="avatar avatar-xxl brround"><img src="{{ asset('assets/images/users/female/33.png')}}" alt="Profile-img" class="avatar avatar-xxl brround"></span>
-								<div class="dropdown-item text-center font-weight-semibold user h3 mb-0"><span class="text-primary">{{ auth()->user()->name }}</span></div>
-								<small>{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</small>
+						</div>
+					</div><!--End Header submenu -->
+
+					<!-- app-content-->
+					<div class="container content-area">
+						<div class="side-app">
+							@if (\Session::has('success'))
+								<div class="alert alert-success">
+									<p>{!! \Session::get('success') !!}</p>
+								</div>
+							@elseif (\Session::has('error'))
+								<div class="alert alert-danger">
+									<p>{!! \Session::get('error') !!}</p>
+								</div>
+							@endif
+							@yield('content')
+						</div><!--End side app-->
+
+						<!-- Right-sidebar-->
+						<div class="sidebar sidebar-right sidebar-animate">
+							<div class="card-body p-0">
+								<div class="col-12">
+									<a href="{{url('/')}}" class="dropdown-item text-primary">
+										You are logged in <b>Seller Panel</b></a>
+								</div>
+								<div class="header-user text-center mt-4 pb-4">
+									<span class="avatar avatar-xxl brround"><img src="{{ asset('assets/images/users/female/33.png')}}" alt="Profile-img" class="avatar avatar-xxl brround"></span>
+									<div class="dropdown-item text-center font-weight-semibold user h3 mb-0"><span class="text-primary">{{ auth()->user()->name }}</span></div>
+									<small>{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</small>
+									
+								</div>
+								<a class="dropdown-item text-center  border-top" href="{{route('seller.profile')}}">
+									<i class="fe fe-user "></i>
+									My Profile
+								</a>
 								
-							</div>
-							<a class="dropdown-item text-center  border-top" href="{{route('seller.profile')}}">
-								<i class="fe fe-user "></i>
-								My Profile
-							</a>
-							
-							<div class="card-body border-top">
-								<div class="row">
-									<div class="col-md-4 col-12"></div>
-
-									<div class="col-md-4 col-12 text-center">
-										<a class="" href="{{route('admin.logout')}}"><i class="dropdown-icon mdi mdi-logout-variant fs-30 m-0 leading-tight"></i></a>
-										<div>Sign out</div>
+								<div class="card-body border-top">
+									<div class="row">
 										<div class="col-md-4 col-12"></div>
 
+										<div class="col-md-4 col-12 text-center">
+											<a class="" href="{{route('admin.logout')}}"><i class="dropdown-icon mdi mdi-logout-variant fs-30 m-0 leading-tight"></i></a>
+											<div>Sign out</div>
+											<div class="col-md-4 col-12"></div>
+
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</div><!-- End Rightsidebar-->
+						</div><!-- End Rightsidebar-->
 
-					<!--footer-->
-					<footer class="footer">
-						<div class="container">
-							<div class="row align-items-center flex-row-reverse">
-								<div class="col-lg-12 col-sm-12   text-center">
-									Copyright © 2022 <a href="#">Ecompartner</a>. Developed by <a href="https://www.shariqq.com/">Shariqq</a> All rights reserved.
+						<!--footer-->
+						<footer class="footer">
+							<div class="container">
+								<div class="row align-items-center flex-row-reverse">
+									<div class="col-lg-12 col-sm-12   text-center">
+										Copyright © 2022 <a href="#">Ecompartner</a>. Developed by <a href="https://www.shariqq.com/">Shariqq</a> All rights reserved.
+									</div>
 								</div>
 							</div>
-						</div>
-					</footer>
-					<!-- End Footer-->
+						</footer>
+						<!-- End Footer-->
 
-				</div>
-				<!-- End app-content-->
+					</div>
+					<!-- End app-content-->
+				@endif
+				
 			</div>
 		</div>
 		<!-- End Page -->

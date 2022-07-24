@@ -88,50 +88,86 @@
                 <div class="card-body pb-0">
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade active show" id="tabs-icons-text-1" role="tabpanel" aria-labelledby="tabs-icons-text-1-tab">
-                            <div class="table-responsive mb-3">
-                                <table class="table row table-borderless w-100 m-0 border">
-                                    <tbody class="col-lg-6 p-0">
-                                        <tr>
-                                            <td><strong>Name :</strong> {{$seller->name}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Email :</strong> {{$seller->email}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Phone :</strong> {{$seller->phone}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Country :</strong> {{$seller->country}}</td>
-                                        </tr>
-                                    </tbody>
-                                    <tbody class="col-lg-6 p-0">
-                                        <tr>
-                                            <td><strong>Status :</strong> <span class="tag border text-dark bg-light">{{$seller->status}}</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Joined on :</strong> {{$seller->created_at}}</td>
-                                        </tr>
-                                        @php
-                                                $warehouses = \App\Warehouse::where('seller_id', $seller->id)->count();
-                                                $leads = \App\LeadsList::where('user_id', $seller->id)->get();
-                                                $total_leads = 0;
-                                                foreach ($leads as $key) {
-                                                    $total_leads += \App\Lead::where('leads_list_id', $key['id'])->count();
-                                                }
-                                        @endphp
-                                        <tr>
-                                            <td>
-                                                <strong>Total Leads :  {{$total_leads}}</strong>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td><strong>Total Warehouses :</strong>
-                                                {{ $warehouses }}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="table-responsive mb-3">
+                                        <table class="table row table-borderless w-100 m-0 border">
+                                            <tbody class="col-lg-6 p-0">
+                                                <tr>
+                                                    <td><strong>Name :</strong> {{$seller->name}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Email :</strong> {{$seller->email}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Phone :</strong> {{$seller->phone}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Country :</strong> {{$seller->country}}</td>
+                                                </tr>
+                                            </tbody>
+                                            <tbody class="col-lg-6 p-0">
+                                                <tr>
+                                                    <td><strong>Status :</strong> <span class="tag border text-dark bg-light">{{$seller->status}}</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Joined on :</strong> {{$seller->created_at}}</td>
+                                                </tr>
+                                                @php
+                                                        $warehouses = \App\Warehouse::where('seller_id', $seller->id)->count();
+                                                        $leads = \App\LeadsList::where('user_id', $seller->id)->get();
+                                                        $total_leads = 0;
+                                                        foreach ($leads as $key) {
+                                                            $total_leads += \App\Lead::where('leads_list_id', $key['id'])->count();
+                                                        }
+                                                @endphp
+                                                <tr>
+                                                    <td>
+                                                        <strong>Total Leads :  {{$total_leads}}</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Total Warehouses :</strong>
+                                                        {{ $warehouses }}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    @foreach ($surveys as $item)
+                                        <div class="col-12">
+                                            <div class="card border">
+                                                <div class="card-header bg-light text-dark">
+                                                    Submitted on <span class="ml-md-1 tag border bg-primary text-white">{{$item->created_at}}</span>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="card-text">
+                                                        <span class="text-primary">Are you already Seller?</span>
+                                                        <br>
+                                                        <b> - {{$item->q1}}</b>
+                                                    </p>
+                                                    <hr>
+                                                    <p class="card-text">
+                                                        <span class="text-primary">What is your capital for this project?</span>
+                                                        <br>
+                                                        <b> - {{$item->q2}}</b>
+                                                    </p>
+                                                    <hr>
+                                                    <p class="card-text">
+                                                        <span class="text-primary">What is your shipment volume per day?</span>
+                                                        <br>
+                                                        <b> - {{$item->q3}}</b>
+                                                    </p>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
+  
                             
                         </div>
                         <div aria-labelledby="tabs-icons-text-2-tab" class="tab-pane fade" id="tabs-icons-text-2" role="tabpanel">
