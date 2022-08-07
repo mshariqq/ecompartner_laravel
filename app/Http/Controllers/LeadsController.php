@@ -76,7 +76,8 @@ class LeadsController extends BaseController
                                                 'msg'   => 'Error, The product does not belongs to you!'
                                             );
                                         }
-                                        if($product->status == 'pending' || $product->status == 'rejected' || $product->status = 'Pending' || $product->status = 'Rejected'){
+
+                                        if($product->status != 'active'){
                                             return array(
                                                 'code' => 500,
                                                 'msg'   => 'Error, The product is not verified by Admin or not Active'
@@ -170,6 +171,19 @@ class LeadsController extends BaseController
         $leads = Lead::where('leads_list_id', $id)->simplePaginate(50);
         $leads_list = LeadsList::find($id);
         return view('user.leads.index', compact('leads', 'leads_list'));
+    }
+
+    public function samplefileDownload(){
+        //PDF file is stored under project/public/download/info.pdf
+        $file= public_path(). "/sample/leads_import_sample.csv";
+
+        // $headers = array(
+        //         'Content-Type: application/csv',
+        //         );
+
+        // $file_path = public_path('uploads/cv/'.$file);
+        return response()->download( $file);
+
     }
 
 }

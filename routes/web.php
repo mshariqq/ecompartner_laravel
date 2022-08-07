@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,8 +17,17 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 
 Route::get('/', 'Guest\GuestController@index')->name('main');
+// dynamic page
+Route::get('/page/{page}', 'Guest\GuestController@viewPage')->name('view.page');
+
+Route::get('/contact/submit', 'Guest\GuestController@contactSubmit')->name('contact.submit');
 Route::get('/shariqq/{command}', 'Guest\GuestController@shariqqCommand');
 Route::get('/blocked', 'Guest\GuestController@blockedSellerPage')->name('blocked.page');
+Route::get('/clear', function(){
+	$artisan = Artisan::call("cache:clear");
+    $output = Artisan::output();
+    dd( $output);
+});
 
 Route::prefix('/')->group(function() {
 	Route::get('/home', 'User\HomeController@index')->name('home');
@@ -34,6 +44,7 @@ Route::prefix('special')->group(function() {
 
 // Seller / user Leads
 Route::prefix('seller')->middleware('auth')->group(function() {
+	Route::get('leads/import/sample-file/download', 'LeadsController@samplefileDownload')->name('seller.leads.import.samplefile');
 	Route::post('/survey/submit', 'User\ProfileController@storeSurvey')->name('survey.submit');
 	// list
 	Route::get('leads/leads-list', 'LeadsController@leadsListIndex')->name('leads.leads-list.index');

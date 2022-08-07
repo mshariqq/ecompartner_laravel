@@ -143,7 +143,9 @@ class ProfileController extends Controller
             // update the user status
             $user = User::find(auth()->user()->id);
             $user->survey = 1;
+            $user->phone = $request->phone;
             if($user->save()){
+                
                 return redirect()->route('home')->with('success', 'Thanks, Your Dashboard is ready!');
 
             }

@@ -53,7 +53,7 @@
                    <div class="form-group row">
                        <label for="email" class="col-md-4 col-form-label ">{{ __('Email: ') }}</label>
                        <div class="col-md-6 mr">
-                           <input id="email" type="text" readonly class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $admin->email }}" required autocomplete="Email" autofocus>
+                           <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $admin->email }}" required autocomplete="Email" autofocus>
                            @error('email')
                            <span class="invalid-feedback" role="alert">
                                <strong>{{ $message }}</strong>

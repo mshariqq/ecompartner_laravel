@@ -13,7 +13,6 @@
 		<p>Please contact the admin for more details</p>
 	</body>
 	</html>
-
 @else
 
 <!doctype html>
@@ -30,10 +29,9 @@
 		<meta content="{{config('app.name')}}" name="description">
 		<meta content="Ecompartner Delivery" name="author">
 		<meta name="keywords" content="ecompartner"/>
-
 		<!-- Favicon -->
-		<link rel="icon" href="{{ asset('assets/images/brand/favicon.ico')}}" type="image/x-icon"/>
-		<link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/favicon.ico')}}" />
+		<link rel="icon" href="{{ asset('frontend/Images/favicon.png')}}" type="image/x-icon"/>
+		<link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend/Images/favicon.png')}}" />
 		<!-- Title -->
 		<title>{{config('app.name')}}  @yield('title')</title>
 
@@ -133,6 +131,11 @@
 												  <option value="100 - 500 Shipments per day">100 - 500 Shipments per day</option>
 												  <option value="more than 500 shipments per day">more than 500 shipments per day</option>
 												</select>
+											  </div>
+											  <div class="form-group">
+												<label for="">Please Provide your Phone number So our sales team contact you</label>
+												<input type="text"
+												  class="form-control" required name="phone" id="phone" aria-describedby="helpId" placeholder="Enter your Mobile">
 											  </div>
 										
 									</div>
@@ -345,7 +348,7 @@
 							<div class="container">
 								<div class="row align-items-center flex-row-reverse">
 									<div class="col-lg-12 col-sm-12   text-center">
-										Copyright © 2022 <a href="#">Ecompartner</a>. Developed by <a href="https://www.shariqq.com/">Shariqq</a> All rights reserved.
+										Copyright © 2022 <a href="https://ecompartner.asia">Ecompartner.asia</a> All rights reserved.
 									</div>
 								</div>
 							</div>

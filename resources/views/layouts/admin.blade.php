@@ -14,8 +14,8 @@
 		<meta name="keywords" content="html admin template, bootstrap admin template premium, premium responsive admin template, admin dashboard template bootstrap, bootstrap simple admin template premium, web admin template, bootstrap admin template, premium admin template html5, best bootstrap admin template, premium admin panel template, admin template"/>
 
 		<!-- Favicon -->
-		<link rel="icon" href="{{ asset('assets/images/brand/favicon.ico')}}" type="image/x-icon"/>
-		<link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/favicon.ico')}}" />
+		<link rel="icon" href="{{ asset('frontend/Images/favicon.png')}}" type="image/x-icon"/>
+		<link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend/Images/favicon.png')}}" />
 		<!-- Title -->
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -323,7 +323,7 @@
 						<div class="container">
 							<div class="row align-items-center flex-row-reverse">
 								<div class="col-lg-12 col-sm-12   text-center">
-									Copyright © 2022 <a href="#">Ecompartner</a>. Developed by <a href="https://www.shariqq.com/">Shariqq</a> All rights reserved.
+									Copyright © 2022 <a href="https://ecompartner.asia">Ecompartner.asia</a>. All rights reserved.
 								</div>
 							</div>
 						</div>

@@ -6,7 +6,7 @@
     <div class="page-header">
         <h4 class="float-left">Import Leads</h4>
         <p class="float-right">
-            <a href="#" class="btn btn-primary"> <i class="fa fa-download" aria-hidden="true"></i> Download Sample</a>
+            <a href="{{route('seller.leads.import.samplefile')}}" class="btn btn-primary"> <i class="fa fa-download" aria-hidden="true"></i> Download Sample</a>
         </p>
     </div>
 

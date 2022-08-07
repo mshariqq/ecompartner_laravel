@@ -3,7 +3,7 @@ $(document).ready(function () {
   const menuBtn = document.querySelector(".menu-btn");
   const closeBtn = document.querySelector(".close-btn");
 
-  $(".loader_bg").delay(3000).fadeOut("slow");
+  $(".loader_bg").delay(450).fadeOut("slow");
 
   menuBtn.addEventListener("click", () => {
     menu.classList.add("active");

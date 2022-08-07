@@ -7,11 +7,9 @@
 		{{-- <meta content="Hogo– Creative Admin Multipurpose Responsive Bootstrap4 Dashboard HTML Template" name="description"> --}}
 		{{-- <meta content="Spruko Technologies Private Limited" name="author"> --}}
 		{{-- <meta name="keywords" content="html admin template, bootstrap admin template premium, premium responsive admin template, admin dashboard template bootstrap, bootstrap simple admin template premium, web admin template, bootstrap admin template, premium admin template html5, best bootstrap admin template, premium admin panel template, admin template"/> --}}
-		
 		<!-- Favicon -->
-		<link rel="icon" href="{{ asset('assets/images/brand/favicon.ico')}}" type="image/x-icon"/>
-		<link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/brand/favicon.ico')}}" />
-
+		<link rel="icon" href="{{ asset('frontend/Images/favicon.png')}}" type="image/x-icon"/>
+		<link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend/Images/favicon.png')}}" />
 		<!-- Title -->
         <title>{{ config('app.name', 'Laravel') }}</title>
 

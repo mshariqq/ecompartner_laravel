@@ -40,6 +40,7 @@
                                     @enderror
                                     {{-- <input type="text" class="form-control" placeholder="Enter Email"> --}}
                                 </div>
+                               
                                 <div class="input-group mb-4">
                                     <span class="input-group-addon bg-white"><i class="fa fa-unlock-alt  w-4"></i></span>
                                     <input placeholder="Password" id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -59,7 +60,7 @@
                                 <div class="form-group mt-5">
                                     <label class="custom-control custom-checkbox">
                                         <input type="checkbox" class="custom-control-input" />
-                                        <span class="custom-control-label">Agree the <a href="terms.html">terms and policy</a></span>
+                                        <span class="custom-control-label">Agree the <a href="{{route('view.page', 'terms-conditions')}}">terms and policy</a></span>
                                     </label>
                                 </div>
                                 <div class="row">
@@ -67,15 +68,18 @@
                                         <button type="submit" class="btn btn-primary btn-block px-4">Create a new account <i class="fa fa-caret-right" aria-hidden="true"></i> </button>
                                     </div>
                                 </div>
-                                <div class="mt-6 btn-list">
+                                <p class="mt-3 text-indigo">
+                                    or
+                                </p>
+                                {{-- <div class="mt-6 btn-list">
                                     <button type="button" class="btn btn-icon btn-facebook"><i class="fa fa-facebook"></i></button>
                                     <button type="button" class="btn btn-icon btn-google"><i class="fa fa-google"></i></button>
                                     <button type="button" class="btn btn-icon btn-twitter"><i class="fa fa-twitter"></i></button>
                                     <button type="button" class="btn btn-icon btn-dribbble"><i class="fa fa-dribbble"></i></button>
-                                </div>
+                                </div> --}}
                                 <p class="col-12 mt-5">
                                     Already have an Account? <br>
-                                    <a href="{{route('login')}}" class="btn btn-indigo">Login <i class="fa fa-arrow-right" aria-hidden="true"></i> </a>
+                                    <a href="{{route('login')}}" class="btn btn-gradient-primary">Login <i class="fa fa-arrow-right" aria-hidden="true"></i> </a>
                                 </p>
                             </div>
                         </div>

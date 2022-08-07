@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Favicon  -->
-    <link rel="shortcut icon" href="{{ asset('frontend/favicon.svg')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('frontend/Images/favicon.png')}}" type="image/x-icon">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- Owl Carousel -->
@@ -63,7 +63,7 @@
                         <a href="{{route('register')}}" class="btn btn-1">Get Started <i class="fas fa-angle-double-right"></i></a>
                     </div>
                     <div class="home-img">
-                        <img src="{{ asset('frontend/Images/Screenshots/1.svg')}}" alt="Gradesy">
+                        <img style="max-height: 500px" src="{{ asset('frontend/Images/laptop2.png')}}" alt="Gradesy">
                     </div>
                 </div>
             </div>
@@ -71,7 +71,8 @@
         <div class="home-bottom"><img src="{{ asset('frontend/Images/home-bottom.svg')}}" alt=""></div>
     </section>
     <!-- Home Section ends -->
-
+    <br>
+    <br>
     <!-- Feature Section starts -->
     <section id="features">
         <div class="features-section">
@@ -116,7 +117,7 @@
             <div class="container">
                 <div class="row align-item-center justify-content-center">
                     <div class="about-img">
-                        <img src="{{ asset('frontend/Images/Screenshots/2.svg')}}" alt="Gradesy">
+                        <img src="{{ asset('frontend/Images/manwithlaptop.png')}}" alt="Gradesy">
                     </div>
                     <div class="about-text">
                         <div class="section-title">
@@ -128,7 +129,7 @@
                                 and Just Focus on increase your number of orders,products.
                             </p>
                          
-                            <a href="#" class="btn btn-2">Get Started <i class="fas fa-angle-double-right"></i></a>
+                            <a href="{{route('register')}}" class="btn btn-2">Get Started <i class="fas fa-angle-double-right"></i></a>
 
                         </div>
                 
@@ -150,11 +151,11 @@
                 </div>
                 <div class="row">
                     <div class="screenshots-carousel owl-carousel">
-                        <div class="screenshots-item"><img src="{{ asset('frontend/Images/Screenshots/3.svg" alt="screenshot')}}"></div>
-                        <div class="screenshots-item"><img src="{{ asset('frontend/Images/Screenshots/22.svg" alt="screenshot')}}"></div>
-                        <div class="screenshots-item"><img src="{{ asset('frontend/Images/Screenshots/11.svg" alt="screenshot')}}"></div>
-                        <div class="screenshots-item"><img src="{{ asset('frontend/Images/Screenshots/4.svg" alt="screenshot')}}"></div>
-                        <div class="screenshots-item"><img src="{{ asset('frontend/Images/Screenshots/5.svg" alt="screenshot')}}"></div>
+                        <div class="screenshots-item"><img src="{{ asset('frontend/Images/Screenshots/3.svg')}}" alt="screenshot"></div>
+                        <div class="screenshots-item"><img src="{{ asset('frontend/Images/Screenshots/22.svg')}}" alt="screenshot"></div>
+                        <div class="screenshots-item"><img src="{{ asset('frontend/Images/Screenshots/11.svg')}}" alt="screenshot"></div>
+                        <div class="screenshots-item"><img src="{{ asset('frontend/Images/Screenshots/4.svg')}}" alt="screenshot"></div>
+                        <div class="screenshots-item"><img src="{{ asset('frontend/Images/Screenshots/5.svg')}}" alt="screenshot"></div>
 
                     </div>
                 </div>
@@ -242,15 +243,19 @@
                     <div class="email details">
                         <i class="fas fa-envelope"></i>
                         <div class="topic">Email</div>
-                        <div class="text-one">contact@ecompartner.com</div>
+                        <div class="text-one">contact@ecompartner.asia</div>
                     </div>
                 </div>
                 <div class="right-side">
+                    <div class="col-12">
+                        
+                    </div>
                     <div class="contact-heading">get in touch</div>
-                    <form action="#">
+                    <form action="{{route('contact.submit')}}">
+                        @csrf
                         <div class="input-box">
                             <label for="text">Name</label>
-                            <input type="text" placeholder="Your Name">
+                            <input type="text" name="name" placeholder="Your Name">
 
                         </div>
                            <div class="input-box" >
@@ -260,13 +265,13 @@
                         </div>
                         <div class="input-box">
                             <label for="phone">Phone</label>
-                            <input type="phone" placeholder="Your phone">
+                            <input type="phone" name="phone" placeholder="Your phone">
                         </div>
                     
                         <div class="message-box">
                             <textarea name="message" placeholder="Your Message" cols="30" rows="10"></textarea>
                         </div>
-                        <a class="btn btn-2">Send <i class="fas fa-paper-plane"></i></a>
+                        <button type="submit" class="btn btn-2">Send <i class="fas fa-paper-plane"></i></button>
                     </form>
                     
                                                                         </div>
@@ -293,15 +298,15 @@
                     <div class="footer-column">
                         <h4>Quick Links</h4>
                         <ul>
-                            <li><a href="#">Terms & Conditions</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="{{route('view.page', 'terms-conditions')}}">Terms & Conditions</a></li>
+                            <li><a href="{{route('view.page', 'policy')}}">Privacy Policy</a></li>
                         </ul>
                     </div>
                   
                     <div class="footer-column">
                         <h4>Contact us</h4>
                         <ul>
-                            <li><a href="mailto:contact@ecompartner.com">contact@ecompartner.com</a></li>
+                            <li><a href="mailto:contact@ecompartner.asia">contact@ecompartner.asia</a></li>
                             <li><a href="tel:971582453879">+971582453879</a></li>
                          
                         </ul>
@@ -319,7 +324,7 @@
             </div>
         </div>
         <hr>
-        <div class="credit">Copyright ©2022 ecompartner.com
+        <div class="credit">Copyright ©2022 @ecompartner.asia
 
         </div>
     </footer>
