@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 
+<!--
 		Developer	: Ecompartner
 		Website		: https://ecompartner.asia/
 		Copyright	: Ecompartner
@@ -44,7 +44,7 @@
                 <li class="menu-item">
                     <a style="background-color: #fff;padding: 7px 12px 7px 12px;border-radius: 12px;color: var(--primary-color)" href="{{route('register')}}" class="text-primary"> <i class="fa fa-user-plus" aria-hidden="true"></i> Sign Up</a>
                 </li>
-                
+
             </ul>
         </div>
     </header>
@@ -121,18 +121,18 @@
                     </div>
                     <div class="about-text">
                         <div class="section-title">
-                            <h2>The Only Partner You Need For Your  
-                                <span>Ecommerce Business 
+                            <h2>The Only Partner You Need For Your
+                                <span>Ecommerce Business
                             </span></h2>
                             <p>We are here to help you Start, Optimize and Scale your e-commerce by giving you easy access to our, fulfillment,call centers and shipping carriers in many countries.</p>
                             <p>So do only the marketing for your products and we will do the rest.
                                 and Just Focus on increase your number of orders,products.
                             </p>
-                         
+
                             <a href="{{url('get-started')}}" class="btn btn-2">Get Started <i class="fas fa-angle-double-right"></i></a>
 
                         </div>
-                
+
                     </div>
                 </div>
             </div>
@@ -145,7 +145,7 @@
         <div class="screenshots-section">
             <div class="container">
                 <div class="section-title">
-                    <h2>SELL On 
+                    <h2>SELL On
                         <span>Un-Tapped Markets
                     </span></h2>
                 </div>
@@ -194,7 +194,7 @@
                         <h1>Live Meetings</h1>
                         <p>Our COD experts will meet you live 2 times a month to discuss all business related issues.</p>
                     </div>
-               
+
                     <div class="feature-item">
                         <div class="icon"><i class="fa fa-shopping-bag"></i></div>
                         <h1>Hot Products</h1>
@@ -225,7 +225,7 @@
      <div class="section-title">
                         <h2>GET STARTED WITH A <span> FREE MEETING</span></h2>
                     </div>
-    
+
 <section>
    <!-- Calendly inline widget begin -->
 <div class="calendly-inline-widget" data-url="https://calendly.com/d/gqh-3hy-628?hide_gdpr_banner=1&primary_color=0467ff" style="min-width:320px;height:630px;"></div>
@@ -252,17 +252,17 @@
                     <div class="footer-column">
                         <h4>Quick Links</h4>
                         <ul>
-                            <li><a href="{{route('view.page', 'terms-conditions')}}">Terms & Conditions</a></li>
-                            <li><a href="{{route('view.page', 'policy')}}">Privacy Policy</a></li>
+                            <li><a href="{{url('page/terms-conditions')}}">Terms & Conditions</a></li>
+                            <li><a href="{{url('page/policy')}}">Privacy Policy</a></li>
                         </ul>
                     </div>
-                  
+
                     <div class="footer-column">
                         <h4>Contact us</h4>
                         <ul>
                             <li><a href="mailto:contact@ecompartner.asia">contact@ecompartner.asia</a></li>
                             <li><a href="tel:971582453879">+971582453879</a></li>
-                         
+
                         </ul>
                     </div>
                     <div class="footer-column">

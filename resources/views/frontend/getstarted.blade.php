@@ -58,11 +58,11 @@
     <section id="screenshots">
         <div class="screenshots-section">
             <div class="container">
-                <div class="section-title"> 
+                <div class="section-title">
                     <br>
                     <br>
                     <br>
-                    <h2 class="mt-5">We are looking forward to Help you 
+                    <h2 class="mt-5">We are looking forward to Help you
                         <span>Start and scale your business on
                     </span></h2>
                 </div>
@@ -115,8 +115,8 @@
                     <div class="footer-column">
                         <h4>Quick Links</h4>
                         <ul>
-                            <li><a href="{{ route('view.page', 'terms-conditions') }}">Terms & Conditions</a></li>
-                            <li><a href="{{ route('view.page', 'policy') }}">Privacy Policy</a></li>
+                            <li><a href="{{url('page/terms-conditions')}}">Terms & Conditions</a></li>
+                            <li><a href="{{url('page/policy')}}">Privacy Policy</a></li>
                         </ul>
                     </div>
 

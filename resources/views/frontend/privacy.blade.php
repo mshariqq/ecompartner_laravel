@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<!-- 
+<!--
 		Developer	: Ecompartner
-		Website		: https://ecompartner.asia/  
+		Website		: https://ecompartner.asia/
 		Copyright	: Ecompartner
 -->
 <html lang="en">
@@ -44,7 +44,7 @@
                 <li class="menu-item">
                     <a style="background-color: #fff;padding: 7px 12px 7px 12px;border-radius: 12px;color: var(--primary-color)" href="{{route('register')}}" class="text-primary"> <i class="fa fa-user-plus" aria-hidden="true"></i> Sign Up</a>
                 </li>
-                
+
             </ul>
         </div>
     </header>
@@ -54,7 +54,7 @@
         <h2>Privacy Policy</h2>
              <br>
              <br>
-       
+
        <div class="custom-page-content-body" style="border: 1px solid #eee;padding: 20px;border-radius: 12px;">
                     <p><span style="color:#7a7a7a"><span style="font-family:Circular Std Book,serif"><span style="font-size:medium">Thank you for choosing to be part of our community at </span></span></span><span style="color:#7a7a7a"><span style="font-family:Circular Std Book,serif"><span style="font-size:medium">ECOM</span></span></span><span style="color:#7a7a7a"><span style="font-family:Circular Std Book,serif"><span style="font-size:medium">PARTNER FZ LLC (&ldquo;</span></span></span><span style="color:#7a7a7a"><span style="font-family:Circular Std Book,serif"><span style="font-size:medium"><strong>Company</strong></span></span></span><span style="color:#7a7a7a"><span style="font-family:Circular Std Book,serif"><span style="font-size:medium">,&rdquo; &ldquo;</span></span></span><span style="color:#7a7a7a"><span style="font-family:Circular Std Book,serif"><span style="font-size:medium"><strong>we</strong></span></span></span><span style="color:#7a7a7a"><span style="font-family:Circular Std Book,serif"><span style="font-size:medium">,&rdquo; &ldquo;</span></span></span><span style="color:#7a7a7a"><span style="font-family:Circular Std Book,serif"><span style="font-size:medium"><strong>us</strong></span></span></span><span style="color:#7a7a7a"><span style="font-family:Circular Std Book,serif"><span style="font-size:medium">,&rdquo; or &ldquo;</span></span></span><span style="color:#7a7a7a"><span style="font-family:Circular Std Book,serif"><span style="font-size:medium"><strong>our</strong></span></span></span><span style="color:#7a7a7a"><span style="font-family:Circular Std Book,serif"><span style="font-size:medium">&ldquo;). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about this privacy notice or our practices with regard to your personal information, please contact us at </span></span></span><span style="color:#7a7a7a"><span style="font-family:Circular Std Book,serif"><span style="font-size:medium">contact</span></span></span><span style="color:#7a7a7a"><span style="font-family:Circular Std Book,serif"><span style="font-size:medium">@</span></span></span><span style="color:#7a7a7a"><span style="font-family:Circular Std Book,serif"><span style="font-size:medium">ecom</span></span></span><span style="color:#7a7a7a"><span style="font-family:Circular Std Book,serif"><span style="font-size:medium">partner.</span></span></span><span style="color:#7a7a7a"><span style="font-family:Circular Std Book,serif"><span style="font-size:medium">asia</span></span></span><span style="color:#7a7a7a"><span style="font-family:Circular Std Book,serif"><span style="font-size:medium">.</span></span></span></p>
 
@@ -193,16 +193,16 @@ Umm Ramool, Dubai - UAE</strong></span></span></span><span style="color:#7a7a7a"
 <p>&nbsp;</p>
 
 <p>&nbsp;</p>
-        
+
        </div>
     </section>
 
     <!-- Contact Us Section starts -->
     <section id="contact-us">
-    
+
         <div class="contact-us">
             <div class="content">
-            
+
                 <div class="left-side">
                     <div class="address details">
                         <i class="fas fa-map-marker-alt"></i>
@@ -223,7 +223,7 @@ Umm Ramool, Dubai - UAE</div>
                 </div>
                 <div class="right-side">
                     <div class="col-12">
-                        
+
                     </div>
                     <div class="contact-heading">get in touch</div>
                     <form action="{{route('contact.submit')}}">
@@ -242,13 +242,13 @@ Umm Ramool, Dubai - UAE</div>
                             <label for="phone">Phone</label>
                             <input type="phone" name="phone" placeholder="Your phone">
                         </div>
-                    
+
                         <div class="message-box">
                             <textarea name="message" placeholder="Your Message" cols="30" rows="10"></textarea>
                         </div>
                         <button type="submit" class="btn btn-2">Send <i class="fas fa-paper-plane"></i></button>
                     </form>
-                    
+
                                                                         </div>
 
                 </div>
@@ -273,17 +273,17 @@ Umm Ramool, Dubai - UAE</div>
                     <div class="footer-column">
                         <h4>Quick Links</h4>
                         <ul>
-                            <li><a href="{{route('view.page', 'terms-conditions')}}">Terms & Conditions</a></li>
-                            <li><a href="{{route('view.page', 'policy')}}">Privacy Policy</a></li>
+                            <li><a href="{{url('page/terms-conditions')}}">Terms & Conditions</a></li>
+                            <li><a href="{{url('page/policy')}}">Privacy Policy</a></li>
                         </ul>
                     </div>
-                  
+
                     <div class="footer-column">
                         <h4>Contact us</h4>
                         <ul>
                             <li><a href="mailto:contact@ecompartner.asia">contact@ecompartner.asia</a></li>
                             <li><a href="tel:971582453879">+971582453879</a></li>
-                         
+
                         </ul>
                     </div>
                     <div class="footer-column">
@@ -314,4 +314,3 @@ Umm Ramool, Dubai - UAE</div>
 </body>
 
 </html>
- 

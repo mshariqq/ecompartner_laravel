@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 
+<!--
 		Developer	: Ecompartner
 		Website		: https://ecompartner.asia/
 		Copyright	: Ecompartner
@@ -44,7 +44,7 @@
                 <li class="menu-item">
                     <a style="background-color: #fff;padding: 7px 12px 7px 12px;border-radius: 12px;color: var(--primary-color)" href="{{route('register')}}" class="text-primary"> <i class="fa fa-user-plus" aria-hidden="true"></i> Sign Up</a>
                 </li>
-                
+
             </ul>
         </div>
     </header>
@@ -54,19 +54,19 @@
         <h2>404 Not Found</h2>
              <br>
              <br>
-       
+
        <div class="custom-page-content-body" style="border: 1px solid #eee;padding: 20px;border-radius: 12px;">
-             
+
             <h4>The page you are looking, does not exist!</h4>
        </div>
     </section>
 
     <!-- Contact Us Section starts -->
     <section id="contact-us">
-    
+
         <div class="contact-us">
             <div class="content">
-            
+
                 <div class="left-side">
                     <div class="address details">
                         <i class="fas fa-map-marker-alt"></i>
@@ -86,7 +86,7 @@
                 </div>
                 <div class="right-side">
                     <div class="col-12">
-                        
+
                     </div>
                     <div class="contact-heading">get in touch</div>
                     <form action="{{route('contact.submit')}}">
@@ -105,13 +105,13 @@
                             <label for="phone">Phone</label>
                             <input type="phone" name="phone" placeholder="Your phone">
                         </div>
-                    
+
                         <div class="message-box">
                             <textarea name="message" placeholder="Your Message" cols="30" rows="10"></textarea>
                         </div>
                         <button type="submit" class="btn btn-2">Send <i class="fas fa-paper-plane"></i></button>
                     </form>
-                    
+
                                                                         </div>
 
                 </div>
@@ -136,17 +136,17 @@
                     <div class="footer-column">
                         <h4>Quick Links</h4>
                         <ul>
-                            <li><a href="{{route('view.page', 'terms-conditions')}}">Terms & Conditions</a></li>
-                            <li><a href="{{route('view.page', 'privacy')}}">Privacy Policy</a></li>
+                            <li><a href="{{url('page/terms-conditions')}}">Terms & Conditions</a></li>
+                            <li><a href="{{url('page/policy')}}">Privacy Policy</a></li>
                         </ul>
                     </div>
-                  
+
                     <div class="footer-column">
                         <h4>Contact us</h4>
                         <ul>
                             <li><a href="mailto:contact@ecompartner.asia">contact@ecompartner.asia</a></li>
                             <li><a href="tel:971582453879">+971582453879</a></li>
-                         
+
                         </ul>
                     </div>
                     <div class="footer-column">
@@ -177,4 +177,3 @@
 </body>
 
 </html>
- 

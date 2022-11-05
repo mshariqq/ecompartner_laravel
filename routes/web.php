@@ -22,7 +22,7 @@ Route::get('/page/{page}', 'Guest\GuestController@viewPage')->name('view.page');
 Route::get('/get-started', 'Guest\GuestController@getStarted')->name('view.page');
 
 Route::get('/contact/submit', 'Guest\GuestController@contactSubmit')->name('contact.submit');
-Route::get('/shariqq/{command}', 'Guest\GuestController@shariqqCommand');
+// Route::get('/shariqq/{command}', 'Guest\GuestController@shariqqCommand');
 Route::get('/blocked', 'Guest\GuestController@blockedSellerPage')->name('blocked.page');
 Route::get('/clear', function(){
 	$artisan = Artisan::call("cache:clear");
@@ -72,11 +72,11 @@ Route::prefix('seller')->middleware('auth')->group(function() {
 
 	// warehouses
 	Route::get('warehouses/all', 'WarehouseController@all')->name('warehouses.all');
-	Route::get('warehouses/new', 'WarehouseController@new')->name('warehouses.new');	
+	Route::get('warehouses/new', 'WarehouseController@new')->name('warehouses.new');
 	Route::post('warehouses/insert', 'WarehouseController@insert')->name('warehouses.insert');
 	Route::get('warehouses/products/all', 'WarehouseController@myProducts')->name('warehouses.products');
-	Route::get('warehouses/products/{id}', 'WarehouseController@wareouseProducts')->name('warehouses.products.inside');	
-	Route::get('warehouses/products/new/{id}', 'WarehouseController@newWareouseProduct');	
+	Route::get('warehouses/products/{id}', 'WarehouseController@wareouseProducts')->name('warehouses.products.inside');
+	Route::get('warehouses/products/new/{id}', 'WarehouseController@newWareouseProduct');
 	Route::post('warehouses/products/insert', 'WarehouseController@insertWareouseProduct')->name('warehouses.product.insert');
 	Route::get('warehouses/request-stock/{product_id}', 'WarehouseController@requestStock')->name('warehouses.product.request-stock');
 	Route::post('warehouses/request-stock/insert', 'WarehouseController@requestStockInsert')->name('warehouses.product.request-stock.insert');

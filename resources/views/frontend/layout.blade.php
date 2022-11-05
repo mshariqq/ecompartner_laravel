@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 
+<!--
 		Developer	: Ecompartner
 		Website		: https://ecompartner.asia/
 		Copyright	: Ecompartner
@@ -46,7 +46,7 @@
                 <li class="menu-item">
                     <a style="background-color: #fff;padding: 7px 12px 7px 12px;border-radius: 12px;color: var(--primary-color)" href="{{route('register')}}" class="text-primary"> <i class="fa fa-user-plus" aria-hidden="true"></i> Sign Up</a>
                 </li>
-                
+
             </ul>
         </div>
     </header>
@@ -73,17 +73,17 @@
                     <div class="footer-column">
                         <h4>Quick Links</h4>
                         <ul>
-                            <li><a href="{{route('view.page', 'policy')}}">Terms & Conditions</a></li>
-                            <li><a href="{{route('view.page', 'terms-conditions')}}">Privacy Policy</a></li>
+                            <li><a href="{{url('page/policy')}}">Terms & Conditions</a></li>
+                            <li><a href="{{url('page/terms-conditions')}}">Privacy Policy</a></li>
                         </ul>
                     </div>
-                  
+
                     <div class="footer-column">
                         <h4>Contact us</h4>
                         <ul>
                             <li><a href="mailto:contact@ecompartner.asia">contact@ecompartner.asia</a></li>
                             <li><a href="tel:971582453879">+971582453879</a></li>
-                         
+
                         </ul>
                     </div>
                     <div class="footer-column">
