@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Admin;
+use App\Lead;
+use App\Order;
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -193,4 +195,63 @@ class AdminsController extends Controller
 
         return redirect('/admin/admins')->with('message', 'Admin Deleted');
     }
+
+    public function todayFilter(Request $request){
+        $date = $request->date;
+        $fromDate = $date . " 00:00:00";     
+        $your_date = strtotime("1 day", strtotime($date));
+        $toDate = date("Y-m-d h:s:m", $your_date);   
+        
+        if(isset($request->date)){
+            $data= [];
+            //  leads
+            $data['leads'] = Lead::whereBetween('created_at', [$fromDate, $toDate])->count();
+            //  confirmed
+            $data['confirmed'] = Order::whereBetween('created_at', [$fromDate, $toDate])->where('status', 'confirmed')->count();
+            // delivered
+            $data['delivered'] = Order::whereBetween('created_at', [$fromDate, $toDate])->where('status', 'delivered')->count();
+            // pending
+            $data['pending'] = Order::whereBetween('created_at', [$fromDate, $toDate])->where('status', 'out for delivery')->count();
+
+            $data['packing'] = Order::whereBetween('created_at', [$fromDate, $toDate])->where('status', 'packing')->count();
+
+            $data['cancelled'] = Order::whereBetween('created_at', [$fromDate, $toDate])->where('status', 'cancelled')->count();
+            return response()->json(array('code' => 200, 'data' => $data));
+        }else{
+            return response()->json(array('code' => 401, "data" => "date missing"));
+        }
+    }
+
+    public function DashAJaxDataFetch(Request $request){
+        $isLeads = false;
+        if($request->condition == 'Total Orders'){
+            // means lead
+            $isLeads = false;
+            if(isset($request->date)){
+                $date = $request->date;
+                $fromDate = $date . " 00:00:00"; 
+                $your_date = strtotime("1 day", strtotime($date));
+                $toDate = date("Y-m-d h:s:m", $your_date);
+
+                $orders = Order::whereBetween('created_at', [$fromDate, $toDate])->get();
+            }else{
+                $orders = Order::all();
+            }
+        }
+        else{
+            if(isset($request->date)){
+                $date = $request->date;
+                $fromDate = $date . " 00:00:00"; 
+                $your_date = strtotime("1 day", strtotime($date));
+                $toDate = date("Y-m-d h:s:m", $your_date);
+
+                $orders = Order::whereBetween('created_at', [$fromDate, $toDate])->where('status', $request->condition)->get();
+            }else{
+                $orders = Order::where('status', $request->condition)->get();
+            }
+        }
+
+        return view('admin.reports.cod_analysi_ajaxdata', compact('orders', 'isLeads'));
+    }
+
 }

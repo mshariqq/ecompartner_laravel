@@ -12904,12 +12904,12 @@ body.fixed-header .header {
 	margin-right:0;
 }
 .app-header .horizontal-nav:hover{
-	color: #4b4992;
-	background-color:#f4f3f9;
+	color: #fff;
+	background-color: transparent !important;
 }
 .app-header .dropdown:hover{
-	color: #4b4992;
-	background-color:#f4f3f9;
+	color: #fff !important;
+	background-color: transparent !important;
 }
 .header-brand:hover {
 	color: inherit;
@@ -13750,7 +13750,7 @@ a.icon {
 	cursor: pointer;
 }
 a.icon:hover {
-	color: #1753fc !important;
+	color: #eee !important;
 }
 .o-auto {
 	overflow: auto !important;
@@ -24357,7 +24357,7 @@ div[data-acc-step]:not(.open) h5 {
 	position:relative;
 }
 .bg-account .page:before{
-	background: url(../images/photos/bg-pages.png) repeat fixed bottom left;
+	/* background: url(../images/photos/bg-pages.png) repeat fixed bottom left; */
 	background-repeat:no-repeat;
 	content: '';
     position: absolute;
@@ -24367,7 +24367,7 @@ div[data-acc-step]:not(.open) h5 {
     height: 100%;
 }
 .bg-account .page:after{
-	background: url(../images/photos/bg-pages2.png) repeat fixed top right;
+	/* background: url(../images/photos/bg-pages2.png) repeat fixed top right; */
 	background-repeat:no-repeat;
 	content: '';
     position: absolute;

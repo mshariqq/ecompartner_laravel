@@ -81,15 +81,15 @@
 	
 	// ______________ PAGE LOADING
 	$(window).on("load", function(e) {
-		$("#global-loader").fadeOut("slow");
+		$("#global-loader").fadeOut("fast");
 	})
 	
 	// ______________ BACK TO TOP BUTTON
 	$(window).on("scroll", function(e) {
 		if ($(this).scrollTop() > 0) {
-			$('#back-to-top').fadeIn('slow');
+			$('#back-to-top').fadeIn('fast');
 		} else {
-			$('#back-to-top').fadeOut('slow');
+			$('#back-to-top').fadeOut('fast');
 		}
 	});
 	$(document).on("click", "#back-to-top", function(e) {

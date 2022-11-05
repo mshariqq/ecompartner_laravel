@@ -1,5 +1,8 @@
 @extends('layouts.admin')
 @section('content')
+<div class="page-header">
+<h4>My Profile</h4>
+</div>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-4">
@@ -24,7 +27,7 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Current Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label ">{{ __('Current Password') }}</label>
                             <div class="col-md-6">
                                 <input id="old_password" type="password" class="form-control @error('old_password') is-invalid @enderror" name="old_password" required autocomplete="Old Password">
                                 @error('old_password')
@@ -35,7 +38,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('New Password') }}</label>
+                            <label for="password" class="col-md-4 col-form-label ">{{ __('New Password') }}</label>
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                                 @error('password')
@@ -46,15 +49,16 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label ">{{ __('Confirm Password') }}</label>
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
                         <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-6 ">
                                 <button type="submit" class="btn btn-primary">
-                                {{ __('Change Password') }}
+                                    <i class="fa fa-upload" aria-hidden="true"></i>
+                                {{ __('Update Password') }}
                                 </button>
                             </div>
                         </div>

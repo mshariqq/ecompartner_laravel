@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Lead;
 use App\LeadsList;
+use App\Product;
+use App\Warehouse;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 
@@ -32,7 +34,7 @@ class LeadsController extends BaseController
                 $Lead_List = new LeadsList();
                 $Lead_List->name = $request->name;
                 $Lead_List->user_id = auth()->user()->id;
-                $Lead_List->status = 'Uploaded';
+                $Lead_List->status = 'pending';
 
                 $saveLeadList = $Lead_List->save();
                 if($saveLeadList){
@@ -51,12 +53,43 @@ class LeadsController extends BaseController
                     {
 
                         if(empty($getData)){
-                            $LeadsLog .= "Empt Row Given in CSV <br>";
+                            $LeadsLog .= "Invalid CSV data format <br>";
 
                         }else{
                             if(empty($getData[0]) && empty($getData[1]) && empty($getData[2]) && empty($getData[3]) && empty($getData[4])){
                                 $LeadsLog .= "Empt Row Value given in this row <br>";
                             }else{
+                                // validate data
+                                if($getData[9] == null || $getData[9] == "" || $getData[9] == " "){
+                                    return array(
+                                        'code' => 500,
+                                        'msg'   => 'Error, Product ID not found!'
+                                    );
+                                }else{
+                                    $product = Product::find($getData[9]);
+                                    if($product){
+                                        // get warehouse id
+                                        $warehouse = Warehouse::where('id', $product->warehouse_id)->where('seller_id', auth()->user()->id)->get();
+                                        if(count($warehouse) < 1){
+                                            return array(
+                                                'code' => 500,
+                                                'msg'   => 'Error, The product does not belongs to you!'
+                                            );
+                                        }
+
+                                        if($product->status != 'active'){
+                                            return array(
+                                                'code' => 500,
+                                                'msg'   => 'Error, The product is not verified by Admin or not Active'
+                                            );
+                                        }
+                                    }else{
+                                        return array(
+                                            'code' => 500,
+                                            'msg'   => 'Error, No Product Found witj that ID #'.$getData[9]
+                                        );
+                                    }
+                                }
                                 // model of leads
                                 $Leads = new Lead();
                                 $Leads->name = $getData[0];
@@ -69,7 +102,8 @@ class LeadsController extends BaseController
                                 $Leads->pieces = $getData[7];
                                 $Leads->shipment_description = $getData[8];
                                 $Leads->leads_list_id = $LLid;
-                                $Leads->status = 'Uploaded';
+                                $Leads->product_id = $getData[9];
+                                $Leads->status = 'pending';
 
                                 // insert the current row
                                 $save_lead = $Leads->save();
@@ -137,6 +171,19 @@ class LeadsController extends BaseController
         $leads = Lead::where('leads_list_id', $id)->simplePaginate(50);
         $leads_list = LeadsList::find($id);
         return view('user.leads.index', compact('leads', 'leads_list'));
+    }
+
+    public function samplefileDownload(){
+        //PDF file is stored under project/public/download/info.pdf
+        $file= public_path(). "/sample/leads_import_sample.csv";
+
+        // $headers = array(
+        //         'Content-Type: application/csv',
+        //         );
+
+        // $file_path = public_path('uploads/cv/'.$file);
+        return response()->download( $file);
+
     }
 
 }

@@ -63,7 +63,7 @@ class ProfileController extends Controller
 
         if($data['phone'] != $admin->phone) {
             $this->validate($request, [
-                'phone' => ['nullable', 'string', 'regex:/^(961(3|70|71)|(03|70|71))\d{6}$/'],
+                'phone' => ['nullable', 'string'],
             ]);
 
             $admin->phone = $data['phone'];
@@ -82,8 +82,8 @@ class ProfileController extends Controller
     public function updatePassword(Request $request)
     {
         $this->validate($request, [
-            'old_password' => ['required', 'string', 'min:8'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'old_password' => ['required', 'string'],
+            'password' => ['required', 'string', 'confirmed'],
         ]);
 
         if (!(Hash::check($request->get('old_password'), Auth::user()->password))) {
