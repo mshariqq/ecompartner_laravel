@@ -33,13 +33,18 @@
                         </div>
                     </div>
                 </div>
-               
+
             </div>
         </div>
-        
+
     </div>
 
     @endforeach
 </div>
+<table>
+    <tfoot>
+        {{ $warehouses->links() }}
+    </tfoot>
+</table>
 
 @endsection

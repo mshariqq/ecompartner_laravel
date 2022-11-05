@@ -22315,8 +22315,8 @@ module.exports = function (css) {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-/*! svg.draggable.js - v2.2.1 - 2016-08-25
-* https://github.com/wout/svg.draggable.js
+/*! svg.draggable.js - v2.2.1 - 2016-08-25
+* https://github.com/wout/svg.draggable.js
 * Copyright (c) 2016 Wout Fierens; Licensed MIT */
 ;(function () {
 
@@ -22548,8 +22548,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 "use strict";
 
 
-/*! svg.filter.js - v2.0.2 - 2016-02-24
-* https://github.com/wout/svg.filter.js
+/*! svg.filter.js - v2.0.2 - 2016-02-24
+* https://github.com/wout/svg.filter.js
 * Copyright (c) 2016 Wout Fierens; Licensed MIT */
 ;(function () {
 
@@ -23152,13 +23152,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 "use strict";
 
 
-/*!
-* svg.pathmorphing.js - Enables pathmorphing / path animation in svg.js
-* @version 0.1.3
-*
-*
-* @copyright (c) 2018 Ulrich-Matthias Schäfer
-* @license MIT
+/*!
+* svg.pathmorphing.js - Enables pathmorphing / path animation in svg.js
+* @version 0.1.3
+*
+*
+* @copyright (c) 2018 Ulrich-Matthias Schäfer
+* @license MIT
 */;
 ;(function () {
   "use strict";
@@ -23742,9 +23742,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
                         if (this.parameters.box.width - snap[0] > 0 && this.parameters.box.height - snap[1] > 0) {
                             // ...if valid, we resize the this.el (which can include moving because the coord-system starts at the left-top and this edge is moving sometimes when resized)
 
-                            /*
-                             * but first check if the element is text box, so we can change the font size instead of
-                             * the width and height
+                            /*
+                             * but first check if the element is text box, so we can change the font size instead of
+                             * the width and height
                              */
 
                             if (this.parameters.type === "text") {

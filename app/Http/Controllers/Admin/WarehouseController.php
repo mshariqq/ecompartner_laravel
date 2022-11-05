@@ -26,10 +26,10 @@ class WarehouseController extends Controller
         return view('admin.warehouses.all-products', compact('products'));
 
     }
-    
+
     public function all(){
-        
-        $warehouses = Warehouse::paginate(10);
+
+        $warehouses = Warehouse::paginate(25);
         return view('admin.warehouses.all', compact('warehouses'));
 
     }
@@ -84,7 +84,7 @@ class WarehouseController extends Controller
     public function productApproval($id, $status){
         if($status == 'approve'){
             $status = 'active';
-        
+
         }elseif($status == 'reject'){
             $status = 'rejected';
         }
@@ -104,7 +104,7 @@ class WarehouseController extends Controller
         }else{
             return redirect()->back()->with('error', "No Product Found, or ID is incorrect");
         }
-       
+
     }
 
 }

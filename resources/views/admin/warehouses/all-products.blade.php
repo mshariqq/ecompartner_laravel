@@ -20,13 +20,14 @@
                 <thead class="bg-primary">
                     <tr>
                         {{-- <th>View</th> --}}
-                        <th width="17%">Action</th>
+                        <th width="10%">Action</th>
                         <th>Warehouse</th>
                         <th>Seller</th>
-                        <th>Name</th>
                         <th>Details</th>
                         <th>Stock</th>
                         <th>Price</th>
+                        {{-- extra details will show conversions, cost per lead, screenshots --}}
+                        <th>Extra Details</th>
                         <th>Info</th>
                     </tr>
                 </thead>
@@ -36,9 +37,9 @@
                             {{-- <td>
                                 <a href="http://" class="btn btn-primary"> <i class="fa fa-eye" aria-hidden="true"></i> View</a>
                             </td> --}}
-                            <td>                                
+                            <td>
                                 <a href="#" class="btn btn-sm btn-dark mb-2"> View Warehouse <i class="fa fa-eye" aria-hidden="true"></i> </a>
-                                
+
                                 <a href="{{url('admin/warehouse/buy-stock/product/'.$item->id)}}" target="_blank" class="btn btn-sm btn-indigo mb-2">Buy Stocks <i class="fa fa-plus-circle" aria-hidden="true"></i> </a>
                                 <img width="auto" height="100px" src="{{url($item->photo)}}" alt="">
 
@@ -50,25 +51,51 @@
                                 <a href="{{route('admin.sellers.profile', $item->warehouse->seller->id)}}" target="_blank">{{$item->warehouse->seller->name}}</a>
                             </td>
 
+
                             <td>
-                                
-                                <span class="text-primary"> #{{$item->id}} <br> {{ $item->name }} </span>
-                                
-                            </td>
-                            <td>
-                                {!! $item->description !!}
-                                
+                                <p>
+                                    <span class="font-weight-bold">Name: </span> {{$item->name}}
+
+                                </p>
+                                <p>
+                                    <span class="font-weight-bold">Description: </span> {!! $item->description !!}
+                                </p>
+
                             </td>
                             <td>
                                 <span class="tag bg-indigo">{{$item->stock}}</span>
                             </td>
                             <td>
                                <span class="tag bg-success"> {{$item->price}}</span>
-                                
+
                             </td>
                             <td>
+                                <p>
+                                    <span class="text-dark">Conversion: </span> <b>{{$item->conversion}}</b>
+                                </p>
+                                <p>
+                                    <span class="text-dark">Cost Per Lead: </span> <b>{{$item->cost_per_lead}} $</b>
+                                </p>
+                                <div class="row">
+                                    {{-- json decode the screenshots array only if it is not null or empty --}}
+                                    @if ($item->screenshots != null && $item->screenshots != "")
+                                        @foreach (json_decode($item->screenshots) as $screenshot)
+                                            <div class="col-4">
+                                                {{-- click to download the image --}}
+                                                <a href="{{url($screenshot)}}" target="_blank">
+                                                    <img width="100%" height="auto" src="{{url($screenshot)}}" alt="">
+                                                </a>
+                                                {{-- <img class="border" width="auto" height="100%" src="{{url($screenshot)}}" alt=""> --}}
+                                            </div>
+                                        @endforeach
+                                    @endif
+
+                                </div>
+                            </td>
+
+                            <td>
                                 <span class="tag bg-light text-dark">{{$item->created_at}}</span>
-                                
+
                                 <br>
                                 @if ($item->status == 'pending')
                                     <span class="tag bg-warning border text-dark">Pending</span>
@@ -84,17 +111,17 @@
                                     <span class="tag bg-light border text-dark">{{$item->status}}</span>
                                 @endif
                             </td>
-                        
+
                         </tr>
                     @endforeach
-                    
+
                 </tbody>
                 <tfoot>
                     {{ $products->links() }}
                 </tfoot>
             </table>
         @endif
-        
+
         </div>
 
     </div>

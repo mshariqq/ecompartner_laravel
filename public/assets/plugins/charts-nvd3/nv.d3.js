@@ -154,31 +154,31 @@ if (typeof(module) !== 'undefined' && typeof(exports) !== 'undefined') {
 if (typeof(window) !== 'undefined') {
   window.nv = nv;
 }
-/* Facade for queueing DOM write operations
- * with Fastdom (https://github.com/wilsonpage/fastdom)
- * if available.
- * This could easily be extended to support alternate
- * implementations in the future.
- */
-nv.dom.write = function(callback) {
-	if (window.fastdom !== undefined) {
-		return fastdom.mutate(callback);
-	}
-	return callback();
-};
-
-/* Facade for queueing DOM read operations
- * with Fastdom (https://github.com/wilsonpage/fastdom)
- * if available.
- * This could easily be extended to support alternate
- * implementations in the future.
- */
-nv.dom.read = function(callback) {
-	if (window.fastdom !== undefined) {
-		return fastdom.measure(callback);
-	}
-	return callback();
-};
+/* Facade for queueing DOM write operations
+ * with Fastdom (https://github.com/wilsonpage/fastdom)
+ * if available.
+ * This could easily be extended to support alternate
+ * implementations in the future.
+ */
+nv.dom.write = function(callback) {
+	if (window.fastdom !== undefined) {
+		return fastdom.mutate(callback);
+	}
+	return callback();
+};
+
+/* Facade for queueing DOM read operations
+ * with Fastdom (https://github.com/wilsonpage/fastdom)
+ * if available.
+ * This could easily be extended to support alternate
+ * implementations in the future.
+ */
+nv.dom.read = function(callback) {
+	if (window.fastdom !== undefined) {
+		return fastdom.measure(callback);
+	}
+	return callback();
+};
 /* Utility class to handle creation of an interactive layer.
  This places a rectangle on top of the chart. When you mouse move over it, it sends a dispatch
  containing the X-coordinate. It can also render a vertical line where the mouse is located.

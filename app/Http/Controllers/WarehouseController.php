@@ -15,19 +15,19 @@ class WarehouseController extends Controller
 {
 
     public function all(){
-        
+
         $warehouses = Warehouse::where('seller_id', auth()->user()->id)->paginate(10);
         return view('user.warehouses.all', compact('warehouses'));
 
     }
 
     public function allProducts($id){
-        
+
         $products = Product::where('warehouse_id', $id)->paginate(10);
         return view('user.warehouses.all', compact('products'));
 
     }
-    
+
     public function new(){
         return view('user.warehouses.new');
 
@@ -76,15 +76,41 @@ class WarehouseController extends Controller
             $move = $file->move($destinationPath,$filename);
 
             if($move){
+                // check if request has screenshots files which is multiple
+                if($request->file('screenshots')){
+                    $screenshots = $request->file('screenshots');
+                    $screenshots_array = [];
+                    foreach($screenshots as $screenshot){
+                        $screenshot_filename =time() + auth()->user()->id .".".  $screenshot->extension();
+                        $screenshot_destinationPath = 'uploads/sellers/products/' . auth()->user()->id;
+                        $screenshot_file_with_destination = $screenshot_destinationPath . "/" . $screenshot_filename;
+                        $screenshot_move = $screenshot->move($screenshot_destinationPath,$screenshot_filename);
+                        if($screenshot_move){
+                            array_push($screenshots_array, $screenshot_file_with_destination);
+                        }
+                    }
+                }
+
                 $product = new Product();
 
                 $product->name = $request->name;
+
+                // check if product description is empty or null
+                if($request->description == null){
+                    $request->description = "No description given";
+                }
+
+                // dd($request->all());
                 $product->description = $request->description;
                 $product->stock = $request->stock;
                 $product->price = $request->price;
                 $product->status = 'pending';
                 $product->photo = $file_with_destination;
                 $product->warehouse_id = $request->warehouse_id;
+                // add screenshots as json_encode arra to the product screenshots
+                $product->screenshots = json_encode($screenshots_array);
+                $product->conversion = $request->conversions;
+                $product->cost_per_lead = $request->cost_per_lead;
 
                 $save = $product->save();
                 if($save){
@@ -101,7 +127,7 @@ class WarehouseController extends Controller
         }else{
             return Redirect::back()->with('errors', 'Product Photo Missing');
         }
-      
+
     }
 
     public function myProducts(){

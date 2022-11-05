@@ -25,7 +25,7 @@
         @csrf
         <input type="hidden" name="warehouse_id" value="{{$warehouse->id}}">
         <div class="card ">
-            
+
           <div class="card-body">
               <div class="form-group">
                 <label for="">Product Name</label>
@@ -33,11 +33,11 @@
               </div>
               <div class="form-group">
                 <textarea id="elm1" name="description">
-                   Share With us Your testing results with proove from your ads dashboard ,Sale Price in testing phase , Leads , Cost Per Lead 
-              
+                   Share With us Your testing results with proove from your ads dashboard ,Sale Price in testing phase , Leads , Cost Per Lead
+
                 </textarea>
               </div>
-              
+
           </div>
         </div>
     </div>
@@ -46,14 +46,42 @@
             <label for="">Stock</label>
             <input required type="number" name="stock" id="" class="form-control bg-white text-primary" placeholder="">
         </div>
-      
+
         <div class="form-group mb-md-3">
             <label for="">Sale Price</label>
             <input required type="number" name="price" id="" class="form-control bg-white text-primary" placeholder="">
         </div>
         <div class="form-group mb-md-3">
+            <label for="">Conversions</label>
+            <input required type="number" name="conversions" id="" class="form-control bg-white text-primary" placeholder="">
+        </div>
+        <div class="form-group mb-md-3">
+            <label for="">Cost per Lead ($)</label>
+            <input required type="number" name="cost_per_lead" id="" class="form-control bg-white text-primary" placeholder="">
+        </div>
+        {{-- <div class="form-group mb-md-3">
+            <label for="">Screenshots</label>
+            <input required type="file" name="screenshots" multiple id="" class="custom-file-input " placeholder="">
+        </div> --}}
+        <div class="form-group">
+            <div class="form-label">Screenshots</div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" name="screenshots[]" multiple>
+                <label class="custom-file-label">You can choose multiple files</label>
+            </div>
+        </div>
+
+        {{-- <div class="form-group mb-md-3">
             <label for="">Product Picture</label>
-            <input required type="file" name="photo" id="" class="form-control bg-white text-primary" placeholder="">
+            <input required type="file" name="photo" id="" class="form-control " placeholder="">
+        </div> --}}
+        <div class="form-group">
+            <div class="form-label">Product Picture</div>
+            <div class="custom-file">
+                <input required type="file" name="photo" id="" class="custom-file-input " placeholder="">
+                {{-- <input type="file" class="custom-file-input" name="screenshots" multiple> --}}
+                <label class="custom-file-label">Choose file</label>
+            </div>
         </div>
         {{-- <div class="form-group mb-md-3">
           <label for=""></label>
