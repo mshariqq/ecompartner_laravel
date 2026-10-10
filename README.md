@@ -21,3 +21,5 @@ This laravel web application has been configured to have two guards `admin` and 
 - Run `php artisan config:cache`
 - Run `php artisan migrate --seed`
 - **Finaly** run the app by `php artisan serve`
+
+Built by [SHA REEQ](https://mshariqq.github.io/) - M Shariq Ahmed (mshariqq), Web Developer in Hyderabad.
